@@ -1,6 +1,7 @@
 from flask import render_template, request, flash, redirect, url_for
-from app import app
+from app import app, db
 from forms import ContactForm
+from models import MenuItem, RestaurantInfo
 import logging
 
 @app.route('/')
@@ -17,8 +18,28 @@ def index():
 @app.route('/meny')
 def menu():
     """Menu page displaying food and beverage offerings"""
-    # Menu data structure - Authentic dishes from Nawarat Thai Mat og Catering
-    menu_data = {
+    # Get menu items from database, fallback to static data if empty
+    db_items = MenuItem.query.filter_by(is_active=True).order_by(MenuItem.category, MenuItem.sort_order, MenuItem.name).all()
+    
+    if db_items:
+        # Use database items
+        menu_data = {
+            'hovedretter': [],
+            'ekstra': [],
+            'drikker': [],
+            'catering': []
+        }
+        
+        for item in db_items:
+            menu_data[item.category].append({
+                'name': item.name,
+                'price': item.price,
+                'description': item.description,
+                'image': item.image_filename
+            })
+    else:
+        # Fallback to static data - this will be replaced by database items
+        menu_data = {
         'hovedretter': [
             {'name': 'Kylling m/ Cashewnøtter & Ris', 'price': '205', 'description': 'Paprika, løk og hjemmelaget saus', 'image': 'kylling-cashew.jpg'},
             {'name': 'Rød Karri', 'price': '205', 'description': 'Kremet rød karri med rød karri pasta, ananas, tomat, fersk basilikum, paprika og kokosmelk. Velg mellom kylling, biff eller svin', 'image': 'rod-karri.jpg'},

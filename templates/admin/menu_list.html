@@ -1,0 +1,94 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Meny - Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-utensils me-2"></i>Meny</h2>
+    <a href="{{ url_for('admin.add_menu_item') }}" class="btn btn-success">
+        <i class="fas fa-plus me-2"></i>Legg til ny rett
+    </a>
+</div>
+
+{% set categories = {
+    'hovedretter': 'Hovedretter',
+    'ekstra': 'Ekstra',
+    'drikker': 'Drikker',
+    'catering': 'Catering'
+} %}
+
+{% for category_key, category_name in categories.items() %}
+    {% set category_items = items|selectattr('category', 'equalto', category_key)|list %}
+    {% if category_items %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">{{ category_name }} ({{ category_items|length }})</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>Navn</th>
+                                <th>Beskrivelse</th>
+                                <th>Pris</th>
+                                <th>Status</th>
+                                <th>Handlinger</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in category_items %}
+                            <tr class="{{ 'table-secondary' if not item.is_active }}">
+                                <td>
+                                    <strong>{{ item.name }}</strong>
+                                    {% if item.image_filename %}
+                                        <br><small class="text-muted">📷 {{ item.image_filename }}</small>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <small>{{ item.description[:100] }}{% if item.description|length > 100 %}...{% endif %}</small>
+                                </td>
+                                <td>
+                                    <span class="badge bg-warning text-dark">{{ item.price }} NOK</span>
+                                </td>
+                                <td>
+                                    {% if item.is_active %}
+                                        <span class="badge bg-success">Aktiv</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Inaktiv</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{{ url_for('admin.edit_menu_item', id=item.id) }}" 
+                                           class="btn btn-outline-primary" title="Rediger">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ url_for('admin.delete_menu_item', id=item.id) }}" 
+                                           class="btn btn-outline-danger" title="Slett"
+                                           onclick="return confirm('Er du sikker på at du vil slette {{ item.name }}?')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+{% if not items %}
+<div class="text-center py-5">
+    <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
+    <h4 class="text-muted">Ingen retter funnet</h4>
+    <p class="text-muted">Begynn med å legge til noen retter i menyen.</p>
+    <a href="{{ url_for('admin.add_menu_item') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-2"></i>Legg til første rett
+    </a>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Restaurantinfo - Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-info-circle me-2"></i>Restaurantinformasjon</h2>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Oppdater kontaktinformasjon</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                {{ form.phone(class="form-control" + (" is-invalid" if form.phone.errors else "")) }}
+                                {{ form.phone.label(class="form-label") }}
+                                {% if form.phone.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.phone.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else "")) }}
+                                {{ form.email.label(class="form-label") }}
+                                {% if form.email.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.email.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        {{ form.address(class="form-control" + (" is-invalid" if form.address.errors else ""), style="height: 80px") }}
+                        {{ form.address.label(class="form-label") }}
+                        {% if form.address.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.address.errors %}{{ error }}{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-floating mb-4">
+                        {{ form.opening_hours(class="form-control" + (" is-invalid" if form.opening_hours.errors else ""), style="height: 120px") }}
+                        {{ form.opening_hours.label(class="form-label") }}
+                        {% if form.opening_hours.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.opening_hours.errors %}{{ error }}{% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    {{ form.submit(class="btn btn-success") }}
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Tips</h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-0 small">
+                    <li class="mb-2">
+                        <strong>Telefon:</strong> Inkluder landkode (+47)
+                    </li>
+                    <li class="mb-2">
+                        <strong>E-post:</strong> Bruk en e-post kunder kan kontakte
+                    </li>
+                    <li class="mb-2">
+                        <strong>Adresse:</strong> Skill linjene med linjeskift
+                    </li>
+                    <li class="mb-0">
+                        <strong>Åpningstider:</strong> En linje per dag, f.eks:<br>
+                        "Mandag: 11:00 - 20:00"
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0"><i class="fas fa-eye me-2"></i>Forhåndsvisning</h6>
+            </div>
+            <div class="card-body">
+                <p class="small text-muted">
+                    Denne informasjonen vises på kontaktsiden og andre steder på nettsiden.
+                    Endringene trer i kraft umiddelbart etter lagring.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
