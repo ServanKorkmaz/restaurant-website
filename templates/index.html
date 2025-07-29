@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Hjem - Gjøvik Kafe og Catering{% endblock %}
+{% block title %}Hjem - Nawarat Thai Mat og Catering{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
@@ -30,8 +30,8 @@
             </div>
             <div class="col-lg-6">
                 <div class="hero-image text-center">
-                    <img src="{{ url_for('static', filename='images/restaurant-exterior.jpg') }}" 
-                         alt="Nawarat Thai Mat og Catering restaurant exterior" 
+                    <img src="{{ url_for('static', filename='images/hero-bg.jpg') }}" 
+                         alt="Autentisk thailandsk mat - Kylling med Cashewnøtter" 
                          class="img-fluid rounded shadow-lg" 
                          style="max-height: 400px; object-fit: cover;">
                 </div>
@@ -74,8 +74,8 @@
                         </div>
                         <h5 class="card-title">Tradisjonelle oppskrifter</h5>
                         <p class="card-text text-muted">
-                            Våre kokker er opplært i autentiske thailandske koketeknikker og 
-                            bruker familieoppskrifter som har blitt overført i generasjoner.
+                            Fra Rød Karri med kokosmelk til Pad Krapao med holybasilikum - 
+                            våre kokker følger autentiske thailandske oppskrifter.
                         </p>
                     </div>
                 </div>
@@ -99,6 +99,40 @@
     </div>
 </section>
 
+<!-- Featured Dishes Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col">
+                <h2 class="display-6 fw-bold mb-3">Populære thailandske retter</h2>
+                <p class="lead text-muted">Smak våre mest autentiske og populære thailandske spesialiteter</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for dish in featured_dishes %}
+            <div class="col-md-4">
+                <div class="card h-100 border-0 bg-dark shadow">
+                    <img src="{{ url_for('static', filename='images/' + dish.image) }}" 
+                         class="card-img-top" 
+                         alt="{{ dish.name }}" 
+                         style="height: 250px; object-fit: cover;">
+                    <div class="card-body text-center p-4">
+                        <h5 class="card-title mb-3">{{ dish.name }}</h5>
+                        <div class="mb-3">
+                            <span class="badge bg-warning text-dark fs-6">{{ dish.price }} NOK</span>
+                        </div>
+                        <a href="{{ url_for('menu') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-eye me-2"></i>Se hele menyen
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
 <!-- Services Section -->
 <section class="py-5">
     <div class="container">
@@ -112,8 +146,8 @@
                                 <i class="fas fa-pepper-hot fa-2x text-primary"></i>
                             </div>
                             <div>
-                                <h5 class="mb-1">Restaurantservering</h5>
-                                <p class="text-muted mb-0">Autentisk thailandsk mat fra mild til sterk, tilpasset din smak</p>
+                                <h5 class="mb-1">12 Autentiske hovedretter</h5>
+                                <p class="text-muted mb-0">Fra Kylling med Cashewnøtter til Paneng Kai - alle retter 205-245 NOK</p>
                             </div>
                         </div>
                     </div>
@@ -124,8 +158,8 @@
                                 <i class="fas fa-utensils fa-2x text-success"></i>
                             </div>
                             <div>
-                                <h5 class="mb-1">Takeaway og levering</h5>
-                                <p class="text-muted mb-0">Bestill hjemme eller på jobben - vi leverer thailandsk mat til deg</p>
+                                <h5 class="mb-1">Friske vårruller og tillegg</h5>
+                                <p class="text-muted mb-0">Vårruller, innbakt scampi og ekstra ris - perfekte tillegg til måltidet</p>
                             </div>
                         </div>
                     </div>
@@ -136,8 +170,8 @@
                                 <i class="fas fa-birthday-cake fa-2x text-warning"></i>
                             </div>
                             <div>
-                                <h5 class="mb-1">Event catering</h5>
-                                <p class="text-muted mb-0">Thailandsk catering for bryllup, firmafester og private arrangementer</p>
+                                <h5 class="mb-1">Profesjonell catering</h5>
+                                <p class="text-muted mb-0">Fra 165-200 NOK per person for bedrifter og arrangementer</p>
                             </div>
                         </div>
                     </div>
@@ -158,9 +192,9 @@
     <div class="container">
         <div class="row text-center">
             <div class="col">
-                <h2 class="display-6 fw-bold mb-4">Besøk oss i Gjøvik sentrum</h2>
+                <h2 class="display-6 fw-bold mb-4">Besøk oss på Tordenskjolds gate</h2>
                 <p class="lead text-muted mb-4">
-                    Du finner oss sentralt plassert på Storgata, kun få minutter fra jernbanestasjonen
+                    Du finner Nawarat Thai Mat og Catering sentralt i Gjøvik sentrum
                 </p>
                 
                 <div class="row g-4">
@@ -168,7 +202,7 @@
                         <div class="location-item">
                             <i class="fas fa-map-marker-alt fa-2x text-primary mb-3"></i>
                             <h5>Adresse</h5>
-                            <p class="text-muted">Storgata 15<br>2815 Gjøvik</p>
+                            <p class="text-muted">Tordenskjolds gate 1<br>2821 Gjøvik</p>
                         </div>
                     </div>
                     
@@ -200,10 +234,10 @@
             <div class="col">
                 <div class="cta-content bg-primary rounded p-5">
                     <h2 class="display-6 fw-bold text-white mb-3">
-                        Klar for en fantastisk kaféopplevelse?
+                        Klar for autentisk thailandsk mat?
                     </h2>
                     <p class="lead text-white mb-4">
-                        Kom innom i dag eller kontakt oss for catering til ditt neste arrangement
+                        Besøk oss på Tordenskjolds gate eller kontakt oss for catering til ditt arrangement
                     </p>
                     <div class="d-flex justify-content-center gap-3 flex-wrap">
                         <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg">

@@ -6,7 +6,13 @@ import logging
 @app.route('/')
 def index():
     """Homepage with business introduction"""
-    return render_template('index.html')
+    # Featured dishes to showcase on homepage
+    featured_dishes = [
+        {'name': 'Kylling m/ Cashewnøtter', 'image': 'kylling-cashew.jpg', 'price': '205'},
+        {'name': 'Rød Karri m/ And', 'image': 'rod-karri-and.jpg', 'price': '245'},
+        {'name': 'Pad Krapao', 'image': 'pad-krapao.jpg', 'price': '205'}
+    ]
+    return render_template('index.html', featured_dishes=featured_dishes)
 
 @app.route('/meny')
 def menu():
