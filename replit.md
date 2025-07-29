@@ -140,3 +140,4 @@ The application is fully localized for Norwegian users with authentic Thai resta
 ✓ Removed Facebook and Instagram social media links (restaurant doesn't use them)
 ✓ Kept only TripAdvisor link in footer social media section
 ✓ Updated email address to "post@nawaratthaimat.no" across all pages and admin system
+✓ Corrected phone number to +47 61 17 77 71 in footer and admin system
