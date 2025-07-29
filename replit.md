@@ -137,3 +137,5 @@ The application is fully localized for Norwegian users with authentic Thai resta
 ✓ Fixed distance to Gjøvik station from "5 min. gange" to "1 min gange"
 ✓ Added error pages (404/500) with proper styling
 ✓ Admin system fully functional at /admin/setup-admin and /admin/login
+✓ Removed Facebook and Instagram social media links (restaurant doesn't use them)
+✓ Kept only TripAdvisor link in footer social media section
