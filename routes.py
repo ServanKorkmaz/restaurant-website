@@ -31,7 +31,9 @@ def menu():
             {'name': 'Biff m/ Østersaus', 'price': '235', 'description': 'Brokkoli, gulrot, løk, ris og hjemmelaget saus', 'image': 'biff-ostersaus.jpg'},
             {'name': 'Wok', 'price': '205', 'description': 'Wok med paprika, løk, brokkoli, gulrot, hvitløk, soyasaus og østersaus. Velg mellom kylling, biff, svin eller scampi', 'image': 'wok.jpg'},
             {'name': 'Stekte Eggnudler m/ Kylling', 'price': '205', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'image': 'stekte-eggnudler.jpg'},
-            {'name': 'Vårruller m/ Salat & Ris', 'price': '185', 'description': 'Glassnudler, kål, gulrot, løk, kyllinkjøttdeig, soyasaus og østersaus. Serveres med salat og ris', 'image': 'varruller.jpg'}
+            {'name': 'Vårruller m/ Salat & Ris', 'price': '185', 'description': 'Glassnudler, kål, gulrot, løk, kyllinkjøttdeig, soyasaus og østersaus. Serveres med salat og ris', 'image': 'varruller.jpg'},
+            {'name': 'Pad Thai', 'price': '205', 'description': 'Thailandsk stekt nudlerrett med tofu, peanøtter, balansert søt og syrlig saus. Velg mellom scampi, kylling eller svin', 'image': None},
+            {'name': 'Nudelsuppe', 'price': '235', 'description': 'Nudelsuppe med svin', 'image': None}
         ],
         'ekstra': [
             {'name': 'Vårull', 'price': '25', 'description': '1 stk vårull med glassnudler, kål, gulrot, løk, kyllinkjøttdeig, soyasaus og østersaus', 'image': None},
