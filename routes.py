@@ -27,13 +27,25 @@ def menu():
             {'name': 'Stekte Eggnudler m/ Kylling', 'price': '205', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'image': 'stekte-eggnudler.jpg'},
             {'name': 'Vårruller m/ Salat & Ris', 'price': '185', 'description': 'Glassnudler, kål, gulrot, løk, kyllinkjøttdeig, soyasaus og østersaus. Serveres med salat og ris', 'image': 'varruller.jpg'}
         ],
+        'ekstra': [
+            {'name': 'Vårull', 'price': '25', 'description': '1 stk vårull med glassnudler, kål, gulrot, løk, kyllinkjøttdeig, soyasaus og østersaus', 'image': None},
+            {'name': 'Innbakt Scampi', 'price': '30', 'description': '1 stk fritert innbakt scampi', 'image': None},
+            {'name': 'Ekstra Ris', 'price': '20', 'description': 'Ekstra ris til retten', 'image': None}
+        ],
         'drikker': [
-            {'name': 'Thai Iste', 'price': '65', 'description': 'Klassisk thai iste med kondensert melk'},
-            {'name': 'Singha øl (0,33l)', 'price': '79', 'description': 'Thailandsk lager øl'},
-            {'name': 'Chang øl (0,33l)', 'price': '79', 'description': 'Thailandsk lager øl'},
-            {'name': 'Kokosnøttvann', 'price': '55', 'description': 'Fersk kokosnøtt'},
-            {'name': 'Mineralvann', 'price': '39', 'description': 'Norsk kildevann'},
-            {'name': 'Brus (Coca-Cola)', 'price': '45', 'description': 'Diverse brus'}
+            {'name': 'Coca-Cola', 'price': '40', 'description': '0,5l Coca-Cola', 'image': None},
+            {'name': 'Coca-Cola Zero', 'price': '40', 'description': '0,5l Coca-Cola Zero', 'image': None},
+            {'name': 'Fanta', 'price': '40', 'description': '0,5l Fanta', 'image': None},
+            {'name': 'Pepsi', 'price': '40', 'description': '0,5l Pepsi', 'image': None},
+            {'name': 'Pepsi Max', 'price': '40', 'description': '0,5l Pepsi Max', 'image': None},
+            {'name': 'Solo', 'price': '40', 'description': '0,5l Solo', 'image': None},
+            {'name': 'Solo Super', 'price': '40', 'description': '0,5l Solo Super', 'image': None},
+            {'name': 'Fanta Exotic', 'price': '40', 'description': '0,5l Fanta Exotic', 'image': None},
+            {'name': 'Sprite', 'price': '40', 'description': '0,5l Sprite', 'image': None},
+            {'name': 'Farris naturell', 'price': '40', 'description': '0,5l Farris naturell', 'image': None},
+            {'name': 'Farris Lime', 'price': '40', 'description': '40 Farris Lime', 'image': None},
+            {'name': 'Munkholm', 'price': '69', 'description': '0,33l', 'image': None},
+            {'name': 'Mozell', 'price': '40', 'description': '0,5l', 'image': None}
         ],
         'catering': [
             {'name': 'Små catering', 'price': 'Fra 200/pers', 'description': 'Utvalg av våre populære retter for 10-20 personer'},
