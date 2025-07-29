@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Meny - Gjøvik Kafe og Catering{% endblock %}
+
+{% block content %}
+<!-- Menu Header -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <h1 class="display-4 fw-bold mb-3">Vår meny</h1>
+                <p class="lead text-muted">
+                    Opplev vårt utvalg av fersk kaffe, deilige måltider og lokale delikatesser
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Menu Content -->
+<section class="py-5">
+    <div class="container">
+        <!-- Coffee & Hot Drinks -->
+        <div class="menu-section mb-5">
+            <div class="row">
+                <div class="col">
+                    <div class="section-header mb-4">
+                        <h2 class="display-6 fw-bold">
+                            <i class="fas fa-coffee text-primary me-3"></i>
+                            Kaffe & varme drikker
+                        </h2>
+                        <p class="text-muted">Fersk kaffe brygget med kjærlighet</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                {% for item in menu.kaffe_drikker %}
+                <div class="col-md-6">
+                    <div class="menu-item card border-0 bg-dark h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">{{ item.name }}</h5>
+                                <span class="badge bg-primary fs-6">{{ item.price }} kr</span>
+                            </div>
+                            <p class="card-text text-muted">{{ item.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Tea & Hot Beverages -->
+        <div class="menu-section mb-5">
+            <div class="row">
+                <div class="col">
+                    <div class="section-header mb-4">
+                        <h2 class="display-6 fw-bold">
+                            <i class="fas fa-leaf text-success me-3"></i>
+                            Te & andre varme drikker
+                        </h2>
+                        <p class="text-muted">Utvalgte te-sorter og varmende drikker</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                {% for item in menu.te_varme_drikker %}
+                <div class="col-md-6">
+                    <div class="menu-item card border-0 bg-dark h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">{{ item.name }}</h5>
+                                <span class="badge bg-success fs-6">{{ item.price }} kr</span>
+                            </div>
+                            <p class="card-text text-muted">{{ item.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Cold Drinks -->
+        <div class="menu-section mb-5">
+            <div class="row">
+                <div class="col">
+                    <div class="section-header mb-4">
+                        <h2 class="display-6 fw-bold">
+                            <i class="fas fa-glass-whiskey text-info me-3"></i>
+                            Kalde drikker
+                        </h2>
+                        <p class="text-muted">Forfriskende drikker for alle smaker</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                {% for item in menu.kalde_drikker %}
+                <div class="col-md-6">
+                    <div class="menu-item card border-0 bg-dark h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">{{ item.name }}</h5>
+                                <span class="badge bg-info fs-6">{{ item.price }} kr</span>
+                            </div>
+                            <p class="card-text text-muted">{{ item.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Food -->
+        <div class="menu-section mb-5">
+            <div class="row">
+                <div class="col">
+                    <div class="section-header mb-4">
+                        <h2 class="display-6 fw-bold">
+                            <i class="fas fa-utensils text-warning me-3"></i>
+                            Mat & snacks
+                        </h2>
+                        <p class="text-muted">Hjemmelagde retter med lokale ingredienser</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                {% for item in menu.mat %}
+                <div class="col-md-6">
+                    <div class="menu-item card border-0 bg-dark h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">{{ item.name }}</h5>
+                                <span class="badge bg-warning text-dark fs-6">{{ item.price }} kr</span>
+                            </div>
+                            <p class="card-text text-muted">{{ item.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Catering -->
+        <div class="menu-section">
+            <div class="row">
+                <div class="col">
+                    <div class="section-header mb-4">
+                        <h2 class="display-6 fw-bold">
+                            <i class="fas fa-concierge-bell text-danger me-3"></i>
+                            Catering-tjenester
+                        </h2>
+                        <p class="text-muted">Profesjonell catering for alle anledninger</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                {% for item in menu.catering %}
+                <div class="col-md-6">
+                    <div class="menu-item card border-0 bg-dark h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">{{ item.name }}</h5>
+                                <span class="badge bg-danger fs-6">{{ item.price }}</span>
+                            </div>
+                            <p class="card-text text-muted">{{ item.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Menu Notice -->
+<section class="py-4 bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <div class="alert alert-info border-0" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Merk:</strong> Alle priser er i norske kroner. Vi tilbyr også 
+                    laktosefrie og glutenfrie alternativer - spør vårt personale for mer informasjon.
+                </div>
+                
+                <div class="mt-4">
+                    <h5>Interessert i catering?</h5>
+                    <p class="text-muted mb-3">
+                        Kontakt oss for skreddersydde tilbud til ditt arrangement
+                    </p>
+                    <a href="{{ url_for('contact') }}" class="btn btn-primary">
+                        <i class="fas fa-envelope me-2"></i>
+                        Be om tilbud
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

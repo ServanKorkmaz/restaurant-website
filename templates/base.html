@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="no" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gjøvik Kafe og Catering{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+                <i class="fas fa-coffee me-2"></i>
+                Gjøvik Kafe og Catering
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.endpoint == 'index' }}" href="{{ url_for('index') }}">
+                            <i class="fas fa-home me-1"></i>Hjem
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.endpoint == 'menu' }}" href="{{ url_for('menu') }}">
+                            <i class="fas fa-utensils me-1"></i>Meny
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.endpoint == 'contact' }}" href="{{ url_for('contact') }}">
+                            <i class="fas fa-envelope me-1"></i>Kontakt
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">
+                        <i class="fas fa-coffee me-2"></i>
+                        Gjøvik Kafe og Catering
+                    </h5>
+                    <p class="text-muted">
+                        Hjertelig velkommen til Gjøvik Kafe og Catering - din lokale kafé i hjertet av Gjøvik.
+                    </p>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <h6 class="mb-3">Åpningstider</h6>
+                    <div class="text-muted">
+                        <div class="d-flex justify-content-between">
+                            <span>Mandag - Fredag:</span>
+                            <span>07:00 - 17:00</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Lørdag:</span>
+                            <span>08:00 - 16:00</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Søndag:</span>
+                            <span>09:00 - 15:00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <h6 class="mb-3">Kontakt</h6>
+                    <div class="text-muted">
+                        <div class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Storgata 15, 2815 Gjøvik
+                        </div>
+                        <div class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +47 61 13 19 00
+                        </div>
+                        <div class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            post@gjovikkafe.no
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="text-muted mb-0">
+                        &copy; 2025 Gjøvik Kafe og Catering. Alle rettigheter forbeholdt.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="social-links">
+                        <a href="#" class="text-muted me-3">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-muted me-3">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-muted">
+                            <i class="fab fa-tripadvisor"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,265 @@
+:root {
+    --norwegian-blue: #0039a6;
+    --norwegian-red: #ef2b2d;
+    --norwegian-white: #ffffff;
+    --warm-brown: #8b4513;
+    --forest-green: #228b22;
+    --cafe-gold: #d4af37;
+}
+
+/* Typography */
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+.hero-title,
+.display-4,
+.display-6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--bs-dark) 0%, var(--bs-secondary) 100%);
+    min-height: 80vh;
+}
+
+.hero-icon {
+    font-size: 15rem;
+    color: var(--cafe-gold);
+    opacity: 0.8;
+}
+
+.services-icon {
+    font-size: 12rem;
+    color: var(--bs-primary);
+    opacity: 0.7;
+}
+
+/* Custom animations */
+.hero-content {
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-image {
+    animation: fadeInRight 1s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Cards and sections */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.menu-item {
+    border-left: 4px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.menu-item:hover {
+    border-left-color: var(--bs-primary);
+}
+
+/* Feature icons */
+.feature-icon,
+.service-icon,
+.contact-icon {
+    transition: transform 0.3s ease;
+}
+
+.feature-icon:hover,
+.service-icon:hover,
+.contact-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Norwegian-inspired design elements */
+.section-header {
+    position: relative;
+}
+
+.section-header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--norwegian-red), var(--norwegian-blue));
+    margin: 1rem 0;
+}
+
+/* Form styling */
+.form-floating > .form-control:focus {
+    border-color: var(--norwegian-blue);
+    box-shadow: 0 0 0 0.2rem rgba(0, 57, 166, 0.25);
+}
+
+.form-floating > label {
+    color: var(--bs-secondary);
+}
+
+/* Button customizations */
+.btn-primary {
+    background-color: var(--norwegian-blue);
+    border-color: var(--norwegian-blue);
+}
+
+.btn-primary:hover {
+    background-color: #002d7f;
+    border-color: #002d7f;
+}
+
+/* Navigation active state */
+.navbar-nav .nav-link.active {
+    color: var(--cafe-gold) !important;
+    font-weight: 500;
+}
+
+/* Social links */
+.social-links a {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--bs-primary) !important;
+    transform: translateY(-2px);
+}
+
+/* Contact form animations */
+.contact-form .form-floating {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.contact-info .contact-item {
+    animation: slideInRight 0.6s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-icon {
+        font-size: 8rem;
+    }
+    
+    .services-icon {
+        font-size: 6rem;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .display-6 {
+        font-size: 1.75rem;
+    }
+}
+
+/* Loading animations */
+.menu-section {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.menu-section:nth-child(1) { animation-delay: 0.1s; }
+.menu-section:nth-child(2) { animation-delay: 0.2s; }
+.menu-section:nth-child(3) { animation-delay: 0.3s; }
+.menu-section:nth-child(4) { animation-delay: 0.4s; }
+.menu-section:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Custom utility classes */
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Badge customizations */
+.badge {
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+/* Alert customizations */
+.alert {
+    border-radius: 10px;
+    border: none;
+}
+
+/* CTA section */
+.cta-content {
+    background: linear-gradient(135deg, var(--norwegian-blue), var(--norwegian-red));
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-content::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>') repeat;
+    animation: float 20s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
