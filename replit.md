@@ -112,15 +112,13 @@ The application is fully localized for Norwegian users with authentic Thai resta
 ## Recent Changes (July 29, 2025)
 
 ✓ Updated restaurant identity from generic café to Nawarat Thai Mat og Catering
-✓ Replaced café menu with authentic Thai dishes including:
-  - Traditional appetizers (Satay Gai, Tom Kha Gai, Tod Man Pla, etc.)
-  - Chicken main dishes (Pad Thai Gai, Massaman Gai, Green Curry, etc.)  
-  - Pork & beef dishes (Pad See Ew, Red Curry, Laab Moo, etc.)
-  - Seafood options (Pad Thai with prawns, whole fish dishes, Tom Yum)
-  - Vegetarian alternatives (Vegetarian Pad Thai, Green Curry with tofu)
-  - Thai drinks (Thai iced tea, Singha/Chang beer, coconut water)
-  - Comprehensive catering services
-✓ Updated all contact information to match real restaurant
+✓ Replaced menu with authentic dishes from real restaurant photos:
+  - 11 hovedretter: Kylling m/ Cashewnøtter, Rød Karri, Paneng Kai, Sweet Chili, Stekt Ris, Rød Karri m/ And, Kyllingsuppe, Pad Krapao, Biff m/ Østersaus, Wok, Stekte Eggnudler m/ Kylling
+  - 1 forrett: Vårruller m/ Salat & Ris
+  - All prices match real restaurant (205-245 NOK for mains)
+  - Added authentic dish images to menu display
+✓ Updated all contact information to match real restaurant (Tordenskjolds gate 1)
 ✓ Modified business description and features to reflect Thai cuisine focus
-✓ Changed iconography from coffee to Thai pepper/spice theme
+✓ Added restaurant exterior photo as hero image on homepage
 ✓ Updated operating hours to match actual restaurant schedule
+✓ Improved image quality for Rød Karri dish photo
