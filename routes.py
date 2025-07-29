@@ -11,43 +11,54 @@ def index():
 @app.route('/meny')
 def menu():
     """Menu page displaying food and beverage offerings"""
-    # Menu data structure
+    # Menu data structure - Authentic Thai dishes
     menu_data = {
-        'kaffe_drikker': [
-            {'name': 'Espresso', 'price': '35', 'description': 'Klassisk italiensk kaffe'},
-            {'name': 'Americano', 'price': '40', 'description': 'Espresso med varmt vann'},
-            {'name': 'Cappuccino', 'price': '45', 'description': 'Espresso med dampet melk og melkeskum'},
-            {'name': 'Latte', 'price': '45', 'description': 'Espresso med mye dampet melk'},
-            {'name': 'Flat White', 'price': '48', 'description': 'Dobbel espresso med mikroskum'},
-            {'name': 'Kaffe av dagen', 'price': '30', 'description': 'Dagens spesialkaffe'}
+        'forretter': [
+            {'name': 'Satay Gai', 'price': '179', 'description': 'Grillede kyllingspyd med peanøttsaus og agurkrelish'},
+            {'name': 'Tom Kha Gai', 'price': '149', 'description': 'Kremet kyllingsuppe med kokosnøtt, galanga og lime'},
+            {'name': 'Tod Man Pla', 'price': '169', 'description': 'Friterte fiskekaker med søt chilisaus'},
+            {'name': 'Larb Gai', 'price': '159', 'description': 'Krydret kyllingsalat med friske urter og ris'},
+            {'name': 'Vegetar Vårruller', 'price': '139', 'description': '4 stk friterte vårruller med grønnsaker og søt chilisaus'}
         ],
-        'te_varme_drikker': [
-            {'name': 'Earl Grey', 'price': '35', 'description': 'Klassisk bergamot-te'},
-            {'name': 'Grønn te', 'price': '35', 'description': 'Frisk japansk sencha'},
-            {'name': 'Kamille', 'price': '35', 'description': 'Beroligende urtete'},
-            {'name': 'Varm sjokolade', 'price': '48', 'description': 'Rik sjokolade med pisket krem'},
-            {'name': 'Chai latte', 'price': '45', 'description': 'Krydret te med dampet melk'}
+        'hovedretter_kylling': [
+            {'name': 'Pad Thai Gai', 'price': '219', 'description': 'Klassisk thailandsk wok med kylling, risnudler og tamarind'},
+            {'name': 'Massaman Gai', 'price': '239', 'description': 'Mild curry med kylling, kokosnøtt, poteter og peanøtter'},
+            {'name': 'Pad Kra Pao Gai', 'price': '229', 'description': 'Krydret kylling med thai-basilikum og stekt egg'},
+            {'name': 'Gai Yang', 'price': '249', 'description': 'Marinert grillet kylling med sticky rice og jeaw bong'},
+            {'name': 'Gaeng Keow Wan Gai', 'price': '239', 'description': 'Grønn curry med kylling, thailandske auberginer og basilikum'}
         ],
-        'kalde_drikker': [
-            {'name': 'Is-kaffe', 'price': '45', 'description': 'Kald kaffe med is og melk'},
-            {'name': 'Smoothie', 'price': '65', 'description': 'Daglig varierende fruktsmootie'},
-            {'name': 'Fresh juice', 'price': '55', 'description': 'Fersk pressede juicer'},
-            {'name': 'Mineralvann', 'price': '25', 'description': 'Norsk kildevann'},
-            {'name': 'Brus', 'price': '30', 'description': 'Utvalg av lokale brusfabrikanter'}
+        'hovedretter_svin_storfe': [
+            {'name': 'Pad See Ew Moo', 'price': '229', 'description': 'Wok med svinekjøtt, brede nudler og kinesisk brokkoli'},
+            {'name': 'Gaeng Phed Neua', 'price': '259', 'description': 'Rød curry med storfekjøtt, bambuskonserves og thai-basilikum'},
+            {'name': 'Laab Moo', 'price': '189', 'description': 'Nordthailandsk svinekjøttsalat med lime og chili'},
+            {'name': 'Pad Kra Pao Moo', 'price': '219', 'description': 'Krydret svinekjøtt med thai-basilikum og stekt egg'}
         ],
-        'mat': [
-            {'name': 'Smørbrød', 'price': '85-120', 'description': 'Klassiske norske smørbrød med lokale ingredienser'},
-            {'name': 'Salater', 'price': '95-140', 'description': 'Sesongbaserte salater med friske grønnsaker'},
-            {'name': 'Supper', 'price': '110', 'description': 'Dagens hjemmelagde suppe med brød'},
-            {'name': 'Kaker', 'price': '45-65', 'description': 'Hjemmelagde kaker og desserter'},
-            {'name': 'Bakverk', 'price': '25-45', 'description': 'Ferske croissanter, muffins og wienerbrød'},
-            {'name': 'Yoghurt med granola', 'price': '75', 'description': 'Naturell yoghurt med hjemmelaget granola'}
+        'sjomat': [
+            {'name': 'Pad Thai Goong', 'price': '269', 'description': 'Pad Thai med store reker og tamarind'},
+            {'name': 'Pla Rad Prik', 'price': '289', 'description': 'Fritert hel fisk med søt og sur chilisaus'},
+            {'name': 'Tom Yum Goong', 'price': '179', 'description': 'Sur og krydret rekesupppe med sitrongress og lime'},
+            {'name': 'Gaeng Som Pla', 'price': '249', 'description': 'Sur curry med fisk og grønnsaker'}
+        ],
+        'vegetar': [
+            {'name': 'Pad Thai Jay', 'price': '199', 'description': 'Vegetarisk Pad Thai med tofu og grønnsaker'},
+            {'name': 'Gaeng Keow Wan Jay', 'price': '219', 'description': 'Grønn vegetar curry med tofu og thailandske auberginer'},
+            {'name': 'Pad Pak Ruam Mit', 'price': '189', 'description': 'Wok med blandede sesonggrønnsaker og soyasaus'},
+            {'name': 'Som Tam Jay', 'price': '169', 'description': 'Vegetarisk papayasalat med tomater og grønne bønner'}
+        ],
+        'drikker': [
+            {'name': 'Thai Iste', 'price': '65', 'description': 'Klassisk thai iste med kondensert melk'},
+            {'name': 'Singha øl (0,33l)', 'price': '79', 'description': 'Thailandsk lager øl'},
+            {'name': 'Chang øl (0,33l)', 'price': '79', 'description': 'Thailandsk lager øl'},
+            {'name': 'Kokosnøttvann', 'price': '55', 'description': 'Fersk kokosnøtt'},
+            {'name': 'Mineralvann', 'price': '39', 'description': 'Importert fra Thailand'},
+            {'name': 'Brus (Coca-Cola)', 'price': '45', 'description': 'Diverse brus'}
         ],
         'catering': [
-            {'name': 'Møtecatering', 'price': 'Fra 150/pers', 'description': 'Kaffe, te og bakverk for møter'},
-            {'name': 'Lunsjcatering', 'price': 'Fra 250/pers', 'description': 'Komplett lunsj med drikke'},
-            {'name': 'Kurs og konferanse', 'price': 'Tilbud på forespørsel', 'description': 'Heldag catering for kurs og konferanser'},
-            {'name': 'Private arrangement', 'price': 'Tilbud på forespørsel', 'description': 'Skreddersydde menyer for private fester'}
+            {'name': 'Små catering', 'price': 'Fra 200/pers', 'description': 'Pad Thai, curry og ris for 10-20 personer'},
+            {'name': 'Medium catering', 'price': 'Fra 180/pers', 'description': 'Utvidet meny for 20-50 personer med forretter'},
+            {'name': 'Store arrangementer', 'price': 'Tilbud på forespørsel', 'description': 'Komplett buffet for over 50 personer'},
+            {'name': 'Bedrift lunsjcatering', 'price': 'Fra 165/pers', 'description': 'Daglig leveranse til bedrifter'},
+            {'name': 'Hjemmelaging', 'price': 'Fra 800/time', 'description': 'Vi kommer hjem til deg og lager autentisk thailandsk mat'}
         ]
     }
     

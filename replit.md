@@ -1,8 +1,8 @@
-# Gjøvik Kafe og Catering - Restaurant Website
+# Nawarat Thai Mat og Catering - Restaurant Website
 
 ## Overview
 
-This is a Flask-based website for Gjøvik Kafe og Catering, a Norwegian café and catering business. The application provides a professional web presence with menu display, contact functionality, and business information. It's built with Flask as the web framework, Bootstrap for responsive design, and includes form handling for customer inquiries.
+This is a Flask-based website for Nawarat Thai Mat og Catering, an authentic Thai restaurant and catering business in Gjøvik, Norway. The application provides a professional web presence with comprehensive Thai menu display, contact functionality, and business information. It's built with Flask as the web framework, Bootstrap for responsive design, and includes form handling for customer inquiries.
 
 ## User Preferences
 
@@ -58,9 +58,9 @@ Preferred communication style: Simple, everyday language.
 
 ### Menu Data Structure
 - Menu items are defined as Python dictionaries within routes
-- Categories include coffee drinks, tea, cold beverages, food, and catering
-- Each item contains name, price, and description fields
-- Data is passed to templates for rendering
+- Categories include Thai appetizers, chicken dishes, pork & beef dishes, seafood, vegetarian options, drinks, and catering
+- Each item contains authentic Thai dish names, Norwegian descriptions, and pricing in NOK
+- Data is passed to templates for rendering with appropriate Thai cuisine iconography
 
 ### Form Processing
 - Contact forms use Flask-WTF for CSRF protection
@@ -99,10 +99,28 @@ Preferred communication style: Simple, everyday language.
 - Static files served through Flask (suitable for single-container deployment)
 - No database dependencies for simple deployment
 
-## Norwegian Localization
+## Norwegian Localization with Thai Restaurant Context
 
-The application is fully localized for Norwegian users:
-- All UI text in Norwegian
+The application is fully localized for Norwegian users with authentic Thai restaurant content:
+- All UI text in Norwegian with proper Thai dish names
 - Form validation messages in Norwegian
 - Norwegian business context (pricing in NOK, local business culture)
-- Norwegian typography and color scheme reflecting national identity
+- Authentic Thai menu items with Norwegian descriptions
+- Contact information for Nawarat Thai Mat og Catering (Tordenskjolds gate 1, 2821 Gjøvik)
+- Operating hours: Tuesday-Wednesday 11:00-17:45, Thursday-Friday 11:00-19:45, Saturday 11:00-20:45, Sunday 12:00-19:45, closed Mondays
+
+## Recent Changes (July 29, 2025)
+
+✓ Updated restaurant identity from generic café to Nawarat Thai Mat og Catering
+✓ Replaced café menu with authentic Thai dishes including:
+  - Traditional appetizers (Satay Gai, Tom Kha Gai, Tod Man Pla, etc.)
+  - Chicken main dishes (Pad Thai Gai, Massaman Gai, Green Curry, etc.)  
+  - Pork & beef dishes (Pad See Ew, Red Curry, Laab Moo, etc.)
+  - Seafood options (Pad Thai with prawns, whole fish dishes, Tom Yum)
+  - Vegetarian alternatives (Vegetarian Pad Thai, Green Curry with tofu)
+  - Thai drinks (Thai iced tea, Singha/Chang beer, coconut water)
+  - Comprehensive catering services
+✓ Updated all contact information to match real restaurant
+✓ Modified business description and features to reflect Thai cuisine focus
+✓ Changed iconography from coffee to Thai pepper/spice theme
+✓ Updated operating hours to match actual restaurant schedule
