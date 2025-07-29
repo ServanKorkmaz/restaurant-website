@@ -1,27 +1,29 @@
 {% extends "admin/base.html" %}
 
-{% block title %}{{ title }} - Admin{% endblock %}
+{% block title %}{{ title or 'Legg til rett' }} - Admin{% endblock %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2><i class="fas fa-utensils me-2"></i>{{ title }}</h2>
-    <a href="{{ url_for('admin.menu_list') }}" class="btn btn-secondary">
+    <h2 class="mb-0">
+        <i class="fas fa-utensils me-2"></i>{{ title or 'Legg til ny rett' }}
+    </h2>
+    <a href="{{ url_for('admin.menu_list') }}" class="btn btn-outline-secondary">
         <i class="fas fa-arrow-left me-2"></i>Tilbake til meny
     </a>
 </div>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-body">
                 <form method="POST">
                     {{ form.hidden_tag() }}
                     
-                    <div class="row g-3">
+                    <div class="row">
                         <div class="col-md-8">
-                            <div class="form-floating mb-3">
-                                {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+                            <div class="mb-3">
                                 {{ form.name.label(class="form-label") }}
+                                {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
                                 {% if form.name.errors %}
                                     <div class="invalid-feedback">
                                         {% for error in form.name.errors %}{{ error }}{% endfor %}
@@ -29,11 +31,10 @@
                                 {% endif %}
                             </div>
                         </div>
-                        
                         <div class="col-md-4">
-                            <div class="form-floating mb-3">
-                                {{ form.price(class="form-control" + (" is-invalid" if form.price.errors else "")) }}
+                            <div class="mb-3">
                                 {{ form.price.label(class="form-label") }}
+                                {{ form.price(class="form-control" + (" is-invalid" if form.price.errors else "")) }}
                                 {% if form.price.errors %}
                                     <div class="invalid-feedback">
                                         {% for error in form.price.errors %}{{ error }}{% endfor %}
@@ -43,21 +44,22 @@
                         </div>
                     </div>
                     
-                    <div class="form-floating mb-3">
-                        {{ form.description(class="form-control" + (" is-invalid" if form.description.errors else ""), style="height: 100px") }}
+                    <div class="mb-3">
                         {{ form.description.label(class="form-label") }}
+                        {{ form.description(class="form-control", rows="3") }}
                         {% if form.description.errors %}
-                            <div class="invalid-feedback">
+                            <div class="text-danger">
                                 {% for error in form.description.errors %}{{ error }}{% endfor %}
                             </div>
                         {% endif %}
+                        <div class="form-text">Beskrivelse av retten (valgfritt)</div>
                     </div>
                     
-                    <div class="row g-3">
+                    <div class="row">
                         <div class="col-md-6">
-                            <div class="form-floating mb-3">
-                                {{ form.category(class="form-select" + (" is-invalid" if form.category.errors else "")) }}
+                            <div class="mb-3">
                                 {{ form.category.label(class="form-label") }}
+                                {{ form.category(class="form-select" + (" is-invalid" if form.category.errors else "")) }}
                                 {% if form.category.errors %}
                                     <div class="invalid-feedback">
                                         {% for error in form.category.errors %}{{ error }}{% endfor %}
@@ -65,46 +67,35 @@
                                 {% endif %}
                             </div>
                         </div>
-                        
                         <div class="col-md-6">
-                            <div class="form-floating mb-3">
-                                {{ form.image_filename(class="form-control" + (" is-invalid" if form.image_filename.errors else "")) }}
+                            <div class="mb-3">
                                 {{ form.image_filename.label(class="form-label") }}
-                                {% if form.image_filename.errors %}
-                                    <div class="invalid-feedback">
-                                        {% for error in form.image_filename.errors %}{{ error }}{% endfor %}
-                                    </div>
-                                {% endif %}
-                                <div class="form-text">Navn på bildefil i static/images/ mappen (f.eks. "pad-thai.jpg")</div>
+                                {{ form.image_filename(class="form-control") }}
+                                <div class="form-text">Filnavn for bilde (eks: kylling_cashew.jpg)</div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="row g-3">
+                    <div class="row">
                         <div class="col-md-6">
-                            <div class="form-floating mb-3">
-                                {{ form.sort_order(class="form-control" + (" is-invalid" if form.sort_order.errors else "")) }}
+                            <div class="mb-3">
                                 {{ form.sort_order.label(class="form-label") }}
-                                {% if form.sort_order.errors %}
-                                    <div class="invalid-feedback">
-                                        {% for error in form.sort_order.errors %}{{ error }}{% endfor %}
-                                    </div>
-                                {% endif %}
-                                <div class="form-text">Lavere tall vises først</div>
+                                {{ form.sort_order(class="form-control") }}
+                                <div class="form-text">Lavere nummer vises først (standard: 10)</div>
                             </div>
                         </div>
-                        
                         <div class="col-md-6">
-                            <div class="form-check form-switch mt-4">
-                                {{ form.is_active(class="form-check-input") }}
-                                {{ form.is_active.label(class="form-check-label") }}
-                                <div class="form-text">Skru av for å skjule rett fra menyen</div>
+                            <div class="mb-3 d-flex align-items-center">
+                                <div class="form-check form-switch">
+                                    {{ form.is_active(class="form-check-input") }}
+                                    {{ form.is_active.label(class="form-check-label") }}
+                                </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="d-flex gap-2">
-                        {{ form.submit(class="btn btn-success") }}
+                        {{ form.submit(class="btn btn-primary") }}
                         <a href="{{ url_for('admin.menu_list') }}" class="btn btn-secondary">Avbryt</a>
                     </div>
                 </form>
@@ -112,27 +103,30 @@
         </div>
     </div>
     
-    <div class="col-lg-4">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-header">
-                <h6 class="mb-0"><i class="fas fa-info-circle me-2"></i>Tips</h6>
+                <h6 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>Tips
+                </h6>
             </div>
             <div class="card-body">
-                <ul class="list-unstyled mb-0 small">
+                <ul class="list-unstyled mb-0">
                     <li class="mb-2">
-                        <strong>Navn:</strong> Bruk autentiske thailandske navn
+                        <i class="fas fa-check text-success me-2"></i>
+                        <small>Bruk beskrivende navn</small>
                     </li>
                     <li class="mb-2">
-                        <strong>Beskrivelse:</strong> Nevn hovedingredienser og proteinvalg
+                        <i class="fas fa-check text-success me-2"></i>
+                        <small>Pris i NOK format (eks: 189 NOK)</small>
                     </li>
                     <li class="mb-2">
-                        <strong>Pris:</strong> Kun tallet, "NOK" legges til automatisk
+                        <i class="fas fa-check text-success me-2"></i>
+                        <small>Velg riktig kategori</small>
                     </li>
-                    <li class="mb-2">
-                        <strong>Bilder:</strong> Last opp til static/images/ og skriv bare filnavnet
-                    </li>
-                    <li class="mb-0">
-                        <strong>Rekkefølge:</strong> 0 = først, 10 = sist, osv.
+                    <li>
+                        <i class="fas fa-check text-success me-2"></i>
+                        <small>Deaktiver for å skjule midlertidig</small>
                     </li>
                 </ul>
             </div>

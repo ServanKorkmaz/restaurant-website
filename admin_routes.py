@@ -3,6 +3,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from app import db
 from models import User, MenuItem, RestaurantInfo
 from admin_forms import LoginForm, MenuItemForm, RestaurantInfoForm, CreateAdminForm
+from functools import wraps
 import logging
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
@@ -10,10 +11,9 @@ admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 def admin_required(f):
     """Decorator to require admin access"""
-    from functools import wraps
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if not current_user.is_authenticated or not current_user.is_admin:
+        if not current_user.is_authenticated or not getattr(current_user, 'is_admin', False):
             abort(403)
         return f(*args, **kwargs)
     return decorated_function
@@ -21,19 +21,43 @@ def admin_required(f):
 
 @admin_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated and current_user.is_admin:
+    if current_user.is_authenticated and getattr(current_user, 'is_admin', False):
         return redirect(url_for('admin.dashboard'))
     
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user and user.check_password(form.password.data) and user.is_admin:
-            login_user(user)
+        if user and user.check_password(form.password.data) and getattr(user, 'is_admin', False):
+            login_user(user, remember=form.remember_me.data)
             flash('Velkommen til admin-panelet!', 'success')
             return redirect(url_for('admin.dashboard'))
         flash('Ugyldig brukernavn eller passord', 'error')
     
     return render_template('admin/login.html', form=form)
+
+
+@admin_bp.route('/setup-admin', methods=['GET', 'POST'])
+def setup_admin():
+    # Check if admin already exists
+    if User.query.filter_by(is_admin=True).first():
+        flash('Administrator allerede opprettet', 'info')
+        return redirect(url_for('admin.login'))
+    
+    form = CreateAdminForm()
+    if form.validate_on_submit():
+        user = User(
+            username=form.username.data,
+            email=form.email.data,
+            is_admin=True
+        )
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        
+        flash('Administrator opprettet! Du kan nå logge inn.', 'success')
+        return redirect(url_for('admin.login'))
+    
+    return render_template('admin/setup_admin.html', form=form)
 
 
 @admin_bp.route('/logout')
@@ -163,25 +187,3 @@ def restaurant_info():
     return render_template('admin/restaurant_info.html', form=form)
 
 
-@admin_bp.route('/setup-admin', methods=['GET', 'POST'])
-def setup_admin():
-    # Only allow setup if no admin users exist
-    if User.query.filter_by(is_admin=True).first():
-        flash('Administrator eksisterer allerede', 'error')
-        return redirect(url_for('admin.login'))
-    
-    form = CreateAdminForm()
-    if form.validate_on_submit():
-        user = User(
-            username=form.username.data,
-            email=form.email.data,
-            is_admin=True
-        )
-        user.set_password(form.password.data)
-        db.session.add(user)
-        db.session.commit()
-        
-        flash('Administrator opprettet! Du kan nå logge inn.', 'success')
-        return redirect(url_for('admin.login'))
-    
-    return render_template('admin/setup_admin.html', form=form)
