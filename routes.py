@@ -51,8 +51,7 @@ def menu():
             {'name': 'Små catering', 'price': 'Fra 200/pers', 'description': 'Utvalg av våre populære retter for 10-20 personer'},
             {'name': 'Medium catering', 'price': 'Fra 180/pers', 'description': 'Utvidet meny for 20-50 personer med forretter'},
             {'name': 'Store arrangementer', 'price': 'Tilbud på forespørsel', 'description': 'Komplett buffet for over 50 personer'},
-            {'name': 'Bedrift lunsjcatering', 'price': 'Fra 165/pers', 'description': 'Daglig leveranse til bedrifter'},
-            {'name': 'Hjemmelaging', 'price': 'Fra 800/time', 'description': 'Vi kommer hjem til deg og lager autentisk thailandsk mat'}
+            {'name': 'Bedrift lunsjcatering', 'price': 'Fra 165/pers', 'description': 'Daglig leveranse til bedrifter'}
         ]
     }
     
