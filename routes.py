@@ -24,9 +24,7 @@ def menu():
             {'name': 'Pad Krapao', 'price': '205', 'description': 'Bambus, holybasilikum, chili, hvitløk, østersaus og soyasaus. Velg mellom kylling, scampi og svin', 'image': 'pad-krapao.jpg'},
             {'name': 'Biff m/ Østersaus', 'price': '235', 'description': 'Brokkoli, gulrot, løk, ris og hjemmelaget saus', 'image': 'biff-ostersaus.jpg'},
             {'name': 'Wok', 'price': '205', 'description': 'Wok med paprika, løk, brokkoli, gulrot, hvitløk, soyasaus og østersaus. Velg mellom kylling, biff, svin eller scampi', 'image': 'wok.jpg'},
-            {'name': 'Stekte Eggnudler m/ Kylling', 'price': '205', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'image': 'stekte-eggnudler.jpg'}
-        ],
-        'forretter': [
+            {'name': 'Stekte Eggnudler m/ Kylling', 'price': '205', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'image': 'stekte-eggnudler.jpg'},
             {'name': 'Vårruller m/ Salat & Ris', 'price': '185', 'description': 'Glassnudler, kål, gulrot, løk, kyllinkjøttdeig, soyasaus og østersaus. Serveres med salat og ris', 'image': 'varruller.jpg'}
         ],
         'drikker': [

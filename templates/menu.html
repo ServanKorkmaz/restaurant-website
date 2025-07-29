@@ -20,40 +20,6 @@
 <!-- Menu Content -->
 <section class="py-5">
     <div class="container">
-        <!-- Appetizers -->
-        <div class="menu-section mb-5">
-            <div class="row">
-                <div class="col">
-                    <div class="section-header mb-4">
-                        <h2 class="display-6 fw-bold">
-                            <i class="fas fa-fire text-danger me-3"></i>
-                            Forretter
-                        </h2>
-                        <p class="text-muted">Autentiske thailandske forretter</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                {% for item in menu.forretter %}
-                <div class="col-md-6 col-lg-4">
-                    <div class="menu-item card border-0 bg-dark h-100">
-                        {% if item.image %}
-                        <img src="{{ url_for('static', filename='images/' + item.image) }}" class="card-img-top" alt="{{ item.name }}" style="height: 200px; object-fit: cover;">
-                        {% endif %}
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="card-title mb-0">{{ item.name }}</h5>
-                                <span class="badge bg-danger fs-6">{{ item.price }} kr</span>
-                            </div>
-                            <p class="card-text text-muted mb-0">{{ item.description }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
         <!-- Main Dishes -->
         <div class="menu-section mb-5">
             <div class="row">
@@ -78,7 +44,7 @@
                         <div class="card-body p-4">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5 class="card-title mb-0">{{ item.name }}</h5>
-                                <span class="badge {% if item.price == '245' %}bg-primary{% elif item.price == '235' %}bg-info{% else %}bg-warning text-dark{% endif %} fs-6">{{ item.price }} kr</span>
+                                <span class="badge bg-warning text-dark fs-6">{{ item.price }} kr</span>
                             </div>
                             <p class="card-text text-muted mb-0">{{ item.description }}</p>
                         </div>
