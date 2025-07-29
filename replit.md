@@ -124,3 +124,5 @@ The application is fully localized for Norwegian users with authentic Thai resta
 ✓ Updated operating hours to match actual restaurant schedule
 ✓ Improved multiple dish photos: Rød Karri m/ And, Kyllingsuppe, Pad Krapao, Wok
 ✓ Removed appetizer section, moved spring rolls to main dishes
+✓ Added restaurant phone number (+47 61 17 77 71) to contact page and homepage
+✓ Updated homepage with Thai restaurant focus and featured dishes section
