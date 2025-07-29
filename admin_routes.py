@@ -161,7 +161,7 @@ def restaurant_info():
     if request.method == 'GET':
         # Pre-populate form with current values
         form.phone.data = phone.value if phone else '+47 61 17 77 71'
-        form.email.data = email.value if email else 'post@nawaratthai.no'
+        form.email.data = email.value if email else 'post@nawaratthaimat.no'
         form.address.data = address.value if address else 'Tordenskjolds gate 1\n2821 Gjøvik\nNorge'
         form.opening_hours.data = hours.value if hours else 'Tir - Ons: 11:00 - 17:45\nTor - Fre: 11:00 - 19:45\nLørdag: 11:00 - 20:45\nSøndag: 12:00 - 19:45\nMandag: Stengt'
     

@@ -139,3 +139,4 @@ The application is fully localized for Norwegian users with authentic Thai resta
 ✓ Admin system fully functional at /admin/setup-admin and /admin/login
 ✓ Removed Facebook and Instagram social media links (restaurant doesn't use them)
 ✓ Kept only TripAdvisor link in footer social media section
+✓ Updated email address to "post@nawaratthaimat.no" across all pages and admin system
