@@ -29,21 +29,24 @@
                             <i class="fas fa-fire text-danger me-3"></i>
                             Forretter
                         </h2>
-                        <p class="text-muted">Tradisjonelle thailandske forretter</p>
+                        <p class="text-muted">Autentiske thailandske forretter</p>
                     </div>
                 </div>
             </div>
             
             <div class="row g-4">
                 {% for item in menu.forretter %}
-                <div class="col-md-6">
+                <div class="col-md-6 col-lg-4">
                     <div class="menu-item card border-0 bg-dark h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
+                        {% if item.image %}
+                        <img src="{{ url_for('static', filename='images/' + item.image) }}" class="card-img-top" alt="{{ item.name }}" style="height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5 class="card-title mb-0">{{ item.name }}</h5>
                                 <span class="badge bg-danger fs-6">{{ item.price }} kr</span>
                             </div>
-                            <p class="card-text text-muted">{{ item.description }}</p>
+                            <p class="card-text text-muted mb-0">{{ item.description }}</p>
                         </div>
                     </div>
                 </div>
@@ -51,123 +54,33 @@
             </div>
         </div>
 
-        <!-- Chicken Main Dishes -->
+        <!-- Main Dishes -->
         <div class="menu-section mb-5">
             <div class="row">
                 <div class="col">
                     <div class="section-header mb-4">
                         <h2 class="display-6 fw-bold">
-                            <i class="fas fa-drumstick-bite text-warning me-3"></i>
-                            Hovedretter - Kylling
+                            <i class="fas fa-utensils text-warning me-3"></i>
+                            Hovedretter
                         </h2>
-                        <p class="text-muted">Autentiske kyllingretter</p>
+                        <p class="text-muted">Autentiske thailandske hovedretter</p>
                     </div>
                 </div>
             </div>
             
             <div class="row g-4">
-                {% for item in menu.hovedretter_kylling %}
-                <div class="col-md-6">
+                {% for item in menu.hovedretter %}
+                <div class="col-md-6 col-lg-4">
                     <div class="menu-item card border-0 bg-dark h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
+                        {% if item.image %}
+                        <img src="{{ url_for('static', filename='images/' + item.image) }}" class="card-img-top" alt="{{ item.name }}" style="height: 200px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5 class="card-title mb-0">{{ item.name }}</h5>
-                                <span class="badge bg-warning text-dark fs-6">{{ item.price }} kr</span>
+                                <span class="badge {% if item.price == '245' %}bg-primary{% elif item.price == '235' %}bg-info{% else %}bg-warning text-dark{% endif %} fs-6">{{ item.price }} kr</span>
                             </div>
-                            <p class="card-text text-muted">{{ item.description }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Pork & Beef Main Dishes -->
-        <div class="menu-section mb-5">
-            <div class="row">
-                <div class="col">
-                    <div class="section-header mb-4">
-                        <h2 class="display-6 fw-bold">
-                            <i class="fas fa-pepper-hot text-primary me-3"></i>
-                            Hovedretter - Svin & Storfe
-                        </h2>
-                        <p class="text-muted">Kraftige smaker og tradisjonelle oppskrifter</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                {% for item in menu.hovedretter_svin_storfe %}
-                <div class="col-md-6">
-                    <div class="menu-item card border-0 bg-dark h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="card-title mb-0">{{ item.name }}</h5>
-                                <span class="badge bg-primary fs-6">{{ item.price }} kr</span>
-                            </div>
-                            <p class="card-text text-muted">{{ item.description }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Seafood -->
-        <div class="menu-section mb-5">
-            <div class="row">
-                <div class="col">
-                    <div class="section-header mb-4">
-                        <h2 class="display-6 fw-bold">
-                            <i class="fas fa-fish text-info me-3"></i>
-                            Sjømat
-                        </h2>
-                        <p class="text-muted">Fersk fisk og skalldyr</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                {% for item in menu.sjomat %}
-                <div class="col-md-6">
-                    <div class="menu-item card border-0 bg-dark h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="card-title mb-0">{{ item.name }}</h5>
-                                <span class="badge bg-info fs-6">{{ item.price }} kr</span>
-                            </div>
-                            <p class="card-text text-muted">{{ item.description }}</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- Vegetarian -->
-        <div class="menu-section mb-5">
-            <div class="row">
-                <div class="col">
-                    <div class="section-header mb-4">
-                        <h2 class="display-6 fw-bold">
-                            <i class="fas fa-leaf text-success me-3"></i>
-                            Vegetarretter
-                        </h2>
-                        <p class="text-muted">Deilige plantebaserte alternativer</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row g-4">
-                {% for item in menu.vegetar %}
-                <div class="col-md-6">
-                    <div class="menu-item card border-0 bg-dark h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="card-title mb-0">{{ item.name }}</h5>
-                                <span class="badge bg-success fs-6">{{ item.price }} kr</span>
-                            </div>
-                            <p class="card-text text-muted">{{ item.description }}</p>
+                            <p class="card-text text-muted mb-0">{{ item.description }}</p>
                         </div>
                     </div>
                 </div>
@@ -191,14 +104,14 @@
             
             <div class="row g-4">
                 {% for item in menu.drikker %}
-                <div class="col-md-6">
+                <div class="col-md-6 col-lg-4">
                     <div class="menu-item card border-0 bg-dark h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5 class="card-title mb-0">{{ item.name }}</h5>
                                 <span class="badge bg-secondary fs-6">{{ item.price }} kr</span>
                             </div>
-                            <p class="card-text text-muted">{{ item.description }}</p>
+                            <p class="card-text text-muted mb-0">{{ item.description }}</p>
                         </div>
                     </div>
                 </div>
