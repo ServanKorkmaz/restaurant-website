@@ -132,6 +132,18 @@ def edit_menu_item(id):
     return render_template('admin/menu_form.html', form=form, title=f'Rediger: {item.name}')
 
 
+@admin_bp.route('/menu/toggle/<int:id>')
+@login_required
+@admin_required
+def toggle_menu_item(id):
+    item = MenuItem.query.get_or_404(id)
+    item.is_active = not item.is_active
+    db.session.commit()
+    status = "aktivert" if item.is_active else "deaktivert"
+    flash(f'Rett "{item.name}" er {status}!', 'success')
+    return redirect(url_for('admin.menu_list'))
+
+
 @admin_bp.route('/menu/delete/<int:id>')
 @login_required
 @admin_required
@@ -140,7 +152,7 @@ def delete_menu_item(id):
     name = item.name
     db.session.delete(item)
     db.session.commit()
-    flash(f'Rett "{name}" er slettet', 'info')
+    flash(f'Rett "{name}" er slettet!', 'success')
     return redirect(url_for('admin.menu_list'))
 
 
