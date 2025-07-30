@@ -145,3 +145,4 @@ The application is fully localized for Norwegian users with authentic Thai resta
 ✓ Updated navigation to include "Hjem, Meny, Catering, Kontakt" as requested
 ✓ Moved catering information from menu page to dedicated catering page
 ✓ Added 6 authentic catering packages with prices from 199-385 kr/pers
+✓ Updated opening hours to match actual restaurant schedule from official Google listing
