@@ -69,7 +69,7 @@ def menu():
             {'name': '07. Rød karri m/ And og Ris', 'price': '205', 'description': 'Ananas, paprika, basilikum, tomat og kokosmelk', 'allergens': '7', 'image': '07-rod-karri-and.jpg'},
             {'name': '08. Kyllingsuppe m/ Ris', 'price': '195', 'description': 'Champignon, tomat, løk, sitronblad, sitrongress, lime og kokosmelk', 'allergens': '', 'image': '08-kyllingsuppe.jpg'},
             {'name': '09. Pad Krapao', 'price': '195', 'description': 'Bambus, holy basilikum, chili, hvitløk, østersaus og soyasaus', 'allergens': '1,4,5', 'image': '09-pad-krapao.jpg'},
-            {'name': 'Biff med østersaus', 'price': '215', 'description': 'Brokkoli, gulrot, løk, hjemmelaget saus', 'allergens': '1,4,5', 'image': 'biff-ostersaus.jpg'},
+            {'name': '10. Biff m/ Østersaus', 'price': '215', 'description': 'Brokkoli, gulrot, løk, hjemmelaget saus', 'allergens': '1,4,5', 'image': '10-biff-ostersaus.jpg'},
             {'name': 'Wok med kylling, biff, svin eller scampi', 'price': '195', 'description': 'Paprika, løk, brokkoli, gulrot, hvitløk, soyasaus, østersaus', 'allergens': '1,2,4,5', 'image': 'wok.jpg'},
             {'name': 'Pad Thai med kylling, svin eller scampi', 'price': '195', 'description': 'Risnudler, egg, grønnsaker og hjemmelaget saus', 'allergens': '1,4,5,6', 'image': None},
             {'name': 'Stekte eggnudler med kylling', 'price': '195', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'allergens': '1,4,5,6', 'image': 'stekte-eggnudler.jpg'},
