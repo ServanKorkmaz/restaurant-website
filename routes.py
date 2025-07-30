@@ -180,40 +180,87 @@ def contact():
     return render_template('contact.html', form=form)
 
 def send_contact_email(form):
-    """Send contact form email via SendGrid"""
+    """Send contact form email via SendGrid or Gmail SMTP"""
     import os
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
     
-    # Check if SendGrid API key is available
+    # Try SendGrid first if available
     sendgrid_key = os.environ.get('SENDGRID_API_KEY')
-    if not sendgrid_key:
-        return False
+    if sendgrid_key:
+        try:
+            from sendgrid import SendGridAPIClient
+            from sendgrid.helpers.mail import Mail
+            
+            message = Mail(
+                from_email='noreply@nawaratthaimat.no',
+                to_emails='post@nawaratthaimat.no',
+                subject=f'Ny henvendelse fra nettsiden: {form.subject.data}',
+                html_content=f'''
+                <h3>Ny henvendelse fra nettsiden</h3>
+                <p><strong>Navn:</strong> {form.name.data}</p>
+                <p><strong>E-post:</strong> {form.email.data}</p>
+                <p><strong>Telefon:</strong> {form.phone.data or "Ikke oppgitt"}</p>
+                <p><strong>Emne:</strong> {form.subject.data}</p>
+                <p><strong>Melding:</strong></p>
+                <p>{form.message.data}</p>
+                <hr>
+                <p><small>Sendt fra nawarat-thai-mat.replit.app</small></p>
+                '''
+            )
+            
+            sg = SendGridAPIClient(sendgrid_key)
+            response = sg.send(message)
+            app.logger.info(f"E-post sendt via SendGrid til post@nawaratthaimat.no")
+            return True
+            
+        except Exception as e:
+            app.logger.error(f"SendGrid error: {e}")
     
-    try:
-        from sendgrid import SendGridAPIClient
-        from sendgrid.helpers.mail import Mail
-        
-        message = Mail(
-            from_email='noreply@nawaratthaimat.no',
-            to_emails='post@nawaratthaimat.no',
-            subject=f'Ny henvendelse fra nettsiden: {form.subject.data}',
-            html_content=f'''
-            <h3>Ny henvendelse fra nettsiden</h3>
-            <p><strong>Navn:</strong> {form.name.data}</p>
-            <p><strong>E-post:</strong> {form.email.data}</p>
-            <p><strong>Telefon:</strong> {form.phone.data or "Ikke oppgitt"}</p>
-            <p><strong>Emne:</strong> {form.subject.data}</p>
-            <p><strong>Melding:</strong></p>
-            <p>{form.message.data}</p>
-            '''
-        )
-        
-        sg = SendGridAPIClient(sendgrid_key)
-        response = sg.send(message)
-        return True
-        
-    except Exception as e:
-        app.logger.error(f"SendGrid error: {e}")
-        return False
+    # Try Gmail SMTP if available
+    gmail_user = os.environ.get('GMAIL_USER')
+    gmail_password = os.environ.get('GMAIL_APP_PASSWORD')
+    
+    if gmail_user and gmail_password:
+        try:
+            msg = MIMEMultipart()
+            msg['From'] = gmail_user
+            msg['To'] = 'post@nawaratthaimat.no'
+            msg['Subject'] = f'Ny henvendelse fra nettsiden: {form.subject.data}'
+            
+            body = f'''Ny henvendelse fra nettsiden
+
+Navn: {form.name.data}
+E-post: {form.email.data}
+Telefon: {form.phone.data or "Ikke oppgitt"}
+Emne: {form.subject.data}
+
+Melding:
+{form.message.data}
+
+---
+Sendt fra nawarat-thai-mat.replit.app
+'''
+            
+            msg.attach(MIMEText(body, 'plain', 'utf-8'))
+            
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(gmail_user, gmail_password)
+            text = msg.as_string()
+            server.sendmail(gmail_user, 'post@nawaratthaimat.no', text)
+            server.quit()
+            
+            app.logger.info(f"E-post sendt via Gmail SMTP til post@nawaratthaimat.no")
+            return True
+            
+        except Exception as e:
+            app.logger.error(f"Gmail SMTP error: {e}")
+    
+    # Log that no email service is configured
+    app.logger.info("Ingen e-posttjeneste konfigurert - meldinger lagres kun i logg")
+    return False
 
 def log_contact_message(form):
     """Log contact message to file as backup"""
