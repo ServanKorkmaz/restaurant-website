@@ -66,7 +66,7 @@ def menu():
             {'name': '04. Paneng kai med kylling, svin, scampi eller biff og ris', 'price': '195', 'description': 'Paprika, basilikum, sitronblad, rød chilipasta og kokosmelk', 'allergens': '7', 'image': '04-paneng-kai.jpg'},
             {'name': '05. Sweet chili', 'price': '195', 'description': 'Paprika, løk, gulrot, ananas og hjemmelaget saus', 'allergens': '1,4,5', 'image': '05-sweet-chili.jpg'},
             {'name': '06. Stekt ris', 'price': '195', 'description': 'Brokkoli, gulrot, løk, egg, østersaus, gulrot og soyasaus', 'allergens': '1,2,4,5,6', 'image': '06-stekt-ris.jpg'},
-            {'name': 'Rød karri med and og ris', 'price': '205', 'description': 'Ananas, paprika, basilikum, tomat og kokosmelk', 'allergens': '7', 'image': 'rod-karri-and.jpg'},
+            {'name': '07. Rød karri m/ And og Ris', 'price': '205', 'description': 'Ananas, paprika, basilikum, tomat og kokosmelk', 'allergens': '7', 'image': '07-rod-karri-and.jpg'},
             {'name': 'Kylling suppe med ris', 'price': '195', 'description': 'Champignon, tomat, løk, sitronblad, sitrongress, lime og kokosmelk', 'allergens': '', 'image': 'kyllingsuppe.jpg'},
             {'name': 'Pad krapao med kylling, svin eller scampi og ris', 'price': '195', 'description': 'Bambus, holy basilikum, chili, hvitløk, østersaus og soyasaus', 'allergens': '1,4,5', 'image': 'pad-krapao.jpg'},
             {'name': 'Biff med østersaus', 'price': '215', 'description': 'Brokkoli, gulrot, løk, hjemmelaget saus', 'allergens': '1,4,5', 'image': 'biff-ostersaus.jpg'},
