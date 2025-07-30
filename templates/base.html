@@ -45,6 +45,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {{ 'active' if request.endpoint == 'catering' }}" href="{{ url_for('catering') }}">
+                            <i class="fas fa-concierge-bell me-1"></i>Catering
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ 'active' if request.endpoint == 'contact' }}" href="{{ url_for('contact') }}">
                             <i class="fas fa-envelope me-1"></i>Kontakt
                         </a>

@@ -19,24 +19,24 @@ def index():
 def menu():
     """Menu page displaying food and beverage offerings"""
     # Get menu items from database, fallback to static data if empty
-    db_items = MenuItem.query.filter_by(is_active=True).order_by(MenuItem.category, MenuItem.sort_order, MenuItem.name).all()
+    db_items = MenuItem.query.filter_by(is_active=True).filter(MenuItem.category != 'catering').order_by(MenuItem.category, MenuItem.sort_order, MenuItem.name).all()
     
     if db_items:
-        # Use database items
+        # Use database items (exclude catering items)
         menu_data = {
             'hovedretter': [],
             'ekstra': [],
-            'drikker': [],
-            'catering': []
+            'drikker': []
         }
         
         for item in db_items:
-            menu_data[item.category].append({
-                'name': item.name,
-                'price': item.price,
-                'description': item.description,
-                'image': item.image_filename
-            })
+            if item.category in menu_data:
+                menu_data[item.category].append({
+                    'name': item.name,
+                    'price': item.price,
+                    'description': item.description,
+                    'image': item.image_filename
+                })
     else:
         # Fallback to static data - this will be replaced by database items
         menu_data = {
@@ -76,15 +76,15 @@ def menu():
             {'name': 'Munkholm', 'price': '69', 'description': '0,33l', 'image': None},
             {'name': 'Mozell', 'price': '40', 'description': '0,5l', 'image': None}
         ],
-        'catering': [
-            {'name': 'Små catering', 'price': 'Fra 200/pers', 'description': 'Utvalg av våre populære retter for 10-20 personer'},
-            {'name': 'Medium catering', 'price': 'Fra 180/pers', 'description': 'Utvidet meny for 20-50 personer med forretter'},
-            {'name': 'Store arrangementer', 'price': 'Tilbud på forespørsel', 'description': 'Komplett buffet for over 50 personer'},
-            {'name': 'Bedrift lunsjcatering', 'price': 'Fra 165/pers', 'description': 'Daglig leveranse til bedrifter'}
-        ]
+
     }
     
     return render_template('menu.html', menu=menu_data)
+
+@app.route('/catering')
+def catering():
+    """Catering page with detailed catering packages"""
+    return render_template('catering.html')
 
 @app.route('/kontakt', methods=['GET', 'POST'])
 def contact():
