@@ -71,7 +71,7 @@ def menu():
             {'name': '09. Pad Krapao', 'price': '195', 'description': 'Bambus, holy basilikum, chili, hvitløk, østersaus og soyasaus', 'allergens': '1,4,5', 'image': '09-pad-krapao.jpg'},
             {'name': '10. Biff m/ Østersaus', 'price': '215', 'description': 'Brokkoli, gulrot, løk, hjemmelaget saus', 'allergens': '1,4,5', 'image': '10-biff-ostersaus.jpg'},
             {'name': '11. Wok', 'price': '195', 'description': 'Paprika, løk, brokkoli, gulrot, hvitløk, soyasaus, østersaus', 'allergens': '1,2,4,5', 'image': '11-wok.jpg'},
-            {'name': 'Pad Thai med kylling, svin eller scampi', 'price': '195', 'description': 'Risnudler, egg, grønnsaker og hjemmelaget saus', 'allergens': '1,4,5,6', 'image': None},
+            {'name': '12. Pad Thai', 'price': '195', 'description': 'Risnudler, egg, grønnsaker og hjemmelaget saus', 'allergens': '1,4,5,6', 'image': '12-pad-thai.jpg'},
             {'name': 'Stekte eggnudler med kylling', 'price': '195', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'allergens': '1,4,5,6', 'image': 'stekte-eggnudler.jpg'},
             {'name': 'Vårruller med salat og ris', 'price': '195', 'description': 'Glassnudler, kål, gulrot, løk, kyllingkjøttdeig, soyasaus og østersaus', 'allergens': '1,4,5,8', 'image': 'varruller.jpg'},
             {'name': 'Kylling klubber med hjemmelaget marinade og ris', 'price': '195', 'description': '', 'allergens': '1,4,5,6', 'image': None},
