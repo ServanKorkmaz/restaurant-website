@@ -43,10 +43,18 @@
                         {% endif %}
                         <div class="card-body p-4">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="card-title mb-0">{{ item.name }}</h5>
+                                <h5 class="card-title mb-0">{{ item.number }}. {{ item.name }}</h5>
                                 <span class="badge bg-warning text-dark fs-6">{{ item.price }} kr</span>
                             </div>
-                            <p class="card-text text-muted mb-0">{{ item.description }}</p>
+                            <p class="card-text text-muted mb-2">{{ item.description }}</p>
+                            {% if item.allergens %}
+                            <p class="card-text">
+                                <small class="text-warning">
+                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                    <strong>Allergener:</strong> {{ item.allergens }}
+                                </small>
+                            </p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -133,29 +141,49 @@
                 
                 <!-- Allergen Information -->
                 <div class="alert alert-warning border-0 mt-3" role="alert">
-                    <h6><i class="fas fa-exclamation-triangle me-2"></i>Allergener</h6>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <small>
-                                1. Glutenholdig korn<br>
-                                2. Skalldyr<br>
-                                3. Egg<br>
-                                4. Fisk<br>
-                                5. Peanøtter<br>
-                                6. Soya<br>
-                                7. Melk (og laktose)
-                            </small>
+                    <h6 class="mb-3"><i class="fas fa-exclamation-triangle me-2"></i>Allergener</h6>
+                    <div class="row g-3">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="bg-dark p-3 rounded">
+                                <h6 class="text-warning mb-2">1-4</h6>
+                                <small>
+                                    <strong>1.</strong> Glutenholdig korn: Hvete, rug, bygg, havre og produkter av disse<br>
+                                    <strong>2.</strong> Skalldyr: Reker, kreps, hummer, kongekrabbe, blåskjell osv.<br>
+                                    <strong>3.</strong> Egg<br>
+                                    <strong>4.</strong> Fisk
+                                </small>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <small>
-                                8. Nøtter (Mandel, hasselnøtt, valnøtt, cashewnøtt, pekannøtt, paranøtt, pistasjnøtt)<br>
-                                9. Selleri<br>
-                                10. Sennep<br>
-                                11. Sesamfrø<br>
-                                12. Svoveldioksid og sulfitt<br>
-                                13. Lupin<br>
-                                14. Bløtdyr
-                            </small>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="bg-dark p-3 rounded">
+                                <h6 class="text-warning mb-2">5-8</h6>
+                                <small>
+                                    <strong>5.</strong> Peanøtter<br>
+                                    <strong>6.</strong> Soya (Soyaolje er ikke et allergen)<br>
+                                    <strong>7.</strong> Melk (og laktose)<br>
+                                    <strong>8.</strong> Nøtter: Mandel, hasselnøtt, valnøtt, cashewnøtt, pekannøtt, paranøtt, pistasjnøtt
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="bg-dark p-3 rounded">
+                                <h6 class="text-warning mb-2">9-12</h6>
+                                <small>
+                                    <strong>9.</strong> Selleri<br>
+                                    <strong>10.</strong> Sennep<br>
+                                    <strong>11.</strong> Sesamfrø<br>
+                                    <strong>12.</strong> Svoveldioksid og sulfitt
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="bg-dark p-3 rounded">
+                                <h6 class="text-warning mb-2">13-14</h6>
+                                <small>
+                                    <strong>13.</strong> Lupin<br>
+                                    <strong>14.</strong> Bløtdyr: Blekksprut, muslinger, snegler osv.
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>

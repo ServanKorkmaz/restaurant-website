@@ -33,49 +33,42 @@ def menu():
         for item in db_items:
             if item.category in menu_data:
                 menu_data[item.category].append({
+                    'number': item.sort_order if item.sort_order else '',
                     'name': item.name,
                     'price': item.price,
                     'description': item.description,
+                    'allergens': getattr(item, 'allergens', ''),
                     'image': item.image_filename
                 })
     else:
         # Fallback to static data - this will be replaced by database items
         menu_data = {
         'hovedretter': [
-            {'name': 'Kylling m/ Cashewnøtter & Ris', 'price': '205', 'description': 'Paprika, løk og hjemmelaget saus', 'image': 'kylling-cashew.jpg'},
-            {'name': 'Rød Karri', 'price': '205', 'description': 'Kremet rød karri med rød karri pasta, ananas, tomat, fersk basilikum, paprika og kokosmelk. Velg mellom kylling, biff eller svin', 'image': 'rod-karri.jpg'},
-            {'name': 'Paneng Kai', 'price': '205', 'description': 'Paprika, basilikum, sitronblad, rød chilipaste, kokosmelk og ris. Velg mellom kylling, scampi, svin og biff', 'image': 'paneng-kai.jpg'},
-            {'name': 'Sweet Chili', 'price': '205', 'description': 'Paprika, løk, gulrot, ananas, ris og hjemmelaget saus. Velg mellom kylling, scampi, svin og biff', 'image': 'sweet-chili.jpg'},
-            {'name': 'Stekt Ris', 'price': '205', 'description': 'Stekt ris med brokkoli, gulrot, løk, egg, østersaus og soyasaus. Velg mellom kylling, svin eller scampi', 'image': 'stekt-ris.jpg'},
-            {'name': 'Rød Karri m/ And & Ris', 'price': '245', 'description': 'Ananas, paprika, basilikum, tomat og kokosmelk', 'image': 'rod-karri-and.jpg'},
-            {'name': 'Kyllingsuppe m/ Ris', 'price': '205', 'description': 'Champignon, tomat, løk, sitronblad, sitrongress, lime og kokosmelk', 'image': 'kyllingsuppe.jpg'},
-            {'name': 'Pad Krapao', 'price': '205', 'description': 'Bambus, holybasilikum, chili, hvitløk, østersaus og soyasaus. Velg mellom kylling, scampi og svin', 'image': 'pad-krapao.jpg'},
-            {'name': 'Biff m/ Østersaus', 'price': '235', 'description': 'Brokkoli, gulrot, løk, ris og hjemmelaget saus', 'image': 'biff-ostersaus.jpg'},
-            {'name': 'Wok', 'price': '205', 'description': 'Wok med paprika, løk, brokkoli, gulrot, hvitløk, soyasaus og østersaus. Velg mellom kylling, biff, svin eller scampi', 'image': 'wok.jpg'},
-            {'name': 'Stekte Eggnudler m/ Kylling', 'price': '205', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'image': 'stekte-eggnudler.jpg'},
-            {'name': 'Vårruller m/ Salat & Ris', 'price': '185', 'description': 'Glassnudler, kål, gulrot, løk, kyllinkjøttdeig, soyasaus og østersaus. Serveres med salat og ris', 'image': 'varruller.jpg'},
-            {'name': 'Pad Thai', 'price': '205', 'description': 'Thailandsk stekt nudlerrett med tofu, peanøtter, balansert søt og syrlig saus. Velg mellom scampi, kylling eller svin', 'image': None},
-            {'name': 'Nudelsuppe', 'price': '235', 'description': 'Nudelsuppe med svin', 'image': None}
+            {'number': '01', 'name': 'Kylling med cashewnøtter og ris', 'price': '195', 'description': 'Paprika, løk og hjemmelaget saus', 'allergens': '1,2,3,4,5,6,8', 'image': 'kylling-cashew.jpg'},
+            {'number': '02', 'name': 'Rød karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, rød chilipasta og kokosmelk', 'allergens': '7', 'image': 'rod-karri.jpg'},
+            {'number': '03', 'name': 'Grønn karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, grønn chilipasta og kokosmelk', 'allergens': '7', 'image': None},
+            {'number': '04', 'name': 'Paneng Kai med kylling, svin, scampi eller biff og ris', 'price': '195', 'description': 'Paprika, basilikum, sitronblad, rød chilipasta og kokosmelk', 'allergens': '7', 'image': 'paneng-kai.jpg'},
+            {'number': '05', 'name': 'Sweet chili med kylling, svin eller biff og ris', 'price': '195', 'description': 'Paprika, løk, gulrot, ananas og hjemmelaget saus', 'allergens': '1,4,5', 'image': 'sweet-chili.jpg'},
+            {'number': '06', 'name': 'Stekt ris med kylling, svin eller scampi', 'price': '195', 'description': 'Brokkoli, gulrot, løk, egg, østersaus, gulrot og soyasaus', 'allergens': '1,2,4,5,6', 'image': 'stekt-ris.jpg'},
+            {'number': '07', 'name': 'Rød karri med and og ris', 'price': '205', 'description': 'Ananas, paprika, basilikum, tomat og kokosmelk', 'allergens': '7', 'image': 'rod-karri-and.jpg'},
+            {'number': '08', 'name': 'Kylling suppe med ris', 'price': '195', 'description': 'Champignon, tomat, løk, sitronblad, sitrongress, lime og kokosmelk', 'allergens': '', 'image': 'kyllingsuppe.jpg'},
+            {'number': '09', 'name': 'Pad krapao med kylling, svin eller scampi og ris', 'price': '195', 'description': 'Bambus, holy basilikum, chili, hvitløk, østersaus og soyasaus', 'allergens': '1,4,5', 'image': 'pad-krapao.jpg'},
+            {'number': '10', 'name': 'Biff med østersaus', 'price': '215', 'description': 'Brokkoli, gulrot, løk, hjemmelaget saus', 'allergens': '1,4,5', 'image': 'biff-ostersaus.jpg'},
+            {'number': '11', 'name': 'Wok med kylling, biff, svin eller scampi', 'price': '195', 'description': 'Paprika, løk, brokkoli, gulrot, hvitløk, soyasaus, østersaus', 'allergens': '1,2,4,5', 'image': 'wok.jpg'},
+            {'number': '12', 'name': 'Pad Thai med kylling, svin eller scampi', 'price': '195', 'description': 'Risnudler, egg, grønnsaker og hjemmelaget saus', 'allergens': '1,4,5,6', 'image': None},
+            {'number': '13', 'name': 'Stekte eggnudler med kylling', 'price': '195', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'allergens': '1,4,5,6', 'image': 'stekte-eggnudler.jpg'},
+            {'number': '14', 'name': 'Vårruller med salat og ris', 'price': '195', 'description': 'Glassnudler, kål, gulrot, løk, kyllingkjøttdeig, soyasaus og østersaus', 'allergens': '1,4,5,8', 'image': 'varruller.jpg'},
+            {'number': '15', 'name': 'Kylling klubber med hjemmelaget marinade og ris', 'price': '195', 'description': '', 'allergens': '1,4,5,6', 'image': None},
+            {'number': '16', 'name': 'Innbakt scampi med salat og ris', 'price': '195', 'description': '', 'allergens': '1,2,6', 'image': None},
+            {'number': '17', 'name': 'Mixed tallerken med salat og ris', 'price': '195', 'description': '2 vårruller, 1 innbakt scampi og 1 innbakt kylling', 'allergens': '1,2,4,5,6,8', 'image': None}
         ],
         'ekstra': [
-            {'name': 'Vårull', 'price': '25', 'description': '1 stk vårull med glassnudler, kål, gulrot, løk, kyllinkjøttdeig, soyasaus og østersaus', 'image': None},
-            {'name': 'Innbakt Scampi', 'price': '30', 'description': '1 stk fritert innbakt scampi', 'image': None},
-            {'name': 'Ekstra Ris', 'price': '20', 'description': 'Ekstra ris til retten', 'image': None}
+            {'name': 'Vårruller pr stk', 'price': '25', 'description': '', 'image': None},
+            {'name': 'Innbakt scampi pr stk', 'price': '30', 'description': '', 'image': None}
         ],
         'drikker': [
-            {'name': 'Coca-Cola', 'price': '40', 'description': '0,5l Coca-Cola', 'image': None},
-            {'name': 'Coca-Cola Zero', 'price': '40', 'description': '0,5l Coca-Cola Zero', 'image': None},
-            {'name': 'Fanta', 'price': '40', 'description': '0,5l Fanta', 'image': None},
-            {'name': 'Pepsi', 'price': '40', 'description': '0,5l Pepsi', 'image': None},
-            {'name': 'Pepsi Max', 'price': '40', 'description': '0,5l Pepsi Max', 'image': None},
-            {'name': 'Solo', 'price': '40', 'description': '0,5l Solo', 'image': None},
-            {'name': 'Solo Super', 'price': '40', 'description': '0,5l Solo Super', 'image': None},
-            {'name': 'Fanta Exotic', 'price': '40', 'description': '0,5l Fanta Exotic', 'image': None},
-            {'name': 'Sprite', 'price': '40', 'description': '0,5l Sprite', 'image': None},
-            {'name': 'Farris naturell', 'price': '40', 'description': '0,5l Farris naturell', 'image': None},
-            {'name': 'Farris Lime', 'price': '40', 'description': '40 Farris Lime', 'image': None},
-            {'name': 'Munkholm', 'price': '69', 'description': '0,33l', 'image': None},
-            {'name': 'Mozell', 'price': '40', 'description': '0,5l', 'image': None}
+            {'name': 'Vann', 'price': '40', 'description': '', 'image': None},
+            {'name': 'Brus', 'price': '40', 'description': '', 'image': None}
         ],
 
     }
