@@ -19,12 +19,12 @@ class ContactForm(FlaskForm):
     
     subject = StringField('Emne', validators=[
         DataRequired(message='Emne er påkrevd'),
-        Length(min=5, max=200, message='Emne må være mellom 5 og 200 tegn')
+        Length(min=2, max=200, message='Emne må være mellom 2 og 200 tegn')
     ])
     
     message = TextAreaField('Melding', validators=[
         DataRequired(message='Melding er påkrevd'),
-        Length(min=10, max=1000, message='Melding må være mellom 10 og 1000 tegn')
+        Length(min=5, max=1000, message='Melding må være mellom 5 og 1000 tegn')
     ])
     
     submit = SubmitField('Send melding')
