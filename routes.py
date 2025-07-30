@@ -60,7 +60,7 @@ def menu():
         # Fallback to static data - this will be replaced by database items
         menu_data = {
         'hovedretter': [
-            {'name': 'Kylling med cashewnøtter og ris', 'price': '195', 'description': 'Paprika, løk og hjemmelaget saus', 'allergens': '1,2,3,4,5,6,8', 'image': 'kylling-cashew.jpg'},
+            {'name': '01. Kylling med cashewnøtter og ris', 'price': '195', 'description': 'Paprika, løk og hjemmelaget saus', 'allergens': '1,2,3,4,5,6,8', 'image': '01-kylling-cashew.jpg'},
             {'name': 'Rød karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, rød chilipasta og kokosmelk', 'allergens': '7', 'image': 'rod-karri.jpg'},
             {'name': 'Grønn karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, grønn chilipasta og kokosmelk', 'allergens': '7', 'image': None},
             {'name': 'Paneng Kai med kylling, svin, scampi eller biff og ris', 'price': '195', 'description': 'Paprika, basilikum, sitronblad, rød chilipasta og kokosmelk', 'allergens': '7', 'image': 'paneng-kai.jpg'},
