@@ -19,10 +19,26 @@ def index():
 @app.route('/meny')
 def menu():
     """Menu page displaying food and beverage offerings"""
+    # Helper function to separate allergen info from description
+    def clean_description_and_extract_allergens(desc):
+        """Separate allergen info from description"""
+        if not desc:
+            return '', ''
+        
+        # Look for allergen patterns like "Allergener: 1,2,3"
+        import re
+        allergen_match = re.search(r'[.\s]*Allergener?:\s*([0-9,\s]+)', desc, re.IGNORECASE)
+        if allergen_match:
+            allergens = allergen_match.group(1).strip()
+            # Remove allergen info from description
+            clean_desc = re.sub(r'[.\s]*Allergener?:\s*[0-9,\s]+', '', desc, flags=re.IGNORECASE).strip().rstrip('.')
+            return clean_desc, allergens
+        return desc, ''
+    
     # Get menu items from database, fallback to static data if empty
     db_items = MenuItem.query.filter_by(is_active=True).filter(MenuItem.category != 'catering').order_by(MenuItem.category, MenuItem.sort_order, MenuItem.name).all()
     
-    if db_items:
+    if db_items and len([item for item in db_items if item.category == 'hovedretter']) > 0:
         # Use database items (exclude catering items)
         menu_data = {
             'hovedretter': [],
@@ -32,35 +48,35 @@ def menu():
         
         for item in db_items:
             if item.category in menu_data:
+                clean_desc, allergens = clean_description_and_extract_allergens(item.description)
                 menu_data[item.category].append({
-                    'number': item.sort_order if item.sort_order else '',
                     'name': item.name,
                     'price': item.price,
-                    'description': item.description,
-                    'allergens': getattr(item, 'allergens', ''),
+                    'description': clean_desc,
+                    'allergens': allergens or getattr(item, 'allergens', ''),
                     'image': item.image_filename
                 })
     else:
         # Fallback to static data - this will be replaced by database items
         menu_data = {
         'hovedretter': [
-            {'number': '01', 'name': 'Kylling med cashewnøtter og ris', 'price': '195', 'description': 'Paprika, løk og hjemmelaget saus', 'allergens': '1,2,3,4,5,6,8', 'image': 'kylling-cashew.jpg'},
-            {'number': '02', 'name': 'Rød karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, rød chilipasta og kokosmelk', 'allergens': '7', 'image': 'rod-karri.jpg'},
-            {'number': '03', 'name': 'Grønn karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, grønn chilipasta og kokosmelk', 'allergens': '7', 'image': None},
-            {'number': '04', 'name': 'Paneng Kai med kylling, svin, scampi eller biff og ris', 'price': '195', 'description': 'Paprika, basilikum, sitronblad, rød chilipasta og kokosmelk', 'allergens': '7', 'image': 'paneng-kai.jpg'},
-            {'number': '05', 'name': 'Sweet chili med kylling, svin eller biff og ris', 'price': '195', 'description': 'Paprika, løk, gulrot, ananas og hjemmelaget saus', 'allergens': '1,4,5', 'image': 'sweet-chili.jpg'},
-            {'number': '06', 'name': 'Stekt ris med kylling, svin eller scampi', 'price': '195', 'description': 'Brokkoli, gulrot, løk, egg, østersaus, gulrot og soyasaus', 'allergens': '1,2,4,5,6', 'image': 'stekt-ris.jpg'},
-            {'number': '07', 'name': 'Rød karri med and og ris', 'price': '205', 'description': 'Ananas, paprika, basilikum, tomat og kokosmelk', 'allergens': '7', 'image': 'rod-karri-and.jpg'},
-            {'number': '08', 'name': 'Kylling suppe med ris', 'price': '195', 'description': 'Champignon, tomat, løk, sitronblad, sitrongress, lime og kokosmelk', 'allergens': '', 'image': 'kyllingsuppe.jpg'},
-            {'number': '09', 'name': 'Pad krapao med kylling, svin eller scampi og ris', 'price': '195', 'description': 'Bambus, holy basilikum, chili, hvitløk, østersaus og soyasaus', 'allergens': '1,4,5', 'image': 'pad-krapao.jpg'},
-            {'number': '10', 'name': 'Biff med østersaus', 'price': '215', 'description': 'Brokkoli, gulrot, løk, hjemmelaget saus', 'allergens': '1,4,5', 'image': 'biff-ostersaus.jpg'},
-            {'number': '11', 'name': 'Wok med kylling, biff, svin eller scampi', 'price': '195', 'description': 'Paprika, løk, brokkoli, gulrot, hvitløk, soyasaus, østersaus', 'allergens': '1,2,4,5', 'image': 'wok.jpg'},
-            {'number': '12', 'name': 'Pad Thai med kylling, svin eller scampi', 'price': '195', 'description': 'Risnudler, egg, grønnsaker og hjemmelaget saus', 'allergens': '1,4,5,6', 'image': None},
-            {'number': '13', 'name': 'Stekte eggnudler med kylling', 'price': '195', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'allergens': '1,4,5,6', 'image': 'stekte-eggnudler.jpg'},
-            {'number': '14', 'name': 'Vårruller med salat og ris', 'price': '195', 'description': 'Glassnudler, kål, gulrot, løk, kyllingkjøttdeig, soyasaus og østersaus', 'allergens': '1,4,5,8', 'image': 'varruller.jpg'},
-            {'number': '15', 'name': 'Kylling klubber med hjemmelaget marinade og ris', 'price': '195', 'description': '', 'allergens': '1,4,5,6', 'image': None},
-            {'number': '16', 'name': 'Innbakt scampi med salat og ris', 'price': '195', 'description': '', 'allergens': '1,2,6', 'image': None},
-            {'number': '17', 'name': 'Mixed tallerken med salat og ris', 'price': '195', 'description': '2 vårruller, 1 innbakt scampi og 1 innbakt kylling', 'allergens': '1,2,4,5,6,8', 'image': None}
+            {'name': 'Kylling med cashewnøtter og ris', 'price': '195', 'description': 'Paprika, løk og hjemmelaget saus', 'allergens': '1,2,3,4,5,6,8', 'image': 'kylling-cashew.jpg'},
+            {'name': 'Rød karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, rød chilipasta og kokosmelk', 'allergens': '7', 'image': 'rod-karri.jpg'},
+            {'name': 'Grønn karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, grønn chilipasta og kokosmelk', 'allergens': '7', 'image': None},
+            {'name': 'Paneng Kai med kylling, svin, scampi eller biff og ris', 'price': '195', 'description': 'Paprika, basilikum, sitronblad, rød chilipasta og kokosmelk', 'allergens': '7', 'image': 'paneng-kai.jpg'},
+            {'name': 'Sweet chili med kylling, svin eller biff og ris', 'price': '195', 'description': 'Paprika, løk, gulrot, ananas og hjemmelaget saus', 'allergens': '1,4,5', 'image': 'sweet-chili.jpg'},
+            {'name': 'Stekt ris med kylling, svin eller scampi', 'price': '195', 'description': 'Brokkoli, gulrot, løk, egg, østersaus, gulrot og soyasaus', 'allergens': '1,2,4,5,6', 'image': 'stekt-ris.jpg'},
+            {'name': 'Rød karri med and og ris', 'price': '205', 'description': 'Ananas, paprika, basilikum, tomat og kokosmelk', 'allergens': '7', 'image': 'rod-karri-and.jpg'},
+            {'name': 'Kylling suppe med ris', 'price': '195', 'description': 'Champignon, tomat, løk, sitronblad, sitrongress, lime og kokosmelk', 'allergens': '', 'image': 'kyllingsuppe.jpg'},
+            {'name': 'Pad krapao med kylling, svin eller scampi og ris', 'price': '195', 'description': 'Bambus, holy basilikum, chili, hvitløk, østersaus og soyasaus', 'allergens': '1,4,5', 'image': 'pad-krapao.jpg'},
+            {'name': 'Biff med østersaus', 'price': '215', 'description': 'Brokkoli, gulrot, løk, hjemmelaget saus', 'allergens': '1,4,5', 'image': 'biff-ostersaus.jpg'},
+            {'name': 'Wok med kylling, biff, svin eller scampi', 'price': '195', 'description': 'Paprika, løk, brokkoli, gulrot, hvitløk, soyasaus, østersaus', 'allergens': '1,2,4,5', 'image': 'wok.jpg'},
+            {'name': 'Pad Thai med kylling, svin eller scampi', 'price': '195', 'description': 'Risnudler, egg, grønnsaker og hjemmelaget saus', 'allergens': '1,4,5,6', 'image': None},
+            {'name': 'Stekte eggnudler med kylling', 'price': '195', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'allergens': '1,4,5,6', 'image': 'stekte-eggnudler.jpg'},
+            {'name': 'Vårruller med salat og ris', 'price': '195', 'description': 'Glassnudler, kål, gulrot, løk, kyllingkjøttdeig, soyasaus og østersaus', 'allergens': '1,4,5,8', 'image': 'varruller.jpg'},
+            {'name': 'Kylling klubber med hjemmelaget marinade og ris', 'price': '195', 'description': '', 'allergens': '1,4,5,6', 'image': None},
+            {'name': 'Innbakt scampi med salat og ris', 'price': '195', 'description': '', 'allergens': '1,2,6', 'image': None},
+            {'name': 'Mixed tallerken med salat og ris', 'price': '195', 'description': '2 vårruller, 1 innbakt scampi og 1 innbakt kylling', 'allergens': '1,2,4,5,6,8', 'image': None}
         ],
         'ekstra': [
             {'name': 'Vårruller pr stk', 'price': '25', 'description': '', 'image': None},

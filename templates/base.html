@@ -17,6 +17,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
     
+    <!-- Menu Fix CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='menu-fix.css') }}">
+    
     {% block extra_head %}{% endblock %}
 </head>
 <body>
@@ -173,6 +176,9 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Menu Numbering Fix -->
+    <script src="{{ url_for('static', filename='fix-numbering.js') }}"></script>
     
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
