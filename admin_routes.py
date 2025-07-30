@@ -45,11 +45,10 @@ def setup_admin():
     
     form = CreateAdminForm()
     if form.validate_on_submit():
-        user = User(
-            username=form.username.data,
-            email=form.email.data,
-            is_admin=True
-        )
+        user = User()
+        user.username = form.username.data
+        user.email = form.email.data
+        user.is_admin = True
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
@@ -95,15 +94,14 @@ def menu_list():
 def add_menu_item():
     form = MenuItemForm()
     if form.validate_on_submit():
-        item = MenuItem(
-            name=form.name.data,
-            description=form.description.data,
-            price=form.price.data,
-            category=form.category.data,
-            image_filename=form.image_filename.data if form.image_filename.data else None,
-            is_active=form.is_active.data,
-            sort_order=form.sort_order.data
-        )
+        item = MenuItem()
+        item.name = form.name.data
+        item.description = form.description.data
+        item.price = form.price.data
+        item.category = form.category.data
+        item.image_filename = form.image_filename.data if form.image_filename.data else None
+        item.is_active = form.is_active.data
+        item.sort_order = form.sort_order.data
         db.session.add(item)
         db.session.commit()
         flash(f'Rett "{item.name}" er lagt til!', 'success')
@@ -177,7 +175,9 @@ def restaurant_info():
             if info:
                 info.value = value
             else:
-                info = RestaurantInfo(key=key, value=value)
+                info = RestaurantInfo()
+                info.key = key
+                info.value = value
                 db.session.add(info)
         
         db.session.commit()

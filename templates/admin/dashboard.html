@@ -3,98 +3,134 @@
 {% block title %}Dashboard - Admin{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0">
-        <i class="fas fa-chart-line me-2"></i>Dashboard
-    </h2>
-    <small class="text-muted">Velkommen tilbake!</small>
+<div class="admin-header text-center">
+    <h1 class="display-5 fw-bold text-white mb-2">
+        <i class="fas fa-chart-line me-3"></i>Admin Dashboard
+    </h1>
+    <p class="lead text-white-50 mb-0">Administrer Nawarat Thai Mat og Catering</p>
 </div>
 
-<div class="row mb-4">
-    <div class="col-md-6 col-lg-3 mb-3">
-        <div class="card bg-primary">
-            <div class="card-body text-center">
-                <i class="fas fa-utensils fa-2x mb-2"></i>
-                <h4 class="card-title">{{ menu_count }}</h4>
-                <p class="card-text">Aktive retter</p>
+<!-- Quick Stats -->
+<div class="quick-stats">
+    <div class="row text-center">
+        <div class="col-md-3 mb-3">
+            <div class="stat-card card text-white">
+                <div class="card-body py-4">
+                    <i class="fas fa-utensils fa-3x mb-3 text-warning"></i>
+                    <h3 class="fw-bold">{{ menu_count }}</h3>
+                    <p class="card-text">Aktive retter</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 col-lg-3 mb-3">
-        <div class="card bg-info">
-            <div class="card-body text-center">
-                <i class="fas fa-list fa-2x mb-2"></i>
-                <h4 class="card-title">{{ total_items }}</h4>
-                <p class="card-text">Totalt retter</p>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card card text-white bg-info">
+                <div class="card-body py-4">
+                    <i class="fas fa-list fa-3x mb-3 text-warning"></i>
+                    <h3 class="fw-bold">{{ total_items }}</h3>
+                    <p class="card-text">Totalt retter</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 col-lg-3 mb-3">
-        <div class="card bg-success">
-            <div class="card-body text-center">
-                <i class="fas fa-store fa-2x mb-2"></i>
-                <h4 class="card-title">Online</h4>
-                <p class="card-text">Nettside status</p>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card card text-white bg-success">
+                <div class="card-body py-4">
+                    <i class="fas fa-globe fa-3x mb-3 text-warning"></i>
+                    <h3 class="fw-bold">Online</h3>
+                    <p class="card-text">Nettside status</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 col-lg-3 mb-3">
-        <div class="card bg-warning">
-            <div class="card-body text-center">
-                <i class="fas fa-tools fa-2x mb-2"></i>
-                <h4 class="card-title">Admin</h4>
-                <p class="card-text">Kontrollpanel</p>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card card text-white bg-warning">
+                <div class="card-body py-4">
+                    <i class="fas fa-tools fa-3x mb-3 text-dark"></i>
+                    <h3 class="fw-bold text-dark">Aktiv</h3>
+                    <p class="card-text text-dark">Admin panel</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Quick Actions -->
 <div class="row">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="fas fa-tachometer-alt me-2"></i>Hurtige handlinger
-                </h5>
+    <div class="col-lg-8">
+        <div class="action-card card">
+            <div class="card-header bg-gradient">
+                <h4 class="mb-0 text-white">
+                    <i class="fas fa-bolt me-2"></i>Hurtige handlinger
+                </h4>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-6 mb-3">
-                        <a href="{{ url_for('admin.add_menu_item') }}" class="btn btn-primary w-100">
-                            <i class="fas fa-plus me-2"></i>Legg til ny rett
+            <div class="card-body p-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <a href="{{ url_for('admin.add_menu_item') }}" class="btn btn-primary btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
+                            <div class="text-center">
+                                <i class="fas fa-plus fa-2x mb-2"></i>
+                                <div>Legg til ny rett</div>
+                            </div>
                         </a>
                     </div>
-                    <div class="col-sm-6 mb-3">
-                        <a href="{{ url_for('admin.menu_list') }}" class="btn btn-outline-primary w-100">
-                            <i class="fas fa-edit me-2"></i>Rediger meny
+                    <div class="col-md-6">
+                        <a href="{{ url_for('admin.menu_list') }}" class="btn btn-outline-primary btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
+                            <div class="text-center">
+                                <i class="fas fa-edit fa-2x mb-2"></i>
+                                <div>Administrer meny</div>
+                            </div>
                         </a>
                     </div>
-                    <div class="col-sm-6 mb-3">
-                        <a href="{{ url_for('admin.restaurant_info') }}" class="btn btn-outline-info w-100">
-                            <i class="fas fa-info-circle me-2"></i>Restaurantinfo
+                    <div class="col-md-6">
+                        <a href="{{ url_for('admin.restaurant_info') }}" class="btn btn-outline-info btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
+                            <div class="text-center">
+                                <i class="fas fa-info-circle fa-2x mb-2"></i>
+                                <div>Restaurantinfo</div>
+                            </div>
                         </a>
                     </div>
-                    <div class="col-sm-6 mb-3">
-                        <a href="{{ url_for('index') }}" target="_blank" class="btn btn-outline-success w-100">
-                            <i class="fas fa-external-link-alt me-2"></i>Se nettside
+                    <div class="col-md-6">
+                        <a href="{{ url_for('index') }}" target="_blank" class="btn btn-outline-success btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
+                            <div class="text-center">
+                                <i class="fas fa-external-link-alt fa-2x mb-2"></i>
+                                <div>Se nettside</div>
+                            </div>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">
+    <div class="col-lg-4">
+        <div class="action-card card">
+            <div class="card-header bg-gradient">
+                <h4 class="mb-0 text-white">
                     <i class="fas fa-info-circle me-2"></i>System informasjon
-                </h5>
+                </h4>
             </div>
             <div class="card-body">
-                <p><strong>Restaurant:</strong> Nawarat Thai Mat og Catering</p>
-                <p><strong>Lokasjon:</strong> Gjøvik</p>
-                <p><strong>Status:</strong> <span class="badge bg-success">Aktiv</span></p>
-                <p><strong>Admin:</strong> {{ current_user.username }}</p>
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 px-0">
+                        <span><i class="fas fa-store me-2 text-primary"></i>Restaurant</span>
+                        <strong class="text-warning">Nawarat Thai</strong>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 px-0">
+                        <span><i class="fas fa-map-marker-alt me-2 text-info"></i>Lokasjon</span>
+                        <strong>Gjøvik</strong>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 px-0">
+                        <span><i class="fas fa-circle me-2 text-success"></i>Status</span>
+                        <span class="badge bg-success">Online</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center bg-transparent border-0 px-0">
+                        <span><i class="fas fa-user-shield me-2 text-warning"></i>Admin</span>
+                        <strong class="text-primary">{{ current_user.username }}</strong>
+                    </div>
+                </div>
+                <hr class="my-3">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('admin.logout') }}" class="btn btn-outline-warning btn-sm">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logg ut
+                    </a>
+                </div>
             </div>
         </div>
     </div>

@@ -3,13 +3,18 @@
 {% block title %}Meny administrasjon - Admin{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="mb-0">
-        <i class="fas fa-utensils me-2"></i>Meny administrasjon
-    </h2>
-    <a href="{{ url_for('admin.add_menu_item') }}" class="btn btn-primary">
-        <i class="fas fa-plus me-2"></i>Legg til rett
-    </a>
+<div class="admin-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="display-6 fw-bold text-white mb-2">
+                <i class="fas fa-utensils me-3"></i>Meny administrasjon
+            </h1>
+            <p class="text-white-50 mb-0">Administrer alle retter, priser og bilder</p>
+        </div>
+        <a href="{{ url_for('admin.add_menu_item') }}" class="btn btn-warning btn-admin">
+            <i class="fas fa-plus me-2"></i>Legg til ny rett
+        </a>
+    </div>
 </div>
 
 {% if items %}
@@ -18,77 +23,84 @@
     {% for category_key, category_name in categories.items() %}
         {% set category_items = items | selectattr('category', 'equalto', category_key) | list %}
         {% if category_items %}
-            <div class="card mb-4">
+            <div class="action-card card mb-4">
                 <div class="card-header">
-                    <h5 class="mb-0">{{ category_name }}</h5>
+                    <h4 class="mb-0 text-white">
+                        <i class="fas fa-list me-2"></i>{{ category_name }}
+                        <span class="badge bg-warning text-dark ms-2">{{ category_items|length }}</span>
+                    </h4>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead>
-                                <tr>
-                                    <th>Navn</th>
-                                    <th>Beskrivelse</th>
-                                    <th>Pris</th>
-                                    <th>Status</th>
-                                    <th>Handlinger</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in category_items %}
-                                <tr>
-                                    <td>
-                                        <strong>{{ item.name }}</strong>
-                                        {% if item.image_filename %}
-                                            <br><small class="text-muted">📷 {{ item.image_filename }}</small>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if item.description %}
-                                            {{ item.description[:100] }}{% if item.description|length > 100 %}...{% endif %}
-                                        {% else %}
-                                            <em class="text-muted">Ingen beskrivelse</em>
-                                        {% endif %}
-                                    </td>
-                                    <td><strong>{{ item.price }}</strong></td>
-                                    <td>
+                <div class="card-body p-0">
+                    {% for item in category_items %}
+                    <div class="menu-item-card p-3">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                {% if item.image_filename %}
+                                    <img src="{{ url_for('static', filename='images/' + item.image_filename) }}" 
+                                         alt="{{ item.name }}" class="menu-item-image">
+                                {% else %}
+                                    <div class="menu-item-image bg-secondary d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-utensils text-white"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h6 class="mb-0 fw-bold">{{ item.name }}</h6>
+                                    <div class="d-flex align-items-center gap-2">
                                         {% if item.is_active %}
-                                            <span class="badge bg-success">Aktiv</span>
+                                            <span class="status-badge badge bg-success">Aktiv</span>
                                         {% else %}
-                                            <span class="badge bg-secondary">Deaktivert</span>
+                                            <span class="status-badge badge bg-secondary">Deaktivert</span>
                                         {% endif %}
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ url_for('admin.edit_menu_item', id=item.id) }}" 
-                                               class="btn btn-sm btn-outline-primary" title="Rediger">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ url_for('admin.delete_menu_item', id=item.id) }}" 
-                                               class="btn btn-sm btn-outline-danger" 
-                                               onclick="return confirm('Er du sikker på at du vil slette denne retten?')" 
-                                               title="Slett">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                        <strong class="text-warning">{{ item.price }}</strong>
+                                    </div>
+                                </div>
+                                <p class="text-muted mb-2 small">
+                                    {% if item.description %}
+                                        {{ item.description[:150] }}{% if item.description|length > 150 %}...{% endif %}
+                                    {% else %}
+                                        <em>Ingen beskrivelse</em>
+                                    {% endif %}
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <a href="{{ url_for('admin.edit_menu_item', id=item.id) }}" 
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-edit me-1"></i>Rediger
+                                    </a>
+                                    {% if item.is_active %}
+                                        <a href="{{ url_for('admin.toggle_menu_item', id=item.id) }}" 
+                                           class="btn btn-sm btn-outline-warning">
+                                            <i class="fas fa-eye-slash me-1"></i>Deaktiver
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ url_for('admin.toggle_menu_item', id=item.id) }}" 
+                                           class="btn btn-sm btn-outline-success">
+                                            <i class="fas fa-eye me-1"></i>Aktiver
+                                        </a>
+                                    {% endif %}
+                                    <a href="{{ url_for('admin.delete_menu_item', id=item.id) }}" 
+                                       class="btn btn-sm btn-outline-danger"
+                                       onclick="return confirm('Er du sikker på at du vil slette denne retten?')">
+                                        <i class="fas fa-trash me-1"></i>Slett
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         {% endif %}
     {% endfor %}
 {% else %}
-    <div class="card">
+    <div class="action-card card">
         <div class="card-body text-center py-5">
-            <i class="fas fa-utensils fa-3x text-muted mb-3"></i>
-            <h4>Ingen retter funnet</h4>
-            <p class="text-muted">Legg til din første rett for å komme i gang.</p>
-            <a href="{{ url_for('admin.add_menu_item') }}" class="btn btn-primary">
-                <i class="fas fa-plus me-2"></i>Legg til rett
+            <i class="fas fa-utensils fa-4x text-muted mb-4"></i>
+            <h4 class="text-white">Ingen retter funnet</h4>
+            <p class="text-muted">Legg til din første rett for å komme i gang med menyen.</p>
+            <a href="{{ url_for('admin.add_menu_item') }}" class="btn btn-primary btn-admin">
+                <i class="fas fa-plus me-2"></i>Legg til første rett
             </a>
         </div>
     </div>
