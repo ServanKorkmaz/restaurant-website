@@ -108,6 +108,13 @@ def contact():
             flash('Takk for din henvendelse! Vi kommer tilbake til deg så snart som mulig.', 'success')
         
         return redirect(url_for('contact'))
+    else:
+        # Debug form validation errors
+        if form.errors:
+            app.logger.error(f"Form validation errors: {form.errors}")
+            for field, errors in form.errors.items():
+                for error in errors:
+                    flash(f"{field}: {error}", 'danger')
     
     return render_template('contact.html', form=form)
 
