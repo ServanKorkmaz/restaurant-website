@@ -76,7 +76,7 @@ def menu():
             {'name': '14. Vårruller m/ Salat & Ris', 'price': '195', 'description': 'Glassnudler, kål, gulrot, løk, kyllingkjøttdeig, soyasaus og østersaus', 'allergens': '1,4,5,8', 'image': '14-varruller.jpg'},
             {'name': '15. Kyllingklubber', 'price': '195', 'description': 'Med hjemmelaget marinade og ris', 'allergens': '1,4,5,6', 'image': '15-kyllingklubber.jpg'},
             {'name': '16. Innbakt Scampi', 'price': '195', 'description': 'Med salat og ris', 'allergens': '1,2,6', 'image': '16-innbakt-scampi.jpg'},
-            {'name': 'Mixed tallerken med salat og ris', 'price': '195', 'description': '2 vårruller, 1 innbakt scampi og 1 innbakt kylling', 'allergens': '1,2,4,5,6,8', 'image': None}
+            {'name': '17. Mixed Tallerken', 'price': '195', 'description': '2 vårruller, 1 innbakt scampi og 1 innbakt kylling med salat og ris', 'allergens': '1,2,4,5,6,8', 'image': '17-mixed-tallerken.jpg'}
         ],
         'ekstra': [
             {'name': 'Vårruller pr stk', 'price': '25', 'description': '', 'image': None},

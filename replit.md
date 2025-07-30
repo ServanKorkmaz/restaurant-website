@@ -156,3 +156,8 @@ The application is fully localized for Norwegian users with authentic Thai resta
   - Pre-filled email template for convenience
   - Clean, modern contact interface
 ✓ Simplified contact system for better user experience
+✓ Completed menu update with all 17 authentic dish images (January 30, 2025):
+  - All main dishes numbered 01-17 with authentic restaurant photos
+  - Database and fallback data updated for consistency
+  - Proper image naming convention (01-kylling-cashew.jpg, etc.)
+  - Visual consistency across all menu items
