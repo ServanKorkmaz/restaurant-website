@@ -46,15 +46,9 @@
                                 <h5 class="card-title mb-0">{{ item.name }}</h5>
                                 <span class="badge bg-warning text-dark fs-6">{{ item.price }} kr</span>
                             </div>
-                            <p class="card-text text-muted mb-2">{{ item.description }}</p>
-                            {% if item.allergens %}
-                            <div class="mt-3 pt-2 border-top border-secondary">
-                                <small class="text-warning d-block">
-                                    <i class="fas fa-exclamation-triangle me-1"></i>
-                                    <strong>Allergener:</strong> {{ item.allergens }}
-                                </small>
-                            </div>
-                            {% endif %}
+                            <p class="card-text text-muted mb-2">
+                                {{ item.description }}{% if item.allergens %}. <span class="text-warning"><strong>Allergener:</strong> {{ item.allergens }}</span>{% endif %}
+                            </p>
                         </div>
                     </div>
                 </div>
