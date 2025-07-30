@@ -147,3 +147,6 @@ The application is fully localized for Norwegian users with authentic Thai resta
 ✓ Added 6 authentic catering packages with prices from 199-385 kr/pers
 ✓ Updated opening hours to match actual restaurant schedule from official Google listing
 ✓ Added SVG icons for all beverages except Munkholm (Coca-Cola, Pepsi, Fanta, Sprite, Solo, Farris, Mozell)
+✓ Updated menu items with numbered sequence (01-17) matching restaurant's official menu layout
+✓ Added comprehensive allergen information for all dishes with detailed allergen list (1-14)
+✓ Included authentic ingredient descriptions from restaurant's menu cards
