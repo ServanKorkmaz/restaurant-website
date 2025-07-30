@@ -92,16 +92,83 @@ def contact():
     form = ContactForm()
     
     if form.validate_on_submit():
-        # In a real application, you would send an email or save to database
-        # For now, we'll just log the message and show a success message
-        logging.info(f"Contact form submission from {form.name.data} ({form.email.data})")
-        logging.info(f"Subject: {form.subject.data}")
-        logging.info(f"Message: {form.message.data}")
+        # Handle form submission
+        try:
+            # Try to send email if SendGrid is configured
+            if send_contact_email(form):
+                flash('Takk for din henvendelse! Vi kommer tilbake til deg så snart som mulig.', 'success')
+            else:
+                # Fallback: Log the message and show success anyway
+                log_contact_message(form)
+                flash('Takk for din henvendelse! Vi kommer tilbake til deg så snart som mulig.', 'success')
+        except Exception as e:
+            # Log error and show user-friendly message
+            app.logger.error(f"Contact form error: {e}")
+            log_contact_message(form)
+            flash('Takk for din henvendelse! Vi kommer tilbake til deg så snart som mulig.', 'success')
         
-        flash('Takk for din henvendelse! Vi vil kontakte deg så snart som mulig.', 'success')
         return redirect(url_for('contact'))
     
     return render_template('contact.html', form=form)
+
+def send_contact_email(form):
+    """Send contact form email via SendGrid"""
+    import os
+    
+    # Check if SendGrid API key is available
+    sendgrid_key = os.environ.get('SENDGRID_API_KEY')
+    if not sendgrid_key:
+        return False
+    
+    try:
+        from sendgrid import SendGridAPIClient
+        from sendgrid.helpers.mail import Mail
+        
+        message = Mail(
+            from_email='noreply@nawaratthaimat.no',
+            to_emails='post@nawaratthaimat.no',
+            subject=f'Ny henvendelse fra nettsiden: {form.subject.data}',
+            html_content=f'''
+            <h3>Ny henvendelse fra nettsiden</h3>
+            <p><strong>Navn:</strong> {form.name.data}</p>
+            <p><strong>E-post:</strong> {form.email.data}</p>
+            <p><strong>Telefon:</strong> {form.phone.data or "Ikke oppgitt"}</p>
+            <p><strong>Emne:</strong> {form.subject.data}</p>
+            <p><strong>Melding:</strong></p>
+            <p>{form.message.data}</p>
+            '''
+        )
+        
+        sg = SendGridAPIClient(sendgrid_key)
+        response = sg.send(message)
+        return True
+        
+    except Exception as e:
+        app.logger.error(f"SendGrid error: {e}")
+        return False
+
+def log_contact_message(form):
+    """Log contact message to file as backup"""
+    import datetime
+    
+    message = f"""
+--- Ny henvendelse {datetime.datetime.now()} ---
+Navn: {form.name.data}
+E-post: {form.email.data}
+Telefon: {form.phone.data or "Ikke oppgitt"}
+Emne: {form.subject.data}
+Melding: {form.message.data}
+---
+"""
+    
+    app.logger.info(f"Contact form submission: {message}")
+    
+    # Also write to file for easy access
+    try:
+        with open('contact_messages.log', 'a', encoding='utf-8') as f:
+            f.write(message + '\n')
+    except Exception as e:
+        app.logger.error(f"Could not write to contact log: {e}")
 
 @app.errorhandler(404)
 def not_found_error(error):
