@@ -41,14 +41,19 @@
                         {% if item.image %}
                         <img src="{{ url_for('static', filename='images/' + item.image) }}" class="card-img-top" alt="{{ item.name }}" style="height: 200px; object-fit: cover;">
                         {% endif %}
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 d-flex flex-column">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <h5 class="card-title mb-0">{{ item.name }}</h5>
                                 <span class="badge bg-warning text-dark fs-6">{{ item.price }} kr</span>
                             </div>
-                            <p class="card-text text-muted mb-2">
-                                {{ item.description }}{% if item.allergens %}. <span class="text-warning"><strong>Allergener:</strong> {{ item.allergens }}</span>{% endif %}
-                            </p>
+                            <p class="card-text text-muted flex-grow-1">{{ item.description }}</p>
+                            {% if item.allergens %}
+                            <div class="mt-auto">
+                                <small class="text-warning">
+                                    <strong>Allergener:</strong> {{ item.allergens }}
+                                </small>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
