@@ -195,10 +195,191 @@ body {
     
     .display-4 {
         font-size: 2.5rem;
+        line-height: 1.2;
     }
     
     .display-6 {
         font-size: 1.75rem;
+        line-height: 1.3;
+    }
+    
+    /* Better mobile text sizing */
+    h1 {
+        font-size: 2rem !important;
+    }
+    
+    h2 {
+        font-size: 1.75rem !important;
+    }
+    
+    h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    h4 {
+        font-size: 1.25rem !important;
+    }
+    
+    h5 {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Improved mobile layout */
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .card-body {
+        padding: 1rem !important;
+    }
+    
+    .lead {
+        font-size: 1.1rem;
+    }
+    
+    /* Better button sizing on mobile */
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .btn-lg {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    /* Menu item cards mobile optimization */
+    .menu-item .card-title {
+        font-size: 1.1rem !important;
+        line-height: 1.2;
+    }
+    
+    .menu-item .card-text {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    /* Badge sizing */
+    .badge {
+        font-size: 0.9rem !important;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    /* Navigation improvements */
+    .navbar-brand {
+        font-size: 1.1rem !important;
+    }
+    
+    .nav-link {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    /* Hero section mobile optimization */
+    .hero-section {
+        min-height: 70vh;
+        padding: 2rem 0;
+    }
+    
+    /* Services section mobile */
+    .service-item h5 {
+        font-size: 1.1rem !important;
+    }
+    
+    .service-item p {
+        font-size: 0.9rem;
+    }
+    
+    /* Alert mobile sizing */
+    .alert {
+        font-size: 0.9rem;
+        padding: 0.75rem;
+    }
+    
+    /* Image sizing for mobile */
+    .card-img-top {
+        height: 180px !important;
+    }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575px) {
+    .display-4 {
+        font-size: 2rem !important;
+    }
+    
+    .display-6 {
+        font-size: 1.5rem !important;
+    }
+    
+    h1 {
+        font-size: 1.75rem !important;
+    }
+    
+    h2 {
+        font-size: 1.5rem !important;
+    }
+    
+    h3 {
+        font-size: 1.25rem !important;
+    }
+    
+    .lead {
+        font-size: 1rem;
+    }
+    
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .card-body {
+        padding: 0.75rem !important;
+    }
+    
+    .menu-item .card-title {
+        font-size: 1rem !important;
+    }
+    
+    .menu-item .card-text {
+        font-size: 0.85rem;
+    }
+    
+    .badge {
+        font-size: 0.8rem !important;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1rem !important;
+    }
+    
+    .nav-link {
+        font-size: 0.95rem;
+    }
+    
+    .card-img-top {
+        height: 160px !important;
+    }
+    
+    /* Smaller hero section for very small screens */
+    .hero-section {
+        min-height: 60vh;
+    }
+    
+    .hero-icon {
+        font-size: 6rem;
     }
 }
 
