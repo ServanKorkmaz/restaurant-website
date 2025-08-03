@@ -185,6 +185,16 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    /* Increase base font size for mobile */
+    html {
+        font-size: 18px !important;
+    }
+    
+    body {
+        font-size: 1.1rem !important;
+        line-height: 1.6 !important;
+    }
+    
     .hero-icon {
         font-size: 8rem;
     }
@@ -194,192 +204,263 @@ body {
     }
     
     .display-4 {
-        font-size: 2.5rem;
+        font-size: 3rem !important;
         line-height: 1.2;
     }
     
     .display-6 {
-        font-size: 1.75rem;
+        font-size: 2.25rem !important;
         line-height: 1.3;
     }
     
-    /* Better mobile text sizing */
+    /* Much larger mobile text sizing */
     h1 {
-        font-size: 2rem !important;
+        font-size: 2.5rem !important;
     }
     
     h2 {
-        font-size: 1.75rem !important;
+        font-size: 2.25rem !important;
     }
     
     h3 {
-        font-size: 1.5rem !important;
+        font-size: 2rem !important;
     }
     
     h4 {
-        font-size: 1.25rem !important;
+        font-size: 1.75rem !important;
     }
     
     h5 {
-        font-size: 1.1rem !important;
+        font-size: 1.5rem !important;
+    }
+    
+    h6 {
+        font-size: 1.25rem !important;
     }
     
     /* Improved mobile layout */
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    .lead {
+        font-size: 1.4rem !important;
+        line-height: 1.5;
+    }
+    
+    /* Much larger buttons on mobile */
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.2rem !important;
+        min-height: 50px;
+    }
+    
+    .btn-lg {
+        padding: 1rem 2rem;
+        font-size: 1.4rem !important;
+        min-height: 60px;
+    }
+    
+    /* Menu item cards mobile optimization */
+    .menu-item .card-title {
+        font-size: 1.4rem !important;
+        line-height: 1.2;
+    }
+    
+    .menu-item .card-text {
+        font-size: 1.1rem !important;
+        line-height: 1.5;
+    }
+    
+    /* Much larger badge sizing */
+    .badge {
+        font-size: 1.1rem !important;
+        padding: 0.6rem 1rem;
+    }
+    
+    /* Navigation improvements */
+    .navbar-brand {
+        font-size: 1.4rem !important;
+    }
+    
+    .nav-link {
+        font-size: 1.2rem !important;
+        padding: 1rem 1.25rem;
+    }
+    
+    /* Hero section mobile optimization */
+    .hero-section {
+        min-height: 70vh;
+        padding: 3rem 0;
+    }
+    
+    /* Services section mobile */
+    .service-item h5 {
+        font-size: 1.4rem !important;
+    }
+    
+    .service-item p {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Alert mobile sizing */
+    .alert {
+        font-size: 1.1rem !important;
+        padding: 1rem;
+    }
+    
+    /* Image sizing for mobile */
+    .card-img-top {
+        height: 200px !important;
+    }
+    
+    /* Larger text for all paragraphs */
+    p {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Footer text */
+    .footer p, .footer small {
+        font-size: 1rem !important;
+    }
+    
+    /* Table text */
+    table {
+        font-size: 1.1rem !important;
+    }
+    
+    /* List items */
+    li {
+        font-size: 1.1rem !important;
+    }
+}
+
+/* Extra small devices (phones, less than 576px) */
+@media (max-width: 575px) {
+    /* Even larger base font for very small screens */
+    html {
+        font-size: 20px !important;
+    }
+    
+    body {
+        font-size: 1.2rem !important;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem !important;
+    }
+    
+    .display-6 {
+        font-size: 2rem !important;
+    }
+    
+    h1 {
+        font-size: 2.25rem !important;
+    }
+    
+    h2 {
+        font-size: 2rem !important;
+    }
+    
+    h3 {
+        font-size: 1.75rem !important;
+    }
+    
+    h4 {
+        font-size: 1.5rem !important;
+    }
+    
+    h5 {
+        font-size: 1.35rem !important;
+    }
+    
+    .lead {
+        font-size: 1.3rem !important;
+    }
+    
     .container {
         padding-left: 15px;
         padding-right: 15px;
     }
     
     .card-body {
-        padding: 1rem !important;
+        padding: 1.25rem !important;
     }
     
-    .lead {
-        font-size: 1.1rem;
-    }
-    
-    /* Better button sizing on mobile */
-    .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.95rem;
-    }
-    
-    .btn-lg {
-        padding: 0.75rem 1.5rem;
-        font-size: 1.1rem;
-    }
-    
-    /* Menu item cards mobile optimization */
     .menu-item .card-title {
-        font-size: 1.1rem !important;
-        line-height: 1.2;
+        font-size: 1.3rem !important;
     }
     
     .menu-item .card-text {
-        font-size: 0.9rem;
-        line-height: 1.4;
+        font-size: 1.05rem !important;
     }
     
-    /* Badge sizing */
     .badge {
-        font-size: 0.9rem !important;
-        padding: 0.5rem 0.75rem;
+        font-size: 1.05rem !important;
+        padding: 0.6rem 0.9rem;
     }
     
-    /* Navigation improvements */
+    .btn {
+        font-size: 1.15rem !important;
+        padding: 0.8rem 1.4rem;
+        min-height: 55px;
+    }
+    
+    .btn-lg {
+        font-size: 1.3rem !important;
+        padding: 1rem 1.8rem;
+        min-height: 65px;
+    }
+    
     .navbar-brand {
-        font-size: 1.1rem !important;
+        font-size: 1.3rem !important;
     }
     
     .nav-link {
-        font-size: 1rem;
-        padding: 0.75rem 1rem;
+        font-size: 1.15rem !important;
     }
     
-    /* Hero section mobile optimization */
-    .hero-section {
-        min-height: 70vh;
-        padding: 2rem 0;
-    }
-    
-    /* Services section mobile */
-    .service-item h5 {
-        font-size: 1.1rem !important;
-    }
-    
-    .service-item p {
-        font-size: 0.9rem;
-    }
-    
-    /* Alert mobile sizing */
-    .alert {
-        font-size: 0.9rem;
-        padding: 0.75rem;
-    }
-    
-    /* Image sizing for mobile */
     .card-img-top {
         height: 180px !important;
     }
-}
-
-/* Extra small devices (phones, less than 576px) */
-@media (max-width: 575px) {
-    .display-4 {
-        font-size: 2rem !important;
-    }
     
-    .display-6 {
-        font-size: 1.5rem !important;
-    }
-    
-    h1 {
-        font-size: 1.75rem !important;
-    }
-    
-    h2 {
-        font-size: 1.5rem !important;
-    }
-    
-    h3 {
-        font-size: 1.25rem !important;
-    }
-    
-    .lead {
-        font-size: 1rem;
-    }
-    
-    .container {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    
-    .card-body {
-        padding: 0.75rem !important;
-    }
-    
-    .menu-item .card-title {
-        font-size: 1rem !important;
-    }
-    
-    .menu-item .card-text {
-        font-size: 0.85rem;
-    }
-    
-    .badge {
-        font-size: 0.8rem !important;
-        padding: 0.4rem 0.6rem;
-    }
-    
-    .btn {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
-    }
-    
-    .btn-lg {
-        font-size: 1rem;
-        padding: 0.6rem 1.2rem;
-    }
-    
-    .navbar-brand {
-        font-size: 1rem !important;
-    }
-    
-    .nav-link {
-        font-size: 0.95rem;
-    }
-    
-    .card-img-top {
-        height: 160px !important;
-    }
-    
-    /* Smaller hero section for very small screens */
+    /* Hero section for very small screens */
     .hero-section {
-        min-height: 60vh;
+        min-height: 65vh;
+        padding: 2.5rem 0;
     }
     
     .hero-icon {
-        font-size: 6rem;
+        font-size: 7rem;
+    }
+    
+    /* Larger text for all elements */
+    p {
+        font-size: 1.15rem !important;
+    }
+    
+    li {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Alert sizing */
+    .alert {
+        font-size: 1.15rem !important;
+        padding: 1.25rem;
+    }
+    
+    /* Service items */
+    .service-item h5 {
+        font-size: 1.35rem !important;
+    }
+    
+    .service-item p {
+        font-size: 1.15rem !important;
     }
 }
 
