@@ -95,27 +95,26 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card border-0 bg-secondary h-100 shadow-sm">
                         <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="d-flex justify-content-between align-items-start mb-4">
                                 <h5 class="card-title mb-0 text-white fw-bold">{{ package.name }}</h5>
                                 <span class="badge bg-warning text-dark fs-6 px-3 py-2">{{ package.price_per_person }}</span>
                             </div>
                             
-                            {% if package.min_persons %}
-                            <div class="mb-3">
-                                <span class="text-info">
-                                    <i class="fas fa-users me-2"></i>
-                                    Min. {{ package.min_persons }} personer
-                                </span>
-                            </div>
-                            {% endif %}
-                            
                             <div class="text-light">
-                                {% for item in package.items.split('\n')[:4] if item %}
-                                <div class="mb-1">{{ item }}</div>
-                                {% endfor %}
-                                {% if package.items.split('\n')|length > 4 %}
-                                <div class="text-muted small mt-2">+ flere retter</div>
-                                {% endif %}
+                                <ul class="list-unstyled mb-0">
+                                    {% for item in package.items.split('\n')[:5] if item %}
+                                    <li class="mb-2 d-flex align-items-start">
+                                        <i class="fas fa-check text-warning me-2 mt-1 small"></i>
+                                        <span>{{ item }}</span>
+                                    </li>
+                                    {% endfor %}
+                                    {% if package.items.split('\n')|length > 5 %}
+                                    <li class="text-muted small mt-3">
+                                        <i class="fas fa-plus me-1"></i>
+                                        flere retter inkludert
+                                    </li>
+                                    {% endif %}
+                                </ul>
                             </div>
                         </div>
                     </div>
