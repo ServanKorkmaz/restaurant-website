@@ -28,8 +28,17 @@ class MenuItem(db.Model):
     price = db.Column(db.String(10), nullable=False)
     category = db.Column(db.String(50), nullable=False)  # 'hovedretter', 'ekstra', 'drikker', 'catering'
     image_filename = db.Column(db.String(100))
+    webp_filename = db.Column(db.String(100))  # WebP version
+    thumbnail_filename = db.Column(db.String(100))  # Thumbnail version
+    alt_text = db.Column(db.String(200))  # Alt text for accessibility
     is_active = db.Column(db.Boolean, default=True)
+    is_published = db.Column(db.Boolean, default=True)  # Published status
+    is_featured = db.Column(db.Boolean, default=False)  # Featured on homepage
     sort_order = db.Column(db.Integer, default=0)
+    position = db.Column(db.Integer)  # For precise ordering
+    allergens = db.Column(db.String(100))  # Comma-separated allergen numbers
+    min_pax = db.Column(db.Integer)  # Minimum persons for catering
+    features = db.Column(db.JSON)  # Features list for catering packages
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 

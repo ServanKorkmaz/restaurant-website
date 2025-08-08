@@ -1,183 +1,160 @@
-{% extends "base.html" %}
+{% extends "_layout.html" %}
 
-{% block title %}Meny - Gjøvik Kafe og Catering{% endblock %}
+{% block title %}Meny - Nawarat Thai Mat og Catering{% endblock %}
+{% block meta_description %}Se vår komplette meny med autentiske thai-retter. Fra mild til sterk, vegetar til sjømat. Allergitilpasset og alltid ferske ingredienser.{% endblock %}
 
 {% block content %}
-<!-- Menu Header -->
-<section class="py-5 bg-dark">
+<!-- Page Header -->
+<section class="bg-primary text-white py-4">
     <div class="container">
-        <div class="row text-center">
-            <div class="col">
-                <h1 class="display-4 fw-bold mb-3">Vår meny</h1>
-                <p class="lead text-muted">
-                    Autentisk thailandsk mat laget med friske ingredienser og tradisjonelle oppskrifter
-                </p>
-            </div>
+        <h1 class="display-5 fw-bold mb-0">Vår Meny</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}" class="text-white-50">Hjem</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Meny</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<!-- Menu Filters and Search -->
+<section class="menu-filters sticky-top bg-white shadow-sm">
+    <div class="container py-3">
+        <!-- Search Bar -->
+        <div class="search-container mb-3">
+            <i class="fas fa-search"></i>
+            <input type="text" 
+                   id="menuSearch" 
+                   class="form-control form-control-lg" 
+                   placeholder="Søk etter retter..."
+                   aria-label="Søk i meny">
+            <div id="searchResults" class="text-muted small mt-2"></div>
+        </div>
+        
+        <!-- Category Filters -->
+        <div class="text-center">
+            <button class="filter-btn active" data-category="alle">
+                <i class="fas fa-th me-1"></i> Alle
+            </button>
+            <button class="filter-btn" data-category="hovedretter">
+                <i class="fas fa-drumstick-bite me-1"></i> Hovedretter
+            </button>
+            <button class="filter-btn" data-category="ekstra">
+                <i class="fas fa-plus-circle me-1"></i> Ekstra
+            </button>
+            <button class="filter-btn" data-category="drikker">
+                <i class="fas fa-glass-water me-1"></i> Drikker
+            </button>
         </div>
     </div>
 </section>
 
-<!-- Menu Content -->
+<!-- Menu Items -->
 <section class="py-5">
     <div class="container">
-        <!-- Main Dishes -->
-        <div class="menu-section mb-5">
-            <div class="row">
-                <div class="col">
-                    <div class="section-header mb-4">
-                        <h2 class="display-6 fw-bold">
-                            <i class="fas fa-utensils text-warning me-3"></i>
-                            Hovedretter
-                        </h2>
-                        <p class="text-muted">Autentiske thailandske hovedretter</p>
-                    </div>
-                </div>
-            </div>
-            
+        <!-- Hovedretter -->
+        {% if menu.hovedretter %}
+        <div class="mb-5" id="hovedretter">
+            <h2 class="display-6 fw-bold mb-4">
+                <i class="fas fa-drumstick-bite text-primary me-2"></i>
+                Hovedretter
+            </h2>
             <div class="row g-4">
-                {% for item in menu.hovedretter %}
+                {% for dish in menu.hovedretter %}
                 <div class="col-md-6 col-lg-4">
-                    <div class="menu-item card border-0 bg-dark h-100">
-                        {% if item.image %}
-                        <img src="{{ url_for('static', filename='images/' + item.image) }}" class="card-img-top" alt="{{ item.name }}" style="height: 200px; object-fit: cover;">
-                        {% endif %}
-                        <div class="card-body p-4 d-flex flex-column">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="card-title mb-0">{{ item.name }}</h5>
-                                <span class="badge bg-warning text-dark fs-6">{{ item.price }} kr</span>
-                            </div>
-                            <p class="card-text text-muted flex-grow-1">{{ item.description }}</p>
-                            {% if item.allergens %}
-                            <div class="mt-auto">
-                                <small class="text-warning">
-                                    <strong>Allergener:</strong> {{ item.allergens }}
-                                </small>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
+                    {% include '_dish_card.html' with context %}
                 </div>
                 {% endfor %}
             </div>
         </div>
-
+        {% endif %}
+        
         <!-- Ekstra -->
-        <div class="menu-section mb-5">
-            <div class="row">
-                <div class="col">
-                    <div class="section-header mb-4">
-                        <h2 class="display-6 fw-bold">
-                            <i class="fas fa-plus text-success me-3"></i>
-                            Ekstra
-                        </h2>
-                        <p class="text-muted">Tillegg til hovedrettene</p>
-                    </div>
-                </div>
-            </div>
-            
+        {% if menu.ekstra %}
+        <div class="mb-5" id="ekstra">
+            <h2 class="display-6 fw-bold mb-4">
+                <i class="fas fa-plus-circle text-primary me-2"></i>
+                Ekstra
+            </h2>
             <div class="row g-4">
-                {% for item in menu.ekstra %}
+                {% for dish in menu.ekstra %}
                 <div class="col-md-6 col-lg-4">
-                    <div class="menu-item card border-0 bg-dark h-100">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="card-title mb-0">{{ item.name }}</h5>
-                                <span class="badge bg-warning text-dark fs-6">{{ item.price }} kr</span>
-                            </div>
-                            <p class="card-text text-muted mb-0">{{ item.description }}</p>
-                        </div>
-                    </div>
+                    {% include '_dish_card.html' with context %}
                 </div>
                 {% endfor %}
             </div>
         </div>
-
-        <!-- Drinks -->
-        <div class="menu-section mb-5">
-            <div class="row">
-                <div class="col">
-                    <div class="section-header mb-4">
-                        <h2 class="display-6 fw-bold">
-                            <i class="fas fa-glass-whiskey text-secondary me-3"></i>
-                            Drikker
-                        </h2>
-                        <p class="text-muted">Brus og drikker</p>
-                    </div>
-                </div>
-            </div>
-            
+        {% endif %}
+        
+        <!-- Drikker -->
+        {% if menu.drikker %}
+        <div class="mb-5" id="drikker">
+            <h2 class="display-6 fw-bold mb-4">
+                <i class="fas fa-glass-water text-primary me-2"></i>
+                Drikker
+            </h2>
             <div class="row g-4">
-                {% for item in menu.drikker %}
+                {% for dish in menu.drikker %}
                 <div class="col-md-6 col-lg-4">
-                    <div class="menu-item card border-0 bg-dark h-100">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="card-title mb-0">{{ item.name }}</h5>
-                                <span class="badge bg-warning text-dark fs-6">{{ item.price }} kr</span>
-                            </div>
-                            <p class="card-text text-muted mb-0">{{ item.description }}</p>
-                        </div>
-                    </div>
+                    {% include '_dish_card.html' with context %}
                 </div>
                 {% endfor %}
             </div>
         </div>
-
-
+        {% endif %}
     </div>
 </section>
 
-<!-- Menu Notice -->
-<section class="py-4 bg-dark">
+<!-- Allergen Information -->
+<section class="py-5 bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                
-                <!-- Allergen Information -->
-                <div class="alert alert-warning border-0 mt-3" role="alert">
-                    <h6 class="mb-3"><i class="fas fa-exclamation-triangle me-2"></i>Allergener</h6>
-                    <div class="bg-light text-dark p-4 rounded">
-                        <div class="row g-4">
-                            <div class="col-lg-6">
-                                <h6 class="text-primary mb-3">Allergener 1-7</h6>
-                                <div class="small">
-                                    <p class="mb-1"><strong>1.</strong> Glutenholdig korn (Hvete, rug, bygg, havre og produkter av disse)</p>
-                                    <p class="mb-1"><strong>2.</strong> Skalldyr (Reker, kreps, hummer, kongekrabbe, blåskjell osv.)</p>
-                                    <p class="mb-1"><strong>3.</strong> Egg</p>
-                                    <p class="mb-1"><strong>4.</strong> Fisk</p>
-                                    <p class="mb-1"><strong>5.</strong> Peanøtter</p>
-                                    <p class="mb-1"><strong>6.</strong> Soya (Soyaolje er ikke et allergen)</p>
-                                    <p class="mb-0"><strong>7.</strong> Melk (og laktose)</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <h6 class="text-primary mb-3">Allergener 8-14</h6>
-                                <div class="small">
-                                    <p class="mb-1"><strong>8.</strong> Nøtter (Mandel, hasselnøtt, valnøtt, cashewnøtt, pekannøtt, paranøtt, pistasjnøtt)</p>
-                                    <p class="mb-1"><strong>9.</strong> Selleri</p>
-                                    <p class="mb-1"><strong>10.</strong> Sennep</p>
-                                    <p class="mb-1"><strong>11.</strong> Sesamfrø</p>
-                                    <p class="mb-1"><strong>12.</strong> Svoveldioksid og sulfitt</p>
-                                    <p class="mb-1"><strong>13.</strong> Lupin</p>
-                                    <p class="mb-0"><strong>14.</strong> Bløtdyr (Blekksprut, muslinger, snegler osv.)</p>
-                                </div>
-                            </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h3 class="fw-bold mb-4">
+                    <i class="fas fa-info-circle text-warning me-2"></i>
+                    Allergeninformasjon
+                </h3>
+                <div class="alert alert-info">
+                    <p class="mb-3">Alle våre retter kan tilpasses for allergier og diettbehov. Ta kontakt med oss for mer informasjon.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><strong>1:</strong> Gluten</li>
+                                <li><strong>2:</strong> Skalldyr</li>
+                                <li><strong>3:</strong> Egg</li>
+                                <li><strong>4:</strong> Fisk</li>
+                                <li><strong>5:</strong> Peanøtter</li>
+                                <li><strong>6:</strong> Soya</li>
+                                <li><strong>7:</strong> Melk/Laktose</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><strong>8:</strong> Nøtter</li>
+                                <li><strong>9:</strong> Selleri</li>
+                                <li><strong>10:</strong> Sennep</li>
+                                <li><strong>11:</strong> Sesamfrø</li>
+                                <li><strong>12:</strong> Svoveldioksid/Sulfitt</li>
+                                <li><strong>13:</strong> Lupin</li>
+                                <li><strong>14:</strong> Bløtdyr</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-                
-                <div class="mt-4">
-                    <h5>Interessert i catering?</h5>
-                    <p class="text-muted mb-3">
-                        Se våre catering-pakker med detaljerte menyer
-                    </p>
-                    <a href="{{ url_for('catering') }}" class="btn btn-primary">
-                        <i class="fas fa-concierge-bell me-2"></i>
-                        Se catering-menyen
-                    </a>
-                </div>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white text-center">
+    <div class="container">
+        <h3 class="display-6 fw-bold mb-3">Planlegger du et arrangement?</h3>
+        <p class="lead mb-4">Vi leverer catering for alle typer arrangementer</p>
+        <a href="{{ url_for('main.catering') }}" class="btn btn-light btn-lg">
+            <i class="fas fa-utensils me-2"></i>
+            Se våre cateringpakker
+        </a>
     </div>
 </section>
 {% endblock %}

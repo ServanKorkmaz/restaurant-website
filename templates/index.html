@@ -1,186 +1,135 @@
-{% extends "base.html" %}
+{% extends "_layout.html" %}
 
 {% block title %}Hjem - Nawarat Thai Mat og Catering{% endblock %}
+{% block meta_description %}Autentisk thai mat og profesjonell catering i Gjøvik. Bestill deilig thai mat for levering eller henting. Perfekt for bedriftsarrangementer og private selskaper.{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section position-relative overflow-hidden">
-    <div class="container py-5">
-        <div class="row align-items-center min-vh-75">
-            <div class="col-lg-6">
-                <div class="hero-content">
-                    <h1 class="display-4 fw-bold mb-4 hero-title">
-                        Velkommen til
-                        <span class="text-primary">Nawarat Thai Mat og Catering</span>
-                    </h1>
-                    <p class="lead mb-4 text-muted">
-                        Opplev autentiske retter fra Thailand laget med friske ingredienser og tradisjonelle oppskrifter 
-                        i hjertet av Gjøvik. Vi serverer deilig thai-mat og tilbyr profesjonell 
-                        catering for alle anledninger.
-                    </p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <a href="{{ url_for('menu') }}" class="btn btn-primary btn-lg">
-                            <i class="fas fa-utensils me-2"></i>Se vår meny
-                        </a>
-                        <a href="{{ url_for('contact') }}" class="btn btn-outline-secondary btn-lg">
-                            <i class="fas fa-envelope me-2"></i>Kontakt oss
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="hero-image text-center">
-                    <img src="{{ url_for('static', filename='images/hero-bg.jpg') }}" 
-                         alt="Autentisk thai-mat - Kylling med Cashewnøtter" 
-                         class="img-fluid rounded shadow-lg" 
-                         style="max-height: 400px; object-fit: cover;">
-                </div>
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="display-4 fw-bold mb-4">Autentisk Thai Mat i Gjøvik</h1>
+            <p class="lead mb-5">Profesjonell catering og deilige retter laget med kjærlighet og tradisjonsrike oppskrifter</p>
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="{{ url_for('main.catering') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-utensils me-2"></i>
+                    Få cateringtilbud
+                </a>
+                <a href="{{ url_for('main.menu') }}" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-book-open me-2"></i>
+                    Se meny
+                </a>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Features Section -->
-<section class="py-5 bg-dark">
+<section class="features py-5">
     <div class="container">
-        <div class="row text-center mb-5">
-            <div class="col">
-                <h2 class="display-6 fw-bold mb-3">Hvorfor velge oss?</h2>
-                <p class="lead text-muted">Vi er stolte av å tilby de beste thai-rettene i Gjøvik</p>
-            </div>
-        </div>
-        
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="card h-100 border-0 bg-dark">
-                    <div class="card-body text-center p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="fas fa-seedling fa-3x text-success"></i>
-                        </div>
-                        <h5 class="card-title">Autentiske ingredienser</h5>
-                        <p class="card-text text-muted">
-                            Vi importerer spesielle ingredienser direkte fra Thailand og kombinerer 
-                            dem med ferske lokale råvarer for autentisk smak.
-                        </p>
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
                     </div>
+                    <h3>Rask Levering</h3>
+                    <p>Vi leverer catering direkte til ditt arrangement i hele Gjøvik-området</p>
                 </div>
             </div>
-            
             <div class="col-md-4">
-                <div class="card h-100 border-0 bg-dark">
-                    <div class="card-body text-center p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="fas fa-award fa-3x text-warning"></i>
-                        </div>
-                        <h5 class="card-title">Tradisjonelle oppskrifter</h5>
-                        <p class="card-text text-muted">
-                            Fra Rød Karri med kokosmelk til Pad Krapao med holybasilikum - 
-                            våre kokker følger autentiske thailandske oppskrifter.
-                        </p>
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
                     </div>
+                    <h3>Autentisk Kvalitet</h3>
+                    <p>Tradisjonelle thai-oppskrifter med ferske ingredienser av høy kvalitet</p>
                 </div>
             </div>
-            
             <div class="col-md-4">
-                <div class="card h-100 border-0 bg-dark">
-                    <div class="card-body text-center p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="fas fa-users fa-3x text-info"></i>
-                        </div>
-                        <h5 class="card-title">Profesjonell catering</h5>
-                        <p class="card-text text-muted">
-                            Fra små møter til store arrangementer - vi leverer skreddersydde 
-                            cateringløsninger som gjør ditt arrangement uforglemmelig.
-                        </p>
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
                     </div>
+                    <h3>Perfekt for Bedrifter</h3>
+                    <p>Skreddersydde cateringløsninger for møter, arrangementer og feiringer</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Featured Dishes Section -->
-<section class="py-5">
+<!-- Popular Dishes -->
+<section class="py-5 bg-light">
     <div class="container">
-        <div class="row text-center mb-5">
-            <div class="col">
-                <h2 class="display-6 fw-bold mb-3">Populære thailandske retter</h2>
-                <p class="lead text-muted">Smak våre mest autentiske og populære thailandske spesialiteter</p>
-            </div>
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Populære Retter</h2>
+            <p class="lead text-muted">Våre mest ettertraktede thai-spesialiteter</p>
         </div>
         
         <div class="row g-4">
-            {% for dish in featured_dishes %}
-            <div class="col-md-4">
-                <div class="card h-100 border-0 bg-dark shadow">
-                    <img src="{{ url_for('static', filename='images/' + dish.image) }}" 
-                         class="card-img-top" 
-                         alt="{{ dish.name }}" 
-                         style="height: 250px; object-fit: cover;">
-                    <div class="card-body text-center p-4">
-                        <h5 class="card-title mb-3">{{ dish.name }}</h5>
-                        <div class="mb-3">
-                            <span class="badge bg-warning text-dark fs-6">{{ dish.price }} NOK</span>
-                        </div>
-                        <a href="{{ url_for('menu') }}" class="btn btn-outline-primary">
-                            <i class="fas fa-eye me-2"></i>Se hele menyen
-                        </a>
-                    </div>
-                </div>
+            {% for dish in featured_dishes[:6] %}
+            <div class="col-md-6 col-lg-4 fade-in-up">
+                {% set show_order_button = false %}
+                {% include '_dish_card.html' with context %}
             </div>
             {% endfor %}
         </div>
+        
+        <div class="text-center mt-5">
+            <a href="{{ url_for('main.menu') }}" class="btn btn-primary btn-lg">
+                Se hele menyen
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
     </div>
 </section>
 
-<!-- Services Section -->
-<section class="py-5">
+<!-- Catering CTA Section -->
+<section class="py-5 bg-primary text-white">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <h2 class="display-6 fw-bold mb-4">Våre tjenester</h2>
-                <div class="service-list">
-                    <div class="service-item mb-3 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-center">
-                            <div class="service-icon me-3">
-                                <i class="fas fa-pepper-hot fa-2x text-primary"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-1">Autentiske hovedretter</h5>
-                                <p class="text-muted mb-0">Fra Kylling med Cashewnøtter til Paneng Kai - alle retter 205-245 NOK</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="service-item mb-3 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-center">
-                            <div class="service-icon me-3">
-                                <i class="fas fa-utensils fa-2x text-success"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-1">Friske vårruller og tillegg</h5>
-                                <p class="text-muted mb-0">Vårruller, innbakt scampi og ekstra ris - perfekte tillegg til måltidet</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="service-item mb-3 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-center">
-                            <div class="service-icon me-3">
-                                <i class="fas fa-birthday-cake fa-2x text-warning"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-1">Profesjonell catering</h5>
-                                <p class="text-muted mb-0">Fra 165-200 NOK per person for bedrifter og arrangementer</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-lg-8">
+                <h2 class="display-6 fw-bold mb-3">Derfor velger bedrifter oss for catering</h2>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Fleksible pakker fra 10 til 500 personer
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Tilpasning for allergier og diettbehov
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Punktlig levering og profesjonell service
+                    </li>
+                </ul>
             </div>
-            
-            <div class="col-lg-6">
-                <div class="services-visual text-center">
-                    <i class="fas fa-concierge-bell services-icon"></i>
+            <div class="col-lg-4 text-center">
+                <button type="button" class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#cateringModal">
+                    <i class="fas fa-envelope me-2"></i>
+                    Få pristilbud nå
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonial Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="testimonial">
+                    <p class="testimonial-text">
+                        "Fantastisk thai-mat! Vi bestiller alltid catering fra Nawarat til våre bedriftsarrangementer. 
+                        Maten er autentisk, velsmakende og presenteres alltid pent. Anbefales på det sterkeste!"
+                    </p>
+                    <div>
+                        <div class="testimonial-author">Kari Olsen</div>
+                        <div class="testimonial-role">HR-sjef, Gjøvik Kommune</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -188,76 +137,76 @@
 </section>
 
 <!-- Location Section -->
-<section class="py-5 bg-dark">
+<section class="py-5 bg-light">
     <div class="container">
-        <div class="row text-center">
-            <div class="col">
-                <h2 class="display-6 fw-bold mb-4">Besøk oss på Tordenskjolds gate</h2>
-                <p class="lead text-muted mb-4">
-                    Du finner Nawarat Thai Mat og Catering sentralt i Gjøvik sentrum
-                </p>
-                
-                <div class="row g-4">
-                    <div class="col-md-3">
-                        <div class="location-item">
-                            <i class="fas fa-map-marker-alt fa-2x text-primary mb-3"></i>
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2 class="display-6 fw-bold mb-4">Besøk Oss i Gjøvik Sentrum</h2>
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
                             <h5>Adresse</h5>
-                            <p class="text-muted">Tordenskjolds gate 1<br>2821 Gjøvik</p>
+                            <p>Tordenskjolds gate 1, 2821 Gjøvik<br>
+                            Kun 1 minutt fra Gjøvik stasjon</p>
                         </div>
                     </div>
-                    
-                    <div class="col-md-3">
-                        <div class="location-item">
-                            <i class="fas fa-phone fa-2x text-success mb-3"></i>
-                            <h5>Ring oss</h5>
-                            <p class="text-muted">+47 61 17 77 71</p>
+                    <div class="contact-info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h5>Åpningstider</h5>
+                            <table class="opening-hours">
+                                <tr>
+                                    <td class="day">Mandag</td>
+                                    <td class="closed">Stengt</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Tirsdag-Onsdag</td>
+                                    <td>11:00-17:45</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Torsdag-Fredag</td>
+                                    <td>11:00-19:45</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Lørdag</td>
+                                    <td>11:00-20:45</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Søndag</td>
+                                    <td>12:00-19:45</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                    
-                    <div class="col-md-3">
-                        <div class="location-item">
-                            <i class="fas fa-parking fa-2x text-warning mb-3"></i>
-                            <h5>Parkering</h5>
-                            <p class="text-muted">Gratis parkering<br>i nærheten</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <div class="location-item">
-                            <i class="fas fa-train fa-2x text-info mb-3"></i>
-                            <h5>Transport</h5>
-                            <p class="text-muted">1 min gange fra<br>Gjøvik stasjon</p>
-                        </div>
-                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="ratio ratio-16x9 rounded overflow-hidden shadow">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d10.6914!3d60.7957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNjDCsDQ3JzQ0LjUiTiAxMMKwNDEnMjkuMCJF!5e0!3m2!1sen!2sno!4v1234567890"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Nawarat Thai Mat og Catering lokasjon">
+                    </iframe>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Call to Action -->
-<section class="py-5">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col">
-                <div class="cta-content bg-primary rounded p-5">
-                    <h2 class="display-6 fw-bold text-white mb-3">
-                        Klar for autentisk thailandsk mat?
-                    </h2>
-                    <p class="lead text-white mb-4">
-                        Besøk oss på Tordenskjolds gate eller kontakt oss for catering til ditt arrangement
-                    </p>
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg">
-                            <i class="fas fa-phone me-2"></i>Ring oss nå
-                        </a>
-                        <a href="{{ url_for('menu') }}" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-eye me-2"></i>Se hele menyen
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- CSS Animations -->
+<style>
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
 {% endblock %}

@@ -1,0 +1,90 @@
+<!-- Catering Inquiry Modal -->
+<div class="modal fade" id="cateringModal" tabindex="-1" aria-labelledby="cateringModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="cateringModalLabel">
+                    <i class="fas fa-utensils me-2"></i>
+                    Forespørsel om catering
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Lukk"></button>
+            </div>
+            <div class="modal-body">
+                <form id="cateringForm" action="{{ url_for('main.catering_inquiry') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Kontaktperson *</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="firma" class="form-label">Firma/Organisasjon *</label>
+                            <input type="text" class="form-control" id="firma" name="firma" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">E-post *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Telefon *</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="antall_personer" class="form-label">Antall personer *</label>
+                            <input type="number" class="form-control" id="antall_personer" name="antall_personer" 
+                                   min="10" max="500" required>
+                            <small class="text-muted">Minimum 10 personer</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="dato" class="form-label">Ønsket dato *</label>
+                            <input type="date" class="form-control" id="dato" name="dato" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="pakke" class="form-label">Velg cateringpakke *</label>
+                        <select class="form-select" id="pakke" name="pakke" required>
+                            <option value="">Velg pakke...</option>
+                            <option value="menyforslag_1">Menyforslag 1 - 199 kr/pers</option>
+                            <option value="menyforslag_2">Menyforslag 2 - 239 kr/pers</option>
+                            <option value="menyforslag_3">Menyforslag 3 - 275 kr/pers</option>
+                            <option value="menyforslag_4">Menyforslag 4 - 299 kr/pers</option>
+                            <option value="menyforslag_5">Menyforslag 5 - 349 kr/pers</option>
+                            <option value="menyforslag_6">Menyforslag 6 - 385 kr/pers</option>
+                            <option value="spesialtilpasset">Spesialtilpasset meny</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="leveringsadresse" class="form-label">Leveringsadresse *</label>
+                        <input type="text" class="form-control" id="leveringsadresse" name="leveringsadresse" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="kommentar" class="form-label">Spesielle ønsker/allergier</label>
+                        <textarea class="form-control" id="kommentar" name="kommentar" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Vi tar kontakt innen 24 timer for å bekrefte bestillingen og avtale detaljer.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Avbryt</button>
+                <button type="submit" form="cateringForm" class="btn btn-primary">
+                    <i class="fas fa-paper-plane me-2"></i>
+                    Send forespørsel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

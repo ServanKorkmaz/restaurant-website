@@ -1,242 +1,178 @@
-{% extends "base.html" %}
+{% extends "_layout.html" %}
 
 {% block title %}Kontakt - Nawarat Thai Mat og Catering{% endblock %}
+{% block meta_description %}Kontakt Nawarat Thai Mat og Catering i Gjøvik. Ring +47 61 17 77 71 eller besøk oss i Tordenskjolds gate 1. Vi svarer gjerne på dine spørsmål!{% endblock %}
 
 {% block content %}
-<!-- Contact Header -->
-<section class="py-5 bg-dark">
+<!-- Page Header -->
+<section class="bg-primary text-white py-4">
     <div class="container">
-        <div class="row text-center">
-            <div class="col">
-                <h1 class="display-4 fw-bold mb-3">Kontakt oss</h1>
-                <p class="lead text-muted">
-                    Vi gleder oss til å høre fra deg! Ta kontakt for reservasjoner, catering eller andre henvendelser
-                </p>
-            </div>
-        </div>
+        <h1 class="display-5 fw-bold mb-0">Kontakt Oss</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}" class="text-white-50">Hjem</a></li>
+                <li class="breadcrumb-item active text-white" aria-current="page">Kontakt</li>
+            </ol>
+        </nav>
     </div>
 </section>
 
-<!-- Contact Content -->
+<!-- Contact Information -->
 <section class="py-5">
     <div class="container">
-        <div class="row g-5">
-            <!-- Contact Options -->
-            <div class="col-lg-8">
-                <div class="contact-options">
-                    <h2 class="h3 mb-4">Ta kontakt med oss</h2>
-                    
-                    <div class="row g-4">
-                        <!-- Email Contact -->
-                        <div class="col-md-6">
-                            <div class="contact-card p-4 rounded bg-dark h-100">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
-                                    <h4>Send e-post</h4>
-                                    <p class="text-muted">Åpner ditt e-postprogram</p>
-                                </div>
-                                <a href="mailto:post@nawaratthaimat.no?subject=Henvendelse%20fra%20nettsiden&body=Hei%20Nawarat%20Thai%20Mat%20og%20Catering%2C%0A%0AJeg%20har%20en%20henvendelse%20angående%3A%0A%0A%5BSkriv%20din%20melding%20her%5D%0A%0AMed%20vennlig%20hilsen%2C%0A%5BDitt%20navn%5D" 
-                                   class="btn btn-primary btn-lg w-100">
-                                    <i class="fas fa-paper-plane me-2"></i>
-                                    Åpne e-post
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <!-- Phone Contact -->
-                        <div class="col-md-6">
-                            <div class="contact-card p-4 rounded bg-dark h-100">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-phone fa-3x text-primary mb-3"></i>
-                                    <h4>Ring oss</h4>
-                                    <p class="text-muted">Snakk direkte med oss</p>
-                                </div>
-                                <a href="tel:+4761177771" class="btn btn-success btn-lg w-100">
-                                    <i class="fas fa-phone me-2"></i>
-                                    +47 61 17 77 71
-                                </a>
-                            </div>
+        <div class="row">
+            <!-- Contact Details -->
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h2 class="display-6 fw-bold mb-4">Vi er her for å hjelpe</h2>
+                <p class="lead mb-5">
+                    Har du spørsmål om vår meny, catering eller ønsker å bestille? 
+                    Ta kontakt med oss på telefon eller e-post, eller besøk oss i restauranten.
+                </p>
+                
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h5>Besøksadresse</h5>
+                            <p>{{ restaurant_info.address|default('Tordenskjolds gate 1, 2821 Gjøvik') }}<br>
+                            <small class="text-muted">Kun 1 minutt fra Gjøvik stasjon</small></p>
                         </div>
                     </div>
                     
-                    <!-- Additional Contact Info -->
-                    <div class="mt-4 p-4 rounded bg-secondary">
-                        <h5 class="mb-3">
-                            <i class="fas fa-info-circle me-2"></i>
-                            Kontaktinformasjon
-                        </h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="mb-2">
-                                    <i class="fas fa-envelope me-2 text-primary"></i>
-                                    <strong>E-post:</strong> post@nawaratthaimat.no
-                                </p>
-                                <p class="mb-2">
-                                    <i class="fas fa-phone me-2 text-primary"></i>
-                                    <strong>Telefon:</strong> +47 61 17 77 71
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="mb-2">
-                                    <i class="fas fa-map-marker-alt me-2 text-primary"></i>
-                                    <strong>Adresse:</strong> Tordenskjolds gate 1, 2821 Gjøvik
-                                </p>
-                                <p class="mb-0">
-                                    <i class="fas fa-train me-2 text-primary"></i>
-                                    <strong>Avstand:</strong> 1 min gange fra Gjøvik stasjon
-                                </p>
-                            </div>
+                    <div class="contact-info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h5>Telefon</h5>
+                            <p><a href="tel:{{ restaurant_info.phone|default('+4761177771')|replace(' ', '') }}" class="text-decoration-none">
+                                {{ restaurant_info.phone|default('+47 61 17 77 71') }}
+                            </a></p>
                         </div>
                     </div>
+                    
+                    <div class="contact-info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h5>E-post</h5>
+                            <p><a href="mailto:{{ restaurant_info.email|default('post@nawaratthaimat.no') }}" class="text-decoration-none">
+                                {{ restaurant_info.email|default('post@nawaratthaimat.no') }}
+                            </a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h5>Åpningstider</h5>
+                            <table class="opening-hours">
+                                <tr>
+                                    <td class="day">Mandag</td>
+                                    <td class="closed">Stengt</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Tirsdag-Onsdag</td>
+                                    <td>11:00-17:45</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Torsdag-Fredag</td>
+                                    <td>11:00-19:45</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Lørdag</td>
+                                    <td>11:00-20:45</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Søndag</td>
+                                    <td>12:00-19:45</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Direct Contact Buttons -->
+                <div class="d-flex gap-3 mt-5">
+                    <a href="tel:+4761177771" class="btn btn-primary btn-lg">
+                        <i class="fas fa-phone me-2"></i>
+                        Ring oss nå
+                    </a>
+                    <a href="mailto:post@nawaratthaimat.no?subject=Forespørsel fra nettsiden&body=Hei,%0D%0A%0D%0AJeg har følgende spørsmål:%0D%0A%0D%0A" 
+                       class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>
+                        Send e-post
+                    </a>
                 </div>
             </div>
             
-            <!-- Contact Information -->
-            <div class="col-lg-4">
-                <div class="contact-info">
-                    <h2 class="h3 mb-4">Kontaktinformasjon</h2>
-                    
-                    <div class="contact-item mb-4 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-start">
-                            <div class="contact-icon me-3">
-                                <i class="fas fa-map-marker-alt fa-lg text-primary"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Adresse</h6>
-                                <p class="text-muted mb-0">
-                                    Tordenskjolds gate 1<br>
-                                    2821 Gjøvik<br>
-                                    <small class="text-muted">1 min gange fra Gjøvik stasjon</small>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item mb-4 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-start">
-                            <div class="contact-icon me-3">
-                                <i class="fas fa-phone fa-lg text-success"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Telefon</h6>
-                                <p class="text-muted mb-0">
-                                    <a href="tel:+4761177771" class="text-decoration-none text-muted">
-                                        +47 61 17 77 71
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item mb-4 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-start">
-                            <div class="contact-icon me-3">
-                                <i class="fas fa-envelope fa-lg text-info"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">E-post</h6>
-                                <p class="text-muted mb-0">
-                                    <a href="mailto:post@nawaratthaimat.no" class="text-decoration-none text-muted">
-                                        post@nawaratthaimat.no
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item mb-4 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-start">
-                            <div class="contact-icon me-3">
-                                <i class="fas fa-clock fa-lg text-warning"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Åpningstider</h6>
-                                <div class="text-muted small">
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Tirsdag:</span>
-                                        <span>11:00 - 18:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Onsdag:</span>
-                                        <span>11:00 - 18:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Torsdag:</span>
-                                        <span>11:00 - 20:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Fredag:</span>
-                                        <span>11:00 - 20:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Lørdag:</span>
-                                        <span>10:00 - 20:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Søndag:</span>
-                                        <span>09:00 - 20:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <span>Mandag:</span>
-                                        <span>Stengt</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Map -->
+            <div class="col-lg-6">
+                <div class="ratio ratio-4x3 rounded overflow-hidden shadow">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d10.6914!3d60.7957!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNjDCsDQ3JzQ0LjUiTiAxMMKwNDEnMjkuMCJF!5e0!3m2!1sen!2sno!4v1234567890"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Nawarat Thai Mat og Catering lokasjon">
+                    </iframe>
                 </div>
                 
-                <!-- Location Info -->
-                <div class="location-section mt-4">
-                    <h6 class="mb-3">Beliggenhet</h6>
-                    <div class="text-muted small">
-                        <i class="fas fa-map-marker-alt me-2"></i>
-                        Kun 1 minutts gange fra Gjøvik stasjon
-                    </div>
+                <!-- Parking Info -->
+                {% if restaurant_info.parking_info %}
+                <div class="alert alert-info mt-4">
+                    <h6 class="alert-heading">
+                        <i class="fas fa-parking me-2"></i>
+                        Parkering
+                    </h6>
+                    <p class="mb-0">{{ restaurant_info.parking_info }}</p>
                 </div>
+                {% else %}
+                <div class="alert alert-info mt-4">
+                    <h6 class="alert-heading">
+                        <i class="fas fa-parking me-2"></i>
+                        Parkering
+                    </h6>
+                    <p class="mb-0">Gateparkering tilgjengelig i nærheten. Parkeringshus 2 minutter unna.</p>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </section>
 
-<!-- Location Section -->
-<section class="py-5 bg-dark">
+<!-- Business Info Section -->
+<section class="py-5 bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <h2 class="h3 mb-4">Finn frem til oss</h2>
-                <p class="text-muted mb-4">
-                    Vi ligger sentralt i Gjøvik sentrum, lett tilgjengelig med bil, tog eller til fots
-                </p>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h3 class="fw-bold mb-4 text-center">Bestilling og Informasjon</h3>
                 
                 <div class="row g-4">
                     <div class="col-md-4">
-                        <div class="location-feature">
-                            <i class="fas fa-parking fa-2x text-success mb-3"></i>
-                            <h6>Parkering</h6>
-                            <p class="text-muted small">
-                                Gratis gateparkering og parkeringshus i nærheten
-                            </p>
+                        <div class="text-center">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h5>Bordbestilling</h5>
+                            <p class="text-muted">Ring oss for å reservere bord eller bestille take-away</p>
                         </div>
                     </div>
                     
                     <div class="col-md-4">
-                        <div class="location-feature">
-                            <i class="fas fa-train fa-2x text-info mb-3"></i>
-                            <h6>Offentlig transport</h6>
-                            <p class="text-muted small">
-                                1 min gange fra Gjøvik stasjon
-                            </p>
+                        <div class="text-center">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h5>Catering</h5>
+                            <p class="text-muted">Bestill minst 48 timer i forveien for beste service</p>
                         </div>
                     </div>
                     
                     <div class="col-md-4">
-                        <div class="location-feature">
-                            <i class="fas fa-wheelchair fa-2x text-warning mb-3"></i>
-                            <h6>Tilgjengelighet</h6>
-                            <p class="text-muted small">
-                                Handicapvennlig inngang og fasiliteter
-                            </p>
+                        <div class="text-center">
+                            <div class="feature-icon mb-3">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h5>Store Arrangementer</h5>
+                            <p class="text-muted">Ta kontakt for spesialtilpassede løsninger</p>
                         </div>
                     </div>
                 </div>
@@ -245,18 +181,59 @@
     </div>
 </section>
 
-<!-- Emergency Contact -->
-<section class="py-4">
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white text-center">
     <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <div class="alert alert-info border-0" role="alert">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <strong>Catering bestillinger:</strong> Vi anbefaler at du kontakter oss minst 48 timer i forveien 
-                    for cateringbestillinger. For akutte bestillinger, ring oss direkte.
-                </div>
-            </div>
-        </div>
+        <h3 class="display-6 fw-bold mb-3">Planlegger du catering?</h3>
+        <p class="lead mb-4">Få et uforpliktende tilbud for ditt neste arrangement</p>
+        <button type="button" class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#cateringModal">
+            <i class="fas fa-envelope me-2"></i>
+            Send cateringforespørsel
+        </button>
     </div>
 </section>
+
+<!-- Schema.org LocalBusiness Markup -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Nawarat Thai Mat og Catering",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Tordenskjolds gate 1",
+        "addressLocality": "Gjøvik",
+        "postalCode": "2821",
+        "addressCountry": "NO"
+    },
+    "telephone": "+47 61 17 77 71",
+    "email": "post@nawaratthaimat.no",
+    "openingHoursSpecification": [
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday"],
+            "opens": "11:00",
+            "closes": "17:45"
+        },
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Thursday", "Friday"],
+            "opens": "11:00",
+            "closes": "19:45"
+        },
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "11:00",
+            "closes": "20:45"
+        },
+        {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "12:00",
+            "closes": "19:45"
+        }
+    ]
+}
+</script>
 {% endblock %}

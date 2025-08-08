@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% block title %}Nawarat Thai Mat og Catering - Autentisk Thai i Gjøvik{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Autentisk thai mat og profesjonell catering i Gjøvik. Bestill deilig thai mat for levering eller henting. Perfekt for bedriftsarrangementer.{% endblock %}">
+    <meta name="keywords" content="thai mat gjøvik, nawarat thai, catering gjøvik, thai restaurant gjøvik, bedriftscatering">
+    <meta name="author" content="Nawarat Thai Mat og Catering">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request.url }}">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ self.meta_description() }}{% endblock %}">
+    <meta property="og:image" content="{{ url_for('static', filename='images/01-kylling-cashew.jpg', _external=True) }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:locale" content="no_NO">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ self.og_title() }}">
+    <meta name="twitter:description" content="{{ self.og_description() }}">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/01-kylling-cashew.jpg', _external=True) }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- CSS -->
+    <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/theme.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    {% block extra_head %}{% endblock %}
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Nawarat Thai Mat og Catering",
+        "image": "{{ url_for('static', filename='images/01-kylling-cashew.jpg', _external=True) }}",
+        "url": "{{ request.url_root }}",
+        "telephone": "+47 61 17 77 71",
+        "priceRange": "$$",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Tordenskjolds gate 1",
+            "addressLocality": "Gjøvik",
+            "postalCode": "2821",
+            "addressCountry": "NO"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 60.7957,
+            "longitude": 10.6914
+        },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Tuesday", "Wednesday"],
+                "opens": "11:00",
+                "closes": "17:45"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Thursday", "Friday"],
+                "opens": "11:00",
+                "closes": "19:45"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Saturday",
+                "opens": "11:00",
+                "closes": "20:45"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "12:00",
+                "closes": "19:45"
+            }
+        ],
+        "servesCuisine": "Thai",
+        "acceptsReservations": "True",
+        "menu": "{{ url_for('main.menu', _external=True) }}"
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Hopp til hovedinnhold</a>
+    
+    <!-- Header -->
+    {% include '_nav.html' %}
+    
+    <!-- Main Content -->
+    <main id="main-content" class="flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <!-- Footer -->
+    {% include '_footer.html' %}
+    
+    <!-- Sticky CTA for Mobile -->
+    <div class="sticky-cta d-md-none">
+        <button type="button" class="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#cateringModal">
+            <i class="fas fa-utensils me-2"></i>
+            Få cateringtilbud
+        </button>
+    </div>
+    
+    <!-- Catering Inquiry Modal -->
+    {% include '_catering_modal.html' %}
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
