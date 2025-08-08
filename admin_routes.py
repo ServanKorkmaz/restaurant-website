@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request, abort
 from flask_login import login_user, logout_user, login_required, current_user
 from app import db
-from models import User, MenuItem, RestaurantInfo
-from admin_forms import LoginForm, MenuItemForm, RestaurantInfoForm, CreateAdminForm
+from models import User, MenuItem, RestaurantInfo, CateringPackage
+from admin_forms import LoginForm, MenuItemForm, RestaurantInfoForm, CreateAdminForm, CateringPackageForm
+import json
 from functools import wraps
 import logging
 
@@ -154,6 +155,86 @@ def delete_menu_item(id):
     db.session.commit()
     flash(f'Rett "{name}" er slettet!', 'success')
     return redirect(url_for('admin.menu_list'))
+
+
+@admin_bp.route('/catering')
+@login_required
+@admin_required
+def catering_list():
+    packages = CateringPackage.query.order_by(CateringPackage.sort_order, CateringPackage.name).all()
+    return render_template('admin/catering_list.html', packages=packages)
+
+
+@admin_bp.route('/catering/add', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_catering_package():
+    form = CateringPackageForm()
+    if form.validate_on_submit():
+        package = CateringPackage()
+        package.name = form.name.data
+        package.price_per_person = form.price_per_person.data
+        package.description = form.description.data
+        package.items = form.items.data
+        package.min_persons = form.min_persons.data
+        package.allergens = form.allergens.data
+        package.best_for = form.best_for.data
+        package.sort_order = form.sort_order.data
+        package.is_active = form.is_active.data
+        db.session.add(package)
+        db.session.commit()
+        flash(f'Catering-pakke "{package.name}" er lagt til!', 'success')
+        return redirect(url_for('admin.catering_list'))
+    
+    return render_template('admin/catering_form.html', form=form, title='Legg til ny catering-pakke')
+
+
+@admin_bp.route('/catering/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_catering_package(id):
+    package = CateringPackage.query.get_or_404(id)
+    form = CateringPackageForm(obj=package)
+    
+    if form.validate_on_submit():
+        package.name = form.name.data
+        package.price_per_person = form.price_per_person.data
+        package.description = form.description.data
+        package.items = form.items.data
+        package.min_persons = form.min_persons.data
+        package.allergens = form.allergens.data
+        package.best_for = form.best_for.data
+        package.sort_order = form.sort_order.data
+        package.is_active = form.is_active.data
+        db.session.commit()
+        flash(f'Catering-pakke "{package.name}" er oppdatert!', 'success')
+        return redirect(url_for('admin.catering_list'))
+    
+    return render_template('admin/catering_form.html', form=form, title=f'Rediger: {package.name}')
+
+
+@admin_bp.route('/catering/toggle/<int:id>')
+@login_required
+@admin_required
+def toggle_catering_package(id):
+    package = CateringPackage.query.get_or_404(id)
+    package.is_active = not package.is_active
+    db.session.commit()
+    status = "aktivert" if package.is_active else "deaktivert"
+    flash(f'Catering-pakke "{package.name}" er {status}!', 'success')
+    return redirect(url_for('admin.catering_list'))
+
+
+@admin_bp.route('/catering/delete/<int:id>')
+@login_required
+@admin_required
+def delete_catering_package(id):
+    package = CateringPackage.query.get_or_404(id)
+    name = package.name
+    db.session.delete(package)
+    db.session.commit()
+    flash(f'Catering-pakke "{name}" er slettet!', 'success')
+    return redirect(url_for('admin.catering_list'))
 
 
 @admin_bp.route('/restaurant-info', methods=['GET', 'POST'])

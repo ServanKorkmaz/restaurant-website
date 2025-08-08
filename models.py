@@ -34,6 +34,22 @@ class MenuItem(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
+class CateringPackage(db.Model):
+    __tablename__ = 'catering_packages'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    price_per_person = db.Column(db.String(20), nullable=False)
+    description = db.Column(db.Text)
+    items = db.Column(db.Text)  # Store as JSON string
+    min_persons = db.Column(db.Integer, default=10)
+    allergens = db.Column(db.String(200))  # Comma-separated allergen numbers
+    best_for = db.Column(db.String(200))  # Best for what occasions
+    is_active = db.Column(db.Boolean, default=True)
+    sort_order = db.Column(db.Integer, default=0)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+
 class RestaurantInfo(db.Model):
     __tablename__ = 'restaurant_info'
     id = db.Column(db.Integer, primary_key=True)

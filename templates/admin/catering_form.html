@@ -1,0 +1,164 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-gradient bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-utensils me-2"></i>
+                        {{ title }}
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+                        
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    {{ form.name.label(class="form-label") }}
+                                    {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+                                    {% if form.name.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.name.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    {{ form.price_per_person.label(class="form-label") }}
+                                    {{ form.price_per_person(class="form-control" + (" is-invalid" if form.price_per_person.errors else ""), placeholder="f.eks. 385 kr/pers") }}
+                                    {% if form.price_per_person.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.price_per_person.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form.description.label(class="form-label") }}
+                            {{ form.description(class="form-control" + (" is-invalid" if form.description.errors else ""), rows=2, placeholder="En kort beskrivelse av pakken") }}
+                            {% if form.description.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.description.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form.items.label(class="form-label") }}
+                            <small class="text-muted d-block mb-1">Skriv inn hver rett på en ny linje</small>
+                            {{ form.items(class="form-control" + (" is-invalid" if form.items.errors else ""), rows=8, placeholder="Vårruller\nKylling med cashew nøtter\nRød karri med kylling\nosv...") }}
+                            {% if form.items.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.items.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    {{ form.min_persons.label(class="form-label") }}
+                                    {{ form.min_persons(class="form-control" + (" is-invalid" if form.min_persons.errors else "")) }}
+                                    {% if form.min_persons.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.min_persons.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    {{ form.allergens.label(class="form-label") }}
+                                    <small class="text-muted d-block mb-1">Komma-separerte tall</small>
+                                    {{ form.allergens(class="form-control" + (" is-invalid" if form.allergens.errors else ""), placeholder="f.eks. 1,3,7,14") }}
+                                    {% if form.allergens.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.allergens.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    {{ form.sort_order.label(class="form-label") }}
+                                    {{ form.sort_order(class="form-control" + (" is-invalid" if form.sort_order.errors else "")) }}
+                                    {% if form.sort_order.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.sort_order.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form.best_for.label(class="form-label") }}
+                            {{ form.best_for(class="form-control" + (" is-invalid" if form.best_for.errors else ""), placeholder="f.eks. Bedriftsarrangementer, familieselskap") }}
+                            {% if form.best_for.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.best_for.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="form-check">
+                                {{ form.is_active(class="form-check-input") }}
+                                {{ form.is_active.label(class="form-check-label") }}
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('admin.catering_list') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>
+                                Tilbake
+                            </a>
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Allergen reference -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h6 class="card-title">Allergen-referanse:</h6>
+                    <div class="row small text-muted">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li>1 - Gluten</li>
+                                <li>2 - Skalldyr</li>
+                                <li>3 - Egg</li>
+                                <li>4 - Fisk</li>
+                                <li>5 - Peanøtter</li>
+                                <li>6 - Soya</li>
+                                <li>7 - Melk</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li>8 - Nøtter</li>
+                                <li>9 - Selleri</li>
+                                <li>10 - Sennep</li>
+                                <li>11 - Sesamfrø</li>
+                                <li>12 - Svoveldioksid og sulfitter</li>
+                                <li>13 - Lupin</li>
+                                <li>14 - Bløtdyr</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

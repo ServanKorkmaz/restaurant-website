@@ -1,0 +1,120 @@
+You are improving an existing Flask + SQLite + Bootstrap 5 website for “Nawarat Thai Mat og Catering” (language: Norwegian). Important: Keep the current design and style. Do not change the color palette, font, or base layout. Do not add e-commerce. Only make small refinements across the entire site for better readability and visual balance — and completely rebuild the Catering page from scratch (while keeping the same visual style).
+
+Keep and fine-tune globally (no redesign):
+Keep existing colors, fonts, spacing, and components.
+
+Fine-tune:
+
+Margins/padding (consistent spacing, slightly more breathing room under section headers).
+
+Mobile readability: keep current base font size; adjust line height and spacing between lists/badges for comfort.
+
+Button sizing: maintain style, ensure large tap targets on mobile.
+
+Add missing image alt-text for accessibility.
+
+Improve short microcopy (buttons/error messages) in Norwegian for clarity.
+
+Do not change the existing menu items (01–17), image file names, or admin login path.
+
+Completely rebuild the /catering page (same style, better structure):
+Goal: Clean, scannable, action-oriented. No new visual identity — just clear structure and better flow.
+
+New structure:
+Hero (short and clear)
+
+Title: “Catering for businesses and events in Gjøvik” (Norwegian equivalent)
+
+Subtitle: 1–2 sentences for trust (delivery time, allergen handling).
+
+Primary button: “Get catering offer” (scrolls to request form). Secondary: “See packages”.
+
+Packages grid (Menyforslag 1–6)
+
+Display as equal-height cards:
+
+Name (Menyforslag 1–6)
+
+Price per person (199–385 NOK — exact from database)
+
+Short description of what’s included
+
+Minimum pax (if applicable)
+
+Allergens (badges)
+
+Buttons: “Details” (anchor/scroll to details) and “Get offer” (opens form/scrolls)
+
+Grid should be 1-column on mobile, 2–3 on desktop (match existing card style).
+
+Optional comparison section (table)
+
+Compact table comparing packages 1–6: Price per person, Included dishes, Vegetarian option, Delivery included?, Minimum pax, Suitable for.
+
+Match existing table styling, no new colors.
+
+Detailed package sections (anchor links)
+
+For each package: title, short intro, bullet list of contents, allergens, optional add-ons (extra starters/desserts), and “Best for…” note.
+
+Primary button: “Get catering offer” (scroll/anchor to form).
+
+Use same card/heading style as rest of site.
+
+Request form (simple, clear)
+
+Fields: Name, Company (optional), Email, Phone, Number of guests, Desired date, Delivery or pickup (radio), Address (only if delivery), Selected package (1–6 or “Not sure”), Notes (allergies, requests).
+
+Requirements: HTML5 + server-side validation, clear error messages.
+
+On success: green confirmation message with summary.
+
+Keep backend flow as in current project.
+
+FAQ (short, useful)
+
+4–6 questions in accordion style: Delivery area, Order deadline, Allergens/customization, Minimum pax, Cancellation, Payment.
+
+Short answers, Norwegian, match typography/margins used elsewhere.
+
+Contact/trust section
+
+Short block with “Call us” button (tel:), opening hours, and friendly line: “Not sure what to choose? We’ll help you quickly by phone or email.”
+
+Same button/link style as rest of site.
+
+UX / Accessibility / Performance tweaks (small, no redesign):
+Logical heading hierarchy (H1 → H2 → H3).
+
+Visible focus state on all links/buttons.
+
+alt attributes on all images.
+
+loading="lazy" for off-screen catering images.
+
+No blocking JS; keep existing bundling.
+
+No new fonts or colors.
+
+Admin (only if functions already exist):
+Do not rebuild admin. Only ensure catering packages (1–6) can be edited with new fields used in the rebuilt page (description, price per person, min. pax, allergens, “best for” note).
+
+Keep table names and columns; only add fields if already supported. No DB migration unless necessary.
+
+Text / microcopy (Norwegian, short):
+Button texts: “See packages”, “Get catering offer”, “Send request”, “Call us”.
+
+Error: “Please fill out this field.”, “Invalid email address.”
+
+Success: “Thank you! We’ll contact you shortly to confirm the details.”
+
+Acceptance criteria:
+Design looks the same (same colors, fonts, button style), but with better spacing and balance.
+
+Catering page shows packages in a clear grid, has a simple form, and a FAQ, and is easy to scan on mobile.
+
+No changes to menu 01–17, file names, or admin login.
+
+All text remains in Norwegian, all images have alt text, focus states are clear for keyboard users.
+
+Go through the code and implement the above without introducing new visual systems. Keep look & feel — just improve structure, spacing, and text rhythm. Priority: (1) Catering page clarity → (2) Small site-wide readability/spacing tweaks → (3) Form UX.

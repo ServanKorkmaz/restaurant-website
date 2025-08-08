@@ -2,7 +2,7 @@ from flask import render_template, request, flash, redirect, url_for
 from app import app, db  
 import logging
 from forms import ContactForm
-from models import MenuItem, RestaurantInfo
+from models import MenuItem, RestaurantInfo, CateringPackage
 import logging
 
 @app.route('/')
@@ -91,10 +91,32 @@ def menu():
     
     return render_template('menu.html', menu=menu_data)
 
-@app.route('/catering')
+@app.route('/catering', methods=['GET', 'POST'])
 def catering():
     """Catering page with detailed catering packages"""
-    return render_template('catering.html')
+    # Get all active catering packages from database
+    packages = CateringPackage.query.filter_by(is_active=True).order_by(CateringPackage.sort_order).all()
+    
+    # Get restaurant info for contact details
+    phone = RestaurantInfo.query.filter_by(key='phone').first()
+    email = RestaurantInfo.query.filter_by(key='email').first()
+    
+    contact_info = {
+        'phone': phone.value if phone else '+47 61 17 77 71',
+        'email': email.value if email else 'post@nawaratthaimat.no'
+    }
+    
+    # Handle form submission if needed
+    form_submitted = False
+    if request.method == 'POST':
+        # Basic form handling - you can expand this
+        flash('Takk for din henvendelse! Vi kontakter deg snart.', 'success')
+        form_submitted = True
+    
+    return render_template('catering.html', 
+                         packages=packages, 
+                         contact_info=contact_info,
+                         form_submitted=form_submitted)
 
 @app.route('/kontakt')
 def contact():

@@ -1,0 +1,122 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Catering-pakker - Admin{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-6 fw-bold mb-0">
+                <i class="fas fa-utensils me-3"></i>
+                Catering-pakker
+            </h1>
+            <p class="text-muted">Administrer dine 6 catering-menyer</p>
+        </div>
+        <div class="col-auto">
+            <a href="{{ url_for('admin.add_catering_package') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>
+                Legg til ny pakke
+            </a>
+        </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="row g-4">
+        {% for package in packages %}
+        <div class="col-lg-6">
+            <div class="card h-100 {% if not package.is_active %}opacity-50{% endif %}">
+                <div class="card-header bg-gradient bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            {{ package.name }}
+                        </h5>
+                        <span class="badge bg-warning text-dark">{{ package.price_per_person }}</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if package.description %}
+                    <p class="text-muted mb-3">{{ package.description }}</p>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        <h6 class="text-muted mb-2">Inkluderte retter:</h6>
+                        <ul class="list-unstyled">
+                            {% for item in package.items.split('\n') if item %}
+                            <li class="mb-1">
+                                <i class="fas fa-check text-success me-2"></i>
+                                {{ item }}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                    <div class="row g-2 mb-3">
+                        {% if package.min_persons %}
+                        <div class="col-auto">
+                            <span class="badge bg-secondary">
+                                <i class="fas fa-users me-1"></i>
+                                Min. {{ package.min_persons }} pers
+                            </span>
+                        </div>
+                        {% endif %}
+                        {% if package.allergens %}
+                        <div class="col-auto">
+                            <span class="badge bg-danger">
+                                <i class="fas fa-exclamation-triangle me-1"></i>
+                                Allergener: {{ package.allergens }}
+                            </span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if package.best_for %}
+                    <p class="small text-muted mb-3">
+                        <i class="fas fa-star me-1"></i>
+                        Best for: {{ package.best_for }}
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-transparent">
+                    <div class="btn-group w-100" role="group">
+                        <a href="{{ url_for('admin.edit_catering_package', id=package.id) }}" 
+                           class="btn btn-outline-primary">
+                            <i class="fas fa-edit"></i>
+                            Rediger
+                        </a>
+                        <a href="{{ url_for('admin.toggle_catering_package', id=package.id) }}" 
+                           class="btn btn-outline-warning">
+                            <i class="fas fa-toggle-{{ 'off' if package.is_active else 'on' }}"></i>
+                            {{ 'Deaktiver' if package.is_active else 'Aktiver' }}
+                        </a>
+                        <a href="{{ url_for('admin.delete_catering_package', id=package.id) }}" 
+                           class="btn btn-outline-danger"
+                           onclick="return confirm('Er du sikker på at du vil slette denne pakken?')">
+                            <i class="fas fa-trash"></i>
+                            Slett
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% if not packages %}
+    <div class="alert alert-info mt-4">
+        <i class="fas fa-info-circle me-2"></i>
+        Ingen catering-pakker er opprettet ennå. 
+        <a href="{{ url_for('admin.add_catering_package') }}">Legg til din første pakke</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

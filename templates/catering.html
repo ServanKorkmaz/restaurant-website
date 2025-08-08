@@ -3,195 +3,201 @@
 {% block title %}Catering - Nawarat Thai Mat og Catering{% endblock %}
 
 {% block content %}
-<!-- Catering Header -->
+<!-- Hero Section -->
 <section class="py-5 bg-dark">
     <div class="container">
-        <div class="row text-center">
-            <div class="col">
-                <h1 class="display-4 fw-bold mb-3">Catering-tjenester</h1>
-                <p class="lead text-muted">
-                    Profesjonell catering med autentisk thai-mat til alle anledninger
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Catering for bedrifter og arrangementer i Gjøvik</h1>
+                <p class="lead text-muted mb-4">
+                    Vi leverer autentisk thai-mat til ditt arrangement. 
+                    Bestilling minimum 48 timer i forveien. Vi håndterer alle allergier profesjonelt.
                 </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="#request-form" class="btn btn-primary btn-lg">
+                        <i class="fas fa-envelope me-2"></i>
+                        Få cateringtilbud
+                    </a>
+                    <a href="#packages" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-eye me-2"></i>
+                        Se pakker
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Catering Content -->
+<!-- Packages Grid -->
+<section id="packages" class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col">
+                <h2 class="display-6 fw-bold mb-3">Våre catering-pakker</h2>
+                <p class="lead text-muted">Velg mellom 6 forskjellige menyer tilpasset ditt arrangement</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for package in packages %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 bg-dark shadow">
+                    <div class="card-header bg-gradient bg-primary text-white">
+                        <h4 class="mb-0">{{ package.name }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <span class="badge bg-warning text-dark fs-5">{{ package.price_per_person }}</span>
+                        </div>
+                        
+                        {% if package.description %}
+                        <p class="text-muted mb-3">{{ package.description }}</p>
+                        {% endif %}
+                        
+                        <ul class="list-unstyled small mb-3">
+                            {% for item in package.items.split('\n')[:3] if item %}
+                            <li class="mb-1">
+                                <i class="fas fa-check text-success me-2"></i>
+                                {{ item }}
+                            </li>
+                            {% endfor %}
+                            {% if package.items.split('\n')|length > 3 %}
+                            <li class="text-muted">
+                                <i class="fas fa-plus me-2"></i>
+                                {{ package.items.split('\n')|length - 3 }} flere retter...
+                            </li>
+                            {% endif %}
+                        </ul>
+                        
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            {% if package.min_persons %}
+                            <span class="badge bg-secondary">
+                                <i class="fas fa-users me-1"></i>
+                                Min. {{ package.min_persons }} pers
+                            </span>
+                            {% endif %}
+                            {% if package.allergens %}
+                            <span class="badge bg-danger">
+                                <i class="fas fa-exclamation-triangle me-1"></i>
+                                Allergener: {{ package.allergens }}
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-grid gap-2">
+                            <a href="#package-{{ loop.index }}" class="btn btn-outline-primary">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Se detaljer
+                            </a>
+                            <a href="#request-form" class="btn btn-primary">
+                                <i class="fas fa-envelope me-2"></i>
+                                Få tilbud
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Comparison Table (Optional) -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <h3 class="text-center mb-4">Sammenlign pakker</h3>
+        <div class="table-responsive">
+            <table class="table table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th>Pakke</th>
+                        <th>Pris/pers</th>
+                        <th>Antall retter</th>
+                        <th>Min. personer</th>
+                        <th>Best for</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for package in packages %}
+                    <tr>
+                        <td class="fw-bold">{{ package.name }}</td>
+                        <td>{{ package.price_per_person }}</td>
+                        <td>{{ package.items.split('\n')|length }} retter</td>
+                        <td>{{ package.min_persons }} pers</td>
+                        <td class="small">{{ package.best_for if package.best_for else '-' }}</td>
+                        <td>
+                            <a href="#request-form" class="btn btn-sm btn-primary">Velg</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Detailed Package Sections -->
 <section class="py-5">
     <div class="container">
-        <!-- Introduction -->
-        <div class="row mb-5">
-            <div class="col-lg-8 mx-auto text-center">
-                <h2 class="h3 mb-4">Perfekt for alle arrangementer</h2>
-                <p class="lead text-muted">
-                    Vi tilbyr skreddersydde catering-løsninger med fersk, autentisk thai-mat. 
-                    Alle våre menyer kan tilpasses antall gjester og spesielle ønsker.
-                </p>
+        <h3 class="text-center mb-5">Detaljert informasjon om hver pakke</h3>
+        
+        {% for package in packages %}
+        <div id="package-{{ loop.index }}" class="card mb-4 border-0 bg-dark">
+            <div class="card-header bg-gradient bg-primary text-white">
+                <h4 class="mb-0">
+                    {{ package.name }}
+                    <span class="badge bg-warning text-dark float-end">{{ package.price_per_person }}</span>
+                </h4>
             </div>
-        </div>
-
-        <!-- Catering Packages -->
-        <div class="row g-4">
-            <!-- Package 1 -->
-            <div class="col-lg-6">
-                <div class="card border-0 bg-dark h-100">
-                    <div class="card-header bg-primary text-white">
-                        <h3 class="h4 mb-0">
-                            <i class="fas fa-utensils me-2"></i>
-                            Menyforslag 1
-                        </h3>
-                        <span class="badge bg-warning text-dark fs-6 mt-2">385 kr/pers</span>
-                    </div>
-                    <div class="card-body">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        {% if package.description %}
+                        <p class="lead mb-3">{{ package.description }}</p>
+                        {% endif %}
+                        
+                        <h5 class="mb-3">Inkluderte retter:</h5>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Laks og eggerøre</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Karbonader med løk</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Salat med dressing</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Brød og smør</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Potetsalat</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Kyllingklubber i hjemmelaget marinade</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Kylling med cashew nøtter</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Vårruller</li>
+                            {% for item in package.items.split('\n') if item %}
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                {{ item }}
+                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
-                </div>
-            </div>
-
-            <!-- Package 2 -->
-            <div class="col-lg-6">
-                <div class="card border-0 bg-dark h-100">
-                    <div class="card-header bg-info text-white">
-                        <h3 class="h4 mb-0">
-                            <i class="fas fa-star me-2"></i>
-                            Menyforslag 2 - Thai Tapas
-                        </h3>
-                        <span class="badge bg-warning text-dark fs-6 mt-2">365 kr/pers</span>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Vårruller</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Innbakt scampi</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Kyllingklubber i hjemmelaget marinade</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Hjemmelaget kyllingspyd med satay saus (peanøttsaus)</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Innbakt kyllingfilet</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Hjemmelaget dressing</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Salat</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 3 -->
-            <div class="col-lg-6">
-                <div class="card border-0 bg-dark h-100">
-                    <div class="card-header bg-secondary text-white">
-                        <h3 class="h4 mb-0">
-                            <i class="fas fa-pepper-hot me-2"></i>
-                            Menyforslag 3
-                        </h3>
-                        <span class="badge bg-warning text-dark fs-6 mt-2">299 kr/pers</span>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Laks og eggerøre</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Karbonader med løk</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Roastbeef m/ remulade</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Stekte kyllingklubber i hjemmelaget marinade</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Smør</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Brød</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Salat og hjemmelaget dressing</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 4 -->
-            <div class="col-lg-6">
-                <div class="card border-0 bg-dark h-100">
-                    <div class="card-header bg-success text-white">
-                        <h3 class="h4 mb-0">
-                            <i class="fas fa-leaf me-2"></i>
-                            Menyforslag 4
-                        </h3>
-                        <span class="badge bg-warning text-dark fs-6 mt-2">225 kr/pers</span>
-                    </div>
-                    <div class="card-body">
-                        <p class="fw-bold mb-3">Spekemat</p>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Spekeskinke, spekepølser, eggerøre</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Hjemmelaget potetsalat, fruktfat, flatbrød og smør</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 5 -->
-            <div class="col-lg-6">
-                <div class="card border-0 bg-dark h-100">
-                    <div class="card-header bg-warning text-dark">
-                        <h3 class="h4 mb-0">
-                            <i class="fas fa-fire me-2"></i>
-                            Menyforslag 5 Thai Mat
-                        </h3>
-                        <span class="badge bg-danger fs-6 mt-2">199 kr/pers</span>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Vårruller 2 stk pr pers</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Kylling med cashew nøtter</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Package 6 -->
-            <div class="col-lg-6">
-                <div class="card border-0 bg-dark h-100">
-                    <div class="card-header bg-danger text-white">
-                        <h3 class="h4 mb-0">
-                            <i class="fas fa-crown me-2"></i>
-                            Menyforslag 6 Thai Mat
-                        </h3>
-                        <span class="badge bg-warning text-dark fs-6 mt-2">365 kr/pers</span>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Vårruller</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Stekte kyllingklubber i hjemmelaget marinade</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Rød karri med kylling</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Pad thai</li>
-                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Kylling med cashew nøtter</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contact Section -->
-        <div class="row mt-5">
-            <div class="col-lg-8 mx-auto">
-                <div class="card border-0 bg-primary text-white">
-                    <div class="card-body text-center p-5">
-                        <h3 class="h2 mb-4">
-                            <i class="fas fa-phone me-3"></i>
-                            Bestill catering i dag
-                        </h3>
-                        <p class="lead mb-4">
-                            Kontakt oss for skreddersydde tilbud og spesielle ønsker. 
-                            Vi leverer til hele Gjøvik-området.
-                        </p>
-                        <div class="row g-3 justify-content-center">
-                            <div class="col-auto">
-                                <a href="tel:+4761177771" class="btn btn-light btn-lg">
-                                    <i class="fas fa-phone me-2"></i>
-                                    +47 61 17 77 71
-                                </a>
-                            </div>
-                            <div class="col-auto">
-                                <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">
+                    <div class="col-md-4">
+                        <div class="bg-dark rounded p-3">
+                            {% if package.allergens %}
+                            <h6 class="text-warning mb-2">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Allergener
+                            </h6>
+                            <p class="small mb-3">{{ package.allergens }}</p>
+                            {% endif %}
+                            
+                            {% if package.best_for %}
+                            <h6 class="text-info mb-2">
+                                <i class="fas fa-star me-2"></i>
+                                Best egnet for
+                            </h6>
+                            <p class="small mb-3">{{ package.best_for }}</p>
+                            {% endif %}
+                            
+                            {% if package.min_persons %}
+                            <h6 class="text-success mb-2">
+                                <i class="fas fa-users me-2"></i>
+                                Minimum bestilling
+                            </h6>
+                            <p class="small mb-3">{{ package.min_persons }} personer</p>
+                            {% endif %}
+                            
+                            <div class="d-grid">
+                                <a href="#request-form" class="btn btn-primary">
                                     <i class="fas fa-envelope me-2"></i>
-                                    Send forespørsel
+                                    Få cateringtilbud
                                 </a>
                             </div>
                         </div>
@@ -199,22 +205,212 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
+    </div>
+</section>
 
-        <!-- Additional Info -->
-        <div class="row mt-5">
-            <div class="col-lg-10 mx-auto">
-                <div class="alert alert-info border-0" role="alert">
-                    <div class="row align-items-center">
-                        <div class="col-md-2 text-center">
-                            <i class="fas fa-info-circle fa-3x text-info"></i>
+<!-- Request Form -->
+<section id="request-form" class="py-5 bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0">
+                    <div class="card-header bg-gradient bg-primary text-white text-center">
+                        <h3 class="mb-0">
+                            <i class="fas fa-envelope me-2"></i>
+                            Be om cateringtilbud
+                        </h3>
+                    </div>
+                    <div class="card-body p-4">
+                        {% if form_submitted %}
+                        <div class="alert alert-success" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Takk for din henvendelse! Vi kontakter deg snart for å bekrefte detaljene.
                         </div>
-                        <div class="col-md-10">
-                            <h5 class="alert-heading">Viktig informasjon</h5>
-                            <ul class="mb-0">
-                                <li>Alle priser er per person og inkluderer moms</li>
-                                <li>Bestilling må gjøres minimum 48 timer i forveien</li>
-                                <li>Vi kan tilpasse menyene etter allergier og spesielle ønsker</li>
-                            </ul>
+                        {% endif %}
+                        
+                        <form method="POST" action="{{ url_for('catering') }}#request-form" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Navn *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <div class="invalid-feedback">Vennligst fyll ut dette feltet.</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="company" class="form-label">Bedrift (valgfritt)</label>
+                                    <input type="text" class="form-control" id="company" name="company">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">E-post *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <div class="invalid-feedback">Ugyldig e-postadresse.</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Telefon *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                    <div class="invalid-feedback">Vennligst fyll ut dette feltet.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="guests" class="form-label">Antall gjester *</label>
+                                    <input type="number" class="form-control" id="guests" name="guests" min="10" required>
+                                    <div class="invalid-feedback">Minimum 10 gjester.</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="date" class="form-label">Ønsket dato *</label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                    <div class="invalid-feedback">Vennligst velg en dato.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Levering eller henting *</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="delivery" id="delivery" value="delivery" checked>
+                                        <label class="form-check-label" for="delivery">Levering</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="delivery" id="pickup" value="pickup">
+                                        <label class="form-check-label" for="pickup">Henting</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3" id="address-field">
+                                <label for="address" class="form-label">Leveringsadresse</label>
+                                <input type="text" class="form-control" id="address" name="address">
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="package" class="form-label">Valgt pakke</label>
+                                <select class="form-select" id="package" name="package">
+                                    <option value="">Ikke sikker ennå</option>
+                                    {% for package in packages %}
+                                    <option value="{{ package.name }}">{{ package.name }} - {{ package.price_per_person }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="notes" class="form-label">Merknader (allergier, spesielle ønsker)</label>
+                                <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>
+                                    Send forespørsel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="text-center mb-4">Ofte stilte spørsmål</h3>
+                
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item bg-dark">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                Hvilket område leverer dere til?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Vi leverer gratis i hele Gjøvik-området. For leveringer utenfor Gjøvik, 
+                                kontakt oss for pristilbud.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-dark">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                <i class="fas fa-clock me-2"></i>
+                                Hvor lang tid i forveien må jeg bestille?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Bestilling må gjøres minimum 48 timer før arrangementet. 
+                                For store arrangementer (over 50 personer) anbefaler vi 1 ukes varsel.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-dark">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Kan dere tilpasse menyene for allergier?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Ja, vi kan tilpasse alle menyer etter allergier og diettbehov. 
+                                Oppgi dette ved bestilling så sørger vi for trygge alternativer.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-dark">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                <i class="fas fa-users me-2"></i>
+                                Hva er minimum antall personer?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Minimum bestilling varierer per pakke, vanligvis fra 10-20 personer. 
+                                Se detaljer for hver pakke ovenfor.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-dark">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                <i class="fas fa-ban me-2"></i>
+                                Hva er avbestillingsreglene?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Gratis avbestilling inntil 24 timer før arrangementet. 
+                                Senere avbestilling belastes med 50% av totalbeløpet.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item bg-dark">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                                <i class="fas fa-credit-card me-2"></i>
+                                Hvordan betaler vi?
+                            </button>
+                        </h2>
+                        <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Vi aksepterer kontant, Vipps og faktura for bedrifter. 
+                                Betaling skjer ved levering eller etter avtale.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -222,4 +418,68 @@
         </div>
     </div>
 </section>
+
+<!-- Contact Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="mb-4">
+                    <i class="fas fa-phone me-2"></i>
+                    Usikker på hva du skal velge?
+                </h3>
+                <p class="lead mb-4">
+                    Vi hjelper deg gjerne med å finne den perfekte menyen for ditt arrangement. 
+                    Ring oss eller send en e-post så gir vi deg rask veiledning.
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="tel:{{ contact_info.phone }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-phone me-2"></i>
+                        Ring oss nå
+                    </a>
+                    <p class="lead mb-0 align-self-center">{{ contact_info.phone }}</p>
+                </div>
+                <div class="mt-3">
+                    <p class="mb-0">
+                        <i class="fas fa-clock me-2"></i>
+                        Åpent: Tir-Ons 11:00-17:45, Tor-Fre 11:00-19:45, Lør 11:00-20:45, Søn 12:00-19:45
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Show/hide address field based on delivery option
+document.addEventListener('DOMContentLoaded', function() {
+    const deliveryRadio = document.getElementById('delivery');
+    const pickupRadio = document.getElementById('pickup');
+    const addressField = document.getElementById('address-field');
+    
+    function toggleAddressField() {
+        if (deliveryRadio.checked) {
+            addressField.style.display = 'block';
+        } else {
+            addressField.style.display = 'none';
+        }
+    }
+    
+    deliveryRadio.addEventListener('change', toggleAddressField);
+    pickupRadio.addEventListener('change', toggleAddressField);
+    
+    // Initial check
+    toggleAddressField();
+    
+    // Form validation
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+});
+</script>
 {% endblock %}

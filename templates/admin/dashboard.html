@@ -63,7 +63,7 @@
             </div>
             <div class="card-body p-4">
                 <div class="row g-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <a href="{{ url_for('admin.add_menu_item') }}" class="btn btn-primary btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
                             <div class="text-center">
                                 <i class="fas fa-plus fa-2x mb-2"></i>
@@ -71,7 +71,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <a href="{{ url_for('admin.menu_list') }}" class="btn btn-outline-primary btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
                             <div class="text-center">
                                 <i class="fas fa-edit fa-2x mb-2"></i>
@@ -79,7 +79,15 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <a href="{{ url_for('admin.catering_list') }}" class="btn btn-outline-success btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
+                            <div class="text-center">
+                                <i class="fas fa-utensils fa-2x mb-2"></i>
+                                <div>Catering-pakker</div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
                         <a href="{{ url_for('admin.restaurant_info') }}" class="btn btn-outline-info btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
                             <div class="text-center">
                                 <i class="fas fa-info-circle fa-2x mb-2"></i>
@@ -87,8 +95,8 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-md-6">
-                        <a href="{{ url_for('index') }}" target="_blank" class="btn btn-outline-success btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
+                    <div class="col-md-4">
+                        <a href="{{ url_for('index') }}" target="_blank" class="btn btn-outline-warning btn-admin w-100 h-100 d-flex align-items-center justify-content-center">
                             <div class="text-center">
                                 <i class="fas fa-external-link-alt fa-2x mb-2"></i>
                                 <div>Se nettside</div>

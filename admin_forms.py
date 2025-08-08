@@ -34,6 +34,19 @@ class MenuItemForm(FlaskForm):
     submit = SubmitField('Lagre')
 
 
+class CateringPackageForm(FlaskForm):
+    name = StringField('Pakkenavn', validators=[DataRequired(), Length(max=100)])
+    price_per_person = StringField('Pris per person (NOK)', validators=[DataRequired()])
+    description = TextAreaField('Kort beskrivelse', validators=[Length(max=500)])
+    items = TextAreaField('Inkluderte retter (en per linje)', validators=[DataRequired()])
+    min_persons = IntegerField('Minimum antall personer', validators=[NumberRange(min=1)], default=10)
+    allergens = StringField('Allergener (f.eks. 1,3,7)', validators=[Length(max=200)])
+    best_for = StringField('Best egnet for', validators=[Length(max=200)])
+    sort_order = IntegerField('Rekkefølge', validators=[NumberRange(min=0)], default=0)
+    is_active = BooleanField('Aktiv', default=True)
+    submit = SubmitField('Lagre')
+
+
 class RestaurantInfoForm(FlaskForm):
     phone = StringField('Telefonnummer', validators=[DataRequired(), Length(max=20)])
     email = StringField('E-post', validators=[DataRequired(), Email(), Length(max=100)])
