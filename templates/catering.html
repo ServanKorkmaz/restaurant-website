@@ -3,154 +3,187 @@
 {% block title %}Catering - Nawarat Thai Mat og Catering{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
+<!-- Catering Header -->
 <section class="py-5 bg-dark">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto text-center">
+        <div class="row text-center">
+            <div class="col">
                 <h1 class="display-4 fw-bold mb-3">Catering</h1>
-                <p class="lead text-muted mb-4">
-                    Autentisk thai-mat levert til ditt arrangement
+                <p class="lead text-muted">
+                    Profesjonell catering med autentisk thai-mat til alle anledninger
                 </p>
-                <a href="#packages" class="btn btn-primary btn-lg">
-                    <i class="fas fa-arrow-down me-2"></i>
-                    Se menyer
-                </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Packages Grid - Simplified -->
-<section id="packages" class="py-5">
+<!-- Catering Content -->
+<section class="py-5">
     <div class="container">
-        <div class="row g-4">
-            {% for package in packages %}
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 border-0 bg-dark">
-                    <div class="card-body text-center p-4">
-                        <h4 class="mb-3">{{ package.name }}</h4>
-                        <p class="display-6 text-warning mb-3">{{ package.price_per_person }}</p>
-                        
-                        {% if package.min_persons %}
-                        <p class="text-muted small mb-3">Minimum {{ package.min_persons }} personer</p>
-                        {% endif %}
-                        
-                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#details-{{ loop.index }}">
-                            Se meny
-                        </button>
-                        
-                        <div class="collapse mt-3" id="details-{{ loop.index }}">
-                            <ul class="list-unstyled text-start small">
-                                {% for item in package.items.split('\n') if item %}
-                                <li class="mb-1">• {{ item }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+        <!-- Catering Packages -->
+        <div class="menu-section mb-5">
+            <div class="row">
+                <div class="col">
+                    <div class="section-header mb-4">
+                        <h2 class="display-6 fw-bold">
+                            <i class="fas fa-concierge-bell text-warning me-3"></i>
+                            Catering-pakker
+                        </h2>
+                        <p class="text-muted">Velg mellom våre 6 forskjellige catering-menyer</p>
                     </div>
                 </div>
             </div>
-            {% endfor %}
+            
+            <div class="row g-4">
+                {% for package in packages %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="menu-item card border-0 bg-dark h-100">
+                        <div class="card-body p-4 d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title mb-0">{{ package.name }}</h5>
+                                <span class="badge bg-warning text-dark fs-6">{{ package.price_per_person }}</span>
+                            </div>
+                            
+                            {% if package.description %}
+                            <p class="card-text text-muted mb-3">{{ package.description }}</p>
+                            {% endif %}
+                            
+                            <div class="mb-3">
+                                <small class="text-success fw-bold">Inkludert:</small>
+                                <ul class="small text-muted mt-2 mb-0 ps-3">
+                                    {% for item in package.items.split('\n')[:4] if item %}
+                                    <li>{{ item }}</li>
+                                    {% endfor %}
+                                    {% if package.items.split('\n')|length > 4 %}
+                                    <li class="text-primary">+ {{ package.items.split('\n')|length - 4 }} flere retter</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            
+                            <div class="mt-auto">
+                                {% if package.min_persons %}
+                                <small class="text-info">
+                                    <i class="fas fa-users me-1"></i>
+                                    <strong>Min. {{ package.min_persons }} personer</strong>
+                                </small>
+                                {% endif %}
+                                {% if package.allergens %}
+                                <div class="mt-1">
+                                    <small class="text-warning">
+                                        <strong>Allergener:</strong> {{ package.allergens }}
+                                    </small>
+                                </div>
+                                {% endif %}
+                                {% if package.best_for %}
+                                <div class="mt-1">
+                                    <small class="text-secondary">
+                                        <i class="fas fa-star me-1"></i>
+                                        {{ package.best_for }}
+                                    </small>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Simple Contact Section -->
-<section class="py-5 bg-primary text-white">
+<!-- Catering Information -->
+<section class="py-4 bg-dark">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 mx-auto text-center">
-                <h2 class="mb-4">Bestill catering</h2>
-                <p class="lead mb-4">
-                    Ring oss for rask bestilling eller send en henvendelse
-                </p>
+            <div class="col text-center">
                 
-                <div class="d-grid gap-3 d-md-flex justify-content-md-center">
-                    <a href="tel:{{ contact_info.phone }}" class="btn btn-light btn-lg">
+                <!-- Contact Information -->
+                <div class="alert alert-primary border-0 mt-3" role="alert">
+                    <h5 class="mb-3">
                         <i class="fas fa-phone me-2"></i>
-                        {{ contact_info.phone }}
-                    </a>
-                    <button class="btn btn-outline-light btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#contactForm">
-                        <i class="fas fa-envelope me-2"></i>
-                        Send forespørsel
-                    </button>
-                </div>
-                
-                <!-- Collapsible Form -->
-                <div class="collapse mt-4" id="contactForm">
-                    <div class="card bg-white text-dark">
-                        <div class="card-body p-4">
-                            <form method="POST" action="{{ url_for('catering') }}">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" name="name" placeholder="Navn" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="tel" class="form-control" name="phone" placeholder="Telefon" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="email" class="form-control" name="email" placeholder="E-post" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="number" class="form-control" name="guests" placeholder="Antall gjester" min="10" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="date" class="form-control" name="date" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <select class="form-select" name="package">
-                                            <option value="">Velg pakke</option>
-                                            {% for package in packages %}
-                                            <option value="{{ package.name }}">{{ package.name }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea class="form-control" name="message" rows="2" placeholder="Melding (valgfritt)"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary btn-lg w-100">
-                                            Send forespørsel
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                        Bestill catering
+                    </h5>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">Kontakt oss</h6>
+                            <p class="mb-2">
+                                <i class="fas fa-phone me-2"></i>
+                                <a href="tel:{{ contact_info.phone }}" class="text-white">{{ contact_info.phone }}</a>
+                            </p>
+                            <p class="mb-2">
+                                <i class="fas fa-envelope me-2"></i>
+                                <a href="mailto:{{ contact_info.email }}" class="text-white">{{ contact_info.email }}</a>
+                            </p>
+                            <p class="mb-0">
+                                <i class="fas fa-clock me-2"></i>
+                                <small>Bestill minimum 48 timer i forveien</small>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">Viktig informasjon</h6>
+                            <p class="small mb-1">• Alle priser er per person og inkluderer moms</p>
+                            <p class="small mb-1">• Gratis levering i hele Gjøvik-området</p>
+                            <p class="small mb-1">• Vi kan tilpasse menyene etter allergier</p>
+                            <p class="small mb-0">• Serviering og oppvask kan tilkjøpes</p>
                         </div>
                     </div>
                 </div>
                 
                 {% if form_submitted %}
-                <div class="alert alert-success mt-3" role="alert">
+                <div class="alert alert-success border-0" role="alert">
                     <i class="fas fa-check-circle me-2"></i>
-                    Takk! Vi kontakter deg snart.
+                    Takk for din henvendelse! Vi kontakter deg snart for å bekrefte detaljene.
                 </div>
                 {% endif %}
+                
+                <!-- Quick Contact Form -->
+                <div class="mt-4">
+                    <h5>Rask forespørsel</h5>
+                    <p class="text-muted mb-3">
+                        Fyll ut skjemaet under for å få tilbud på catering
+                    </p>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <form method="POST" action="{{ url_for('catering') }}" class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="name" placeholder="Navn" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="tel" class="form-control" name="phone" placeholder="Telefon" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" name="email" placeholder="E-post" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="number" class="form-control" name="guests" placeholder="Antall gjester" min="10" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control" name="date" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-select" name="package">
+                                        <option value="">Velg pakke</option>
+                                        {% for package in packages %}
+                                        <option value="{{ package.name }}">{{ package.name }} - {{ package.price_per_person }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <textarea class="form-control" name="message" rows="2" placeholder="Melding eller spesielle ønsker (valgfritt)"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-paper-plane me-2"></i>
+                                        Send forespørsel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- Simple Info -->
-<section class="py-5">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-4 mb-3">
-                <i class="fas fa-clock fa-2x text-primary mb-2"></i>
-                <h5>Bestill 48 timer før</h5>
-                <p class="text-muted small">Minimum bestillingstid</p>
-            </div>
-            <div class="col-md-4 mb-3">
-                <i class="fas fa-truck fa-2x text-primary mb-2"></i>
-                <h5>Gratis levering</h5>
-                <p class="text-muted small">I hele Gjøvik-området</p>
-            </div>
-            <div class="col-md-4 mb-3">
-                <i class="fas fa-leaf fa-2x text-primary mb-2"></i>
-                <h5>Allergivennlig</h5>
-                <p class="text-muted small">Vi tilpasser etter behov</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 {% endblock %}
