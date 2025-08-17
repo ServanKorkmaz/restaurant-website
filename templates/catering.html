@@ -10,9 +10,9 @@
             <div class="col-lg-8">
                 <h1 class="display-4 fw-bold mb-3">Profesjonell Thai Catering</h1>
                 <p class="lead text-muted mb-4">Autentisk thailandsk mat til alle anledninger</p>
-                <a href="#catering-form" class="btn btn-warning btn-lg px-5 py-3">
-                    <i class="fas fa-envelope me-2"></i>
-                    Få cateringtilbud
+                <a href="tel:+4761177771" class="btn btn-warning btn-lg px-5 py-3">
+                    <i class="fas fa-phone me-2"></i>
+                    Ring for tilbud
                 </a>
             </div>
         </div>
@@ -62,9 +62,9 @@
                         </div>
                         
                         <div class="mt-auto">
-                            <a href="#catering-form" class="btn btn-warning w-100">
-                                <i class="fas fa-paper-plane me-2"></i>
-                                Få tilbud
+                            <a href="tel:+4761177771" class="btn btn-warning w-100">
+                                <i class="fas fa-phone me-2"></i>
+                                Ring oss
                             </a>
                         </div>
                     </div>
@@ -75,65 +75,7 @@
     </div>
 </section>
 
-<!-- Contact Form -->
-<section class="py-5 bg-light" id="catering-form">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="section-header mb-5 text-center">
-                    <h2 class="h3 fw-bold">Be om cateringtilbud</h2>
-                    <p class="text-muted">Fortell oss om arrangementet ditt så kontakter vi deg</p>
-                </div>
-                
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body p-4">
-                        <form id="cateringForm">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="name" class="form-label">Navn *</label>
-                                    <input type="text" class="form-control" id="name" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="phone" class="form-label">Telefon *</label>
-                                    <input type="tel" class="form-control" id="phone" required>
-                                </div>
-                                <div class="col-12">
-                                    <label for="email" class="form-label">E-post</label>
-                                    <input type="email" class="form-control" id="email">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="guests" class="form-label">Antall gjester *</label>
-                                    <select class="form-select" id="guests" required>
-                                        <option value="">Velg antall</option>
-                                        <option value="10-20">10-20 personer</option>
-                                        <option value="20-30">20-30 personer</option>
-                                        <option value="30-50">30-50 personer</option>
-                                        <option value="50-100">50-100 personer</option>
-                                        <option value="100+">Over 100 personer</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="eventDate" class="form-label">Ønsket dato</label>
-                                    <input type="date" class="form-control" id="eventDate">
-                                </div>
-                                <div class="col-12">
-                                    <label for="message" class="form-label">Beskrivelse av arrangementet</label>
-                                    <textarea class="form-control" id="message" rows="4" placeholder="Fortell oss om arrangementet, ønsker for mat, budsjett, osv."></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-warning btn-lg w-100">
-                                        <i class="fas fa-paper-plane me-2"></i>
-                                        Send forespørsel
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- FAQ Section -->
 <section class="py-5" id="faq">
@@ -297,38 +239,6 @@
 
 {% block extra_scripts %}
 <script>
-// Form handling
-document.getElementById('cateringForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const email = document.getElementById('email').value;
-    const guests = document.getElementById('guests').value;
-    const eventDate = document.getElementById('eventDate').value;
-    const message = document.getElementById('message').value;
-    
-    const subject = 'Cateringforespørsel fra ' + name;
-    const body = `Hei,
-
-Jeg ønsker å bestille catering:
-
-Navn: ${name}
-Telefon: ${phone}
-E-post: ${email}
-Antall gjester: ${guests}
-Ønsket dato: ${eventDate}
-
-Beskrivelse:
-${message}
-
-Mvh,
-${name}`;
-    
-    const mailtoLink = `mailto:post@nawaratthaimat.no?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-});
-
 // Gallery modal
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('imageModal');
