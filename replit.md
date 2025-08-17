@@ -137,8 +137,11 @@ The application is fully localized for Norwegian users with authentic Thai resta
 ✓ Fixed distance to Gjøvik station from "5 min. gange" to "1 min gange"
 ✓ Added error pages (404/500) with proper styling
 ✓ Admin system fully functional at /admin/setup-admin and /admin/login
-✓ Removed Facebook and Instagram social media links (restaurant doesn't use them)
-✓ Kept only TripAdvisor link in footer social media section
+✓ Added Facebook and Instagram social media links with official URLs:
+  - Facebook: https://www.facebook.com/nawarat.thai.mat.og.catering
+  - Instagram: https://www.instagram.com/nawaratthaimat/
+✓ Professional social media styling with brand colors and hover effects
+✓ Links appear in footer and contact page for maximum visibility
 ✓ Updated email address to "post@nawaratthaimat.no" across all pages and admin system
 ✓ Corrected phone number to +47 61 17 77 71 in footer and admin system
 ✓ Created separate catering page with detailed packages from restaurant's menu

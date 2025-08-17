@@ -718,3 +718,35 @@ body {
         font-size: 1rem;
     }
 }
+
+/* Social Media Links */
+.social-links a {
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.social-links a[href*="facebook"]:hover {
+    background-color: #1877f2;
+}
+
+.social-links a[href*="instagram"]:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.social-links a[href*="tripadvisor"]:hover {
+    background-color: #00af87;
+}
