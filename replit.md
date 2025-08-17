@@ -186,6 +186,9 @@ The application is fully localized for Norwegian users with authentic Thai resta
   - Added 5 new authentic catering images: stekte poteter, rekesalat, biff salat, skinke salat, vårruller
   - Fixed JavaScript error with smooth scrolling selector validation
   - Updated page structure to Hero → Packages → FAQ → Gallery (streamlined flow)
+  - Applied consistent dark navy background (#0b1d36) across hero, FAQ, and gallery sections
+  - Removed carousel completely from gallery section per user request - now only shows thumbnail grid
+  - Optimized gallery layout with centered grid and professional hover effects
   - Redesigned gallery section with consistent dark navy background (#0b1d36) throughout entire page
   - Implemented professional grid layout with responsive thumbnails (4:3 aspect ratio)
   - Added subtle hover effects (scale 1.03x + shadow) for better interactivity
