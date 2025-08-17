@@ -107,7 +107,7 @@ The application is fully localized for Norwegian users with authentic Thai resta
 - Norwegian business context (pricing in NOK, local business culture)
 - Authentic Thai menu items with Norwegian descriptions
 - Contact information for Nawarat Thai Mat og Catering (Tordenskjolds gate 1, 2821 Gjøvik)
-- Operating hours: Tuesday-Wednesday 11:00-18:00, Thursday-Friday 11:00-20:00, Saturday 12:00-20:00, Sunday 12:00-20:00, closed Mondays
+- Operating hours: Tuesday-Wednesday 11:00-18:00, Thursday-Friday 11:00-20:00, Saturday 10:00-20:00, Sunday 12:00-20:00, closed Mondays
 
 ## Recent Changes (July 29, 2025)
 
