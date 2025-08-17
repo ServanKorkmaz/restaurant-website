@@ -182,3 +182,7 @@ The application is fully localized for Norwegian users with authentic Thai resta
   - Added prominent CTA buttons and smooth scrolling navigation
   - Reduced carousel to smaller showcase size (45vh max) with proper centering
   - Maintained original aspect ratios with object-fit: contain for all images
+  - Removed contact form section per user request, replaced with direct phone CTAs
+  - Added 5 new authentic catering images: stekte poteter, rekesalat, biff salat, skinke salat, vårruller
+  - Fixed JavaScript error with smooth scrolling selector validation
+  - Updated page structure to Hero → Packages → FAQ → Gallery (streamlined flow)
