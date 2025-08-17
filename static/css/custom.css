@@ -79,6 +79,91 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
+/* Catering cards */
+.catering-card {
+    background: #2c3e50 !important; /* Light variant of site's dark blue */
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.catering-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.catering-card .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0;
+}
+
+.catering-price-badge {
+    background: var(--cafe-gold) !important;
+    color: #000 !important;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.catering-dish-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.catering-dish-list li {
+    color: #e8e9ea;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.catering-dish-list li:before {
+    content: "•";
+    color: var(--cafe-gold);
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 0.75rem;
+    margin-top: -0.1rem;
+}
+
+.catering-cta-btn {
+    background: var(--cafe-gold);
+    border: none;
+    color: #000;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.catering-cta-btn:hover {
+    background: #b8941f;
+    color: #000;
+    transform: translateY(-1px);
+}
+
+/* Responsive layout for catering cards */
+@media (max-width: 768px) {
+    .catering-card .card-title {
+        font-size: 1.25rem;
+    }
+    
+    .catering-price-badge {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .row.g-4 .col-xl-4:nth-child(3n+1) {
+        clear: left;
+    }
+}
+
 .menu-item {
     border-left: 4px solid transparent;
     transition: border-color 0.3s ease;

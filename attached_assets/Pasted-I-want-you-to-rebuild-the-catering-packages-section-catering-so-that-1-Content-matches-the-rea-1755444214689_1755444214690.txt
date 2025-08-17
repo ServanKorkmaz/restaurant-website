@@ -1,0 +1,133 @@
+I want you to rebuild the catering packages section (/catering) so that:
+
+1. Content matches the real menu (see below)
+
+Replace the current dish lists with the exact content from the restaurant’s printed menu. Each package should include all the listed dishes.
+
+Correct packages (in Norwegian, must be exactly this):
+
+Menyforslag 1 – 385 kr/pers
+
+Laks og eggerøre
+
+Karbonader med løk
+
+Salat med dressing
+
+Brød og smør
+
+Potetsalat
+
+Kyllingklubber i hjemmelaget marinade
+
+Kylling med cashew nøtter
+
+Vårruller
+
+Menyforslag 2 – Thai tapas – 365 kr/pers
+
+Vårruller
+
+Innbakt scampi
+
+Kyllingklubber i hjemmelaget marinade
+
+Hjemmelaget kyllingspyd med satay-saus (peanøttsaus)
+
+Innbakt kyllingfilet
+
+Hjemmelaget dressing
+
+Salat
+
+Menyforslag 3 – 299 kr/pers
+
+Laks og eggerøre
+
+Karbonader med løk
+
+Roastbeef m/ remulade
+
+Stekte kyllingklubber i hjemmelaget marinade
+
+Smør
+
+Salat og hjemmelaget dressing
+
+Menyforslag 4 – Spekemat – 225 kr/pers
+
+Spekeskinke
+
+Spekepølser
+
+Eggerøre
+
+Hjemmelaget potetsalat
+
+Fruktfat
+
+Flatbrød og smør
+
+Menyforslag 5 – Thai mat – 199 kr/pers
+
+Vårruller (2 stk pr pers)
+
+Kylling med cashew nøtter
+
+Jasminris
+
+Menyforslag 6 – Thai mat Deluxe – 365 kr/pers
+
+Vårruller
+
+Stekte kyllingklubber i hjemmelaget marinade
+
+Rød karri med kylling
+
+Pad thai
+
+Kylling med cashew nøtter
+
+2. Design improvements
+
+Use Bootstrap cards but make them clean, modern and consistent.
+
+Background of cards: use a light variant of the site’s dark blue (not gray-purple).
+
+Title: bold, larger, clear (e.g. “Menyforslag 1”).
+
+Price: badge in the top-right corner, styled clean (gold/yellow background, dark text).
+
+List of dishes: left-aligned, neat bullet list (✔ or •). No truncation (“flere retter inkludert” should be removed).
+
+Button: “📞 Ring oss” as a full-width button at bottom of card. Use the site’s primary button color.
+
+Cards should all be equal height, aligned in a grid (2 per row on desktop, 1 per row on mobile).
+
+3. Technical implementation
+
+Update the template for catering cards with the new content and design.
+
+Ensure all cards use the same padding, shadow, border-radius for a modern consistent look.
+
+Add hover effect: card lifts slightly (transform: translateY(-2px), subtle shadow).
+
+Ensure responsive layout:
+
+Mobile: single column
+
+Tablet: 2 columns
+
+Desktop: 3 columns max
+
+4. Acceptance criteria
+
+All catering packages exactly match the printed menus (dishes + prices).
+
+Cards look professional and consistent (clean background, aligned, equal height).
+
+No missing dishes.
+
+Page looks good on desktop and mobile.
+
+CTA button is visible and easy to tap.
