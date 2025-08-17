@@ -48,7 +48,7 @@
                             <ul class="list-unstyled mb-0">
                                 {% for item in package.items.split('\n')[:5] if item %}
                                 <li class="mb-2 d-flex align-items-start">
-                                    <i class="fas fa-check text-warning me-2 mt-1 flex-shrink-0"></i>
+                                    <i class="fas fa-check text-warning me-2 mt-1 small"></i>
                                     <span>{{ item }}</span>
                                 </li>
                                 {% endfor %}
@@ -74,6 +74,9 @@
         </div>
     </div>
 </section>
+
+
+
 
 <!-- Gallery Section -->
 <section class="catering-gallery-section py-5" id="gallery">
@@ -125,74 +128,6 @@
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/catering-spring-rolls.jpg') }}" data-bs-title="Vårruller">
                     <img src="{{ url_for('static', filename='images/catering-spring-rolls.jpg') }}" alt="Vårruller" class="catering-thumb" loading="lazy">
                 </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ Section -->
-<section class="py-5 catering-gallery-section" id="faq">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="section-header mb-5 text-center">
-                    <h2 class="h3 fw-bold text-light">Ofte stilte spørsmål</h2>
-                    <p class="text-light opacity-75">Svar på de vanligste spørsmålene om vår catering</p>
-                </div>
-                
-                <div class="accordion" id="cateringFAQ">
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                Hvor lang tid på forhånd må jeg bestille?
-                            </button>
-                        </h3>
-                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#cateringFAQ">
-                            <div class="accordion-body">
-                                Vi anbefaler å bestille minst 3-5 dager på forhånd for mindre arrangementer. For store arrangementer (50+ personer) eller i travle perioder, anbefaler vi 1-2 uker på forhånd.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                Leverer dere til hele Gjøvik?
-                            </button>
-                        </h3>
-                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#cateringFAQ">
-                            <div class="accordion-body">
-                                Ja, vi leverer til hele Gjøvik by og nærområder. For leveringer utenfor sentrum kan det tilkomme en liten leveringsavgift.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                Kan dere tilpasse maten for allergier?
-                            </button>
-                        </h3>
-                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#cateringFAQ">
-                            <div class="accordion-body">
-                                Absolutt! Vi kan tilpasse maten for de fleste allergier og kostholdsbehov. Gi oss beskjed når du bestiller, så finner vi gode løsninger.
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="accordion-item">
-                        <h3 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                Inkluderer prisen servering og opprydding?
-                            </button>
-                        </h3>
-                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#cateringFAQ">
-                            <div class="accordion-body">
-                                Prisene inkluderer levering og oppstilling av maten. Servering og opprydding kan tilkjøpes for større arrangementer - kontakt oss for priser.
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
