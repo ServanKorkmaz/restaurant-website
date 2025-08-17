@@ -207,8 +207,21 @@
             <div class="modal-header border-0">
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center p-0">
+            <div class="modal-body text-center p-0 position-relative">
                 <img id="modalImage" src="" alt="" class="img-fluid rounded" style="max-height: 80vh;">
+                
+                <!-- Navigation arrows -->
+                <button class="btn btn-outline-light position-absolute top-50 start-0 translate-middle-y ms-3" id="prevImage" style="z-index: 1050;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="btn btn-outline-light position-absolute top-50 end-0 translate-middle-y me-3" id="nextImage" style="z-index: 1050;">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <!-- Image counter -->
+                <div class="position-absolute bottom-0 start-50 translate-middle-x mb-3 bg-dark bg-opacity-75 text-light px-3 py-1 rounded" id="imageCounter" style="z-index: 1050;">
+                    <span id="currentImageIndex">1</span> / <span id="totalImages">13</span>
+                </div>
             </div>
         </div>
     </div>
@@ -218,19 +231,100 @@
 
 {% block extra_scripts %}
 <script>
-// Gallery modal
+// Gallery modal with navigation
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
+    const prevBtn = document.getElementById('prevImage');
+    const nextBtn = document.getElementById('nextImage');
+    const currentIndexSpan = document.getElementById('currentImageIndex');
     
-    modal.addEventListener('show.bs.modal', function(event) {
-        const trigger = event.relatedTarget;
-        const imageSrc = trigger.getAttribute('data-bs-image');
-        const imageTitle = trigger.getAttribute('data-bs-title');
+    // Get all gallery items
+    const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+    let currentImageIndex = 0;
+    
+    // Update modal content
+    function updateModalImage(index) {
+        const item = galleryItems[index];
+        const imageSrc = item.getAttribute('data-bs-image');
+        const imageTitle = item.getAttribute('data-bs-title');
         
         modalImage.src = imageSrc;
         modalImage.alt = imageTitle;
+        currentIndexSpan.textContent = index + 1;
+        currentImageIndex = index;
+        
+        // Update button states
+        prevBtn.style.display = index === 0 ? 'none' : 'block';
+        nextBtn.style.display = index === galleryItems.length - 1 ? 'none' : 'block';
+    }
+    
+    // Show modal
+    modal.addEventListener('show.bs.modal', function(event) {
+        const trigger = event.relatedTarget;
+        const index = galleryItems.indexOf(trigger);
+        updateModalImage(index);
     });
+    
+    // Navigation functions
+    function showPrevImage() {
+        if (currentImageIndex > 0) {
+            updateModalImage(currentImageIndex - 1);
+        }
+    }
+    
+    function showNextImage() {
+        if (currentImageIndex < galleryItems.length - 1) {
+            updateModalImage(currentImageIndex + 1);
+        }
+    }
+    
+    // Button events
+    prevBtn.addEventListener('click', showPrevImage);
+    nextBtn.addEventListener('click', showNextImage);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (modal.classList.contains('show')) {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                showPrevImage();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                showNextImage();
+            } else if (e.key === 'Escape') {
+                bootstrap.Modal.getInstance(modal).hide();
+            }
+        }
+    });
+    
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    modalImage.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    modalImage.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+        
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe right - show previous image
+                showPrevImage();
+            } else {
+                // Swipe left - show next image
+                showNextImage();
+            }
+        }
+    }
 });
 
 // Smooth scrolling

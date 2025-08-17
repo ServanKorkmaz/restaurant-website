@@ -598,3 +598,38 @@ body {
         gap: 12px;
     }
 }
+
+/* Modal Navigation Styling */
+#prevImage, #nextImage {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+#prevImage:hover, #nextImage:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: white;
+    transform: scale(1.1);
+}
+
+#prevImage i, #nextImage i {
+    font-size: 1.2rem;
+}
+
+/* Hide navigation on small screens to prevent overlap */
+@media (max-width: 576px) {
+    #prevImage, #nextImage {
+        width: 40px;
+        height: 40px;
+    }
+    
+    #prevImage i, #nextImage i {
+        font-size: 1rem;
+    }
+}
