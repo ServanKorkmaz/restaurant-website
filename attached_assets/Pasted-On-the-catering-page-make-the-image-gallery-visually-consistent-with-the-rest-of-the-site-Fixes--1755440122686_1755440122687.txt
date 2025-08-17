@@ -1,0 +1,68 @@
+On the /catering page, make the image gallery visually consistent with the rest of the site.
+
+Fixes needed:
+
+Use the same dark background color as the rest of the Catering page (no white/gray mismatch).
+
+Add padding and spacing so the gallery has breathing room.
+
+Center-align the gallery section.
+
+Style thumbnails so they look neat and professional (consistent sizes, rounded corners, subtle hover effect).
+
+Implementation details:
+
+Wrap the gallery in a <section> with a dark background (same as page background):
+
+<section class="catering-gallery-section py-5">
+  <div class="container text-center">
+    <h2 class="h4 mb-4 text-light">Galleri</h2>
+    <div class="catering-gallery">
+      {% for img in gallery_images %}
+        <a href="{{ url_for('static', filename=img.src) }}" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-img="{{ url_for('static', filename=img.src) }}">
+          <img src="{{ url_for('static', filename=img.thumb or img.src) }}" alt="{{ img.alt or 'Catering' }}" class="catering-thumb">
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+Add CSS:
+
+.catering-gallery-section {
+  background-color: #0b1d36; /* match page navy */
+}
+
+.catering-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+  justify-items: center;
+}
+
+.catering-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.catering-thumb:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+
+Optional: add a Bootstrap modal to open full-size images when clicking thumbnails (instead of linking directly).
+
+Acceptance criteria:
+
+Gallery background matches Catering page (dark navy).
+
+Thumbnails are consistent size, evenly spaced, and fit naturally into the design.
+
+Section has a title (“Galleri”) styled like the rest.
+
+On hover, thumbnails have a subtle zoom effect, making it feel professional.

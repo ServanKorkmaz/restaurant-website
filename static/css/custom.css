@@ -565,21 +565,36 @@ body {
 }
 
 /* Catering Gallery */
+.catering-gallery-section {
+    background-color: #0b1d36; /* match page navy */
+}
+
 .catering-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 12px;
+    gap: 15px;
+    justify-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .catering-thumb {
     width: 100%;
-    aspect-ratio: 4/3;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
-    border-radius: 0.5rem;
-    transition: transform 0.3s ease;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
 }
 
 .catering-thumb:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 768px) {
+    .catering-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+    }
 }
