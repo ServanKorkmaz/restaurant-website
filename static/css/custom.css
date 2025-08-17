@@ -7,10 +7,27 @@
     --cafe-gold: #d4af37;
 }
 
-/* Typography */
+/* Typography - Mobile First */
 body {
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
+    font-size: 18px; /* Base font size for better mobile readability */
+}
+
+/* Ensure all images are responsive */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Prevent horizontal scrolling */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .hero-title,
@@ -272,12 +289,18 @@ body {
 @media (max-width: 768px) {
     /* Optimized font size for mobile */
     html {
-        font-size: 16px !important;
+        font-size: 18px !important;
     }
     
     body {
-        font-size: 1rem !important;
+        font-size: 1.1rem !important;
         line-height: 1.7 !important;
+    }
+    
+    /* Prevent zooming on small screens */
+    .container, .container-fluid {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
     }
     
     .hero-icon {
@@ -340,15 +363,33 @@ body {
     
     /* Optimized button sizes for mobile */
     .btn {
-        padding: 0.65rem 1.25rem;
-        font-size: 1rem !important;
-        min-height: 48px;
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem !important;
+        min-height: 50px;
+        margin-bottom: 0.5rem;
     }
     
     .btn-lg {
-        padding: 0.85rem 1.75rem;
-        font-size: 1.15rem !important;
-        min-height: 56px;
+        padding: 1rem 2rem;
+        font-size: 1.25rem !important;
+        min-height: 60px;
+    }
+    
+    /* Full width buttons only in hero sections */
+    .hero-section .btn {
+        width: 100%;
+    }
+    
+    /* Mobile navigation improvements */
+    .navbar-toggler {
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        border-width: 2px;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 1rem 0.75rem;
+        font-size: 1.2rem !important;
     }
     
     /* Menu item cards mobile optimization */
@@ -364,8 +405,9 @@ body {
     
     /* Much larger badge sizing */
     .badge {
-        font-size: 1.1rem !important;
-        padding: 0.6rem 1rem;
+        font-size: 1.2rem !important;
+        padding: 0.7rem 1.2rem;
+        font-weight: 600;
     }
     
     /* Navigation improvements */
@@ -381,7 +423,19 @@ body {
     /* Hero section mobile optimization */
     .hero-section {
         min-height: 70vh;
-        padding: 3rem 0;
+        padding: 2rem 0;
+    }
+    
+    /* Prevent cards from causing horizontal scroll */
+    .card {
+        max-width: 100%;
+        word-wrap: break-word;
+    }
+    
+    /* Ensure service items are responsive */
+    .service-item {
+        max-width: 100%;
+        overflow-wrap: break-word;
     }
     
     /* Services section mobile */
