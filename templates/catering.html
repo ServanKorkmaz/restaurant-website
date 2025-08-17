@@ -44,18 +44,12 @@
                             <span class="catering-price-badge">{{ package.price_per_person }}</span>
                         </div>
                         
-                        <div class="flex-grow-1 mb-4">
+                        <div class="flex-grow-1">
                             <ul class="catering-dish-list">
                                 {% for item in package.items.split('\n') if item.strip() %}
                                 <li>{{ item.strip() }}</li>
                                 {% endfor %}
                             </ul>
-                        </div>
-                        
-                        <div class="mt-auto">
-                            <a href="tel:+4761177771" class="btn catering-cta-btn w-100">
-                                📞 Ring oss
-                            </a>
                         </div>
                     </div>
                 </div>
