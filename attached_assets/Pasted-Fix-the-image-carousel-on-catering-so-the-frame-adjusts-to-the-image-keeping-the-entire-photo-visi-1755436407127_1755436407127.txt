@@ -1,0 +1,75 @@
+Fix the image carousel on /catering so the frame adjusts to the image, keeping the entire photo visible (no zoom/crop). Remove any fixed heights that force cropping.
+
+Requirements
+
+Keep images in original aspect ratio.
+
+No black bars; use page background (or transparent) instead.
+
+No stretching; never cut off the photo.
+
+Carousel height should adapt to each slide’s intrinsic image height.
+
+On mobile, cap extremely tall images to viewport height for usability.
+
+Make these changes
+
+In the carousel template, ensure slides center their content:
+
+<div class="carousel-item">
+  <img src="{{ url_for('static', filename='...') }}" class="d-block carousel-img" alt="...">
+</div>
+
+
+Add/replace CSS (remove any previous fixed heights on .carousel, .carousel-item, or img):
+
+/* Container should grow with the image */
+.carousel,
+.carousel-inner,
+.carousel-item {
+  background: transparent;           /* no black fill */
+  height: auto;                      /* let content define height */
+  min-height: 0;
+}
+
+/* Center each image and keep full content visible */
+.carousel-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;                        /* keep edges clean */
+}
+
+/* Key rules: preserve aspect ratio, no cropping, no stretching */
+.carousel-img {
+  display: block;
+  width: 100%;
+  height: auto;                      /* auto height = no crop */
+  max-height: 80vh;                  /* prevents oversize on tall images */
+  object-fit: contain;               /* show entire photo */
+  object-position: center center;
+  margin: 0 auto;
+  background: transparent;           /* avoid colored bars */
+}
+
+/* Optional: smaller cap on very small screens */
+@media (max-width: 576px) {
+  .carousel-img {
+    max-height: 70vh;
+  }
+}
+
+
+Remove any JS/CSS that sets a fixed pixel height on the carousel or images (e.g., height: 500px;, min-height, or JS that normalizes heights). We want variable slide heights.
+
+If Bootstrap’s .img-fluid is used, keep it; it’s compatible with height:auto.
+
+Acceptance criteria
+
+Each slide shows the entire image with correct proportions.
+
+The carousel height changes per image (no fixed frame).
+
+No black bars; background matches the page.
+
+Desktop and mobile both look good; very tall images never exceed ~80% of viewport height.
