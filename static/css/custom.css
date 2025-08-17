@@ -526,38 +526,60 @@ body {
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Variable Height Carousel - Container adapts to image */
+/* Restore Bootstrap behavior for carousel */
 .carousel,
 .carousel-inner,
 .carousel-item {
-    background: transparent;
     height: auto;
-    min-height: 0;
+    background: transparent;
 }
 
-/* Center each image and keep full content visible */
 .carousel-item {
+    display: none;
+    position: relative;
+}
+
+/* Center the image with a child wrapper, not on .carousel-item */
+.carousel-center {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    width: 100%;
 }
 
-/* Key rules: preserve aspect ratio, no cropping, no stretching */
+/* Keep whole image visible, adaptive height, no crop */
 .carousel-img {
     display: block;
-    width: 100%;
+    max-width: 100%;
     height: auto;
-    max-height: 80vh;
+    max-height: 45vh;
     object-fit: contain;
     object-position: center center;
-    margin: 0 auto;
     background: transparent;
 }
 
-/* Optional: smaller cap on very small screens */
 @media (max-width: 576px) {
-    .carousel-img {
-        max-height: 70vh;
+    .carousel-img { 
+        max-height: 35vh; 
     }
+}
+
+/* Catering Gallery */
+.catering-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.catering-thumb {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.catering-thumb:hover {
+    transform: scale(1.05);
 }

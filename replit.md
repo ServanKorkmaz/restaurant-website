@@ -173,3 +173,12 @@ The application is fully localized for Norwegian users with authentic Thai resta
   - Minimalist catering page with collapsible details
   - Simple contact form with phone-first approach
   - Optimized mobile font sizes for better readability
+✓ Professional catering page redesign (August 17, 2025):
+  - Fixed carousel slide stacking bug by restoring Bootstrap defaults
+  - Restructured page flow: Hero → Packages → Contact Form → FAQ → Gallery
+  - Added comprehensive contact form with validation and mailto integration
+  - Implemented FAQ accordion section with common catering questions
+  - Created thumbnail gallery with Bootstrap modal lightbox functionality
+  - Added prominent CTA buttons and smooth scrolling navigation
+  - Reduced carousel to smaller showcase size (45vh max) with proper centering
+  - Maintained original aspect ratios with object-fit: contain for all images

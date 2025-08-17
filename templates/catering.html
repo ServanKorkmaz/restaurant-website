@@ -3,126 +3,362 @@
 {% block title %}Catering - Nawarat Thai Mat og Catering{% endblock %}
 
 {% block content %}
-<!-- Catering Header -->
+<!-- Hero Section -->
 <section class="py-5 bg-dark">
     <div class="container">
-        <div class="row text-center">
-            <div class="col">
-                <h1 class="display-4 fw-bold mb-3">Catering</h1>
-                <p class="lead text-muted">
-                    Profesjonell catering med autentisk thai-mat til alle anledninger
-                </p>
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">Profesjonell Thai Catering</h1>
+                <p class="lead text-muted mb-4">Autentisk thailandsk mat til alle anledninger</p>
+                <a href="#catering-form" class="btn btn-warning btn-lg px-5 py-3">
+                    <i class="fas fa-envelope me-2"></i>
+                    Få cateringtilbud
+                </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Catering Gallery Slideshow -->
-<section class="py-4 bg-gradient bg-dark">
+<!-- Catering Packages -->
+<section class="py-5" id="packages">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="section-header mb-5 text-center">
+                    <h2 class="display-6 fw-bold">
+                        <i class="fas fa-concierge-bell text-warning me-3"></i>
+                        Catering-pakker
+                    </h2>
+                    <p class="text-muted">Velg mellom våre 6 forskjellige catering-menyer</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for package in packages %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 bg-secondary h-100 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-start mb-4">
+                            <h5 class="card-title mb-0 text-white fw-bold">{{ package.name }}</h5>
+                            <span class="badge bg-warning text-dark fs-6 px-3 py-2">{{ package.price_per_person }}</span>
+                        </div>
+                        
+                        <div class="text-light mb-4">
+                            <ul class="list-unstyled mb-0">
+                                {% for item in package.items.split('\n')[:5] if item %}
+                                <li class="mb-2 d-flex align-items-start">
+                                    <i class="fas fa-check text-warning me-2 mt-1 small"></i>
+                                    <span>{{ item }}</span>
+                                </li>
+                                {% endfor %}
+                                {% if package.items.split('\n')|length > 5 %}
+                                <li class="text-muted small mt-3">
+                                    <i class="fas fa-plus me-1"></i>
+                                    flere retter inkludert
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <a href="#catering-form" class="btn btn-warning w-100">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Få tilbud
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form -->
+<section class="py-5 bg-light" id="catering-form">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-10 col-md-11">
-                <div id="cateringCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#cateringCarousel" data-bs-slide-to="0" class="active"></button>
-                        <button type="button" data-bs-target="#cateringCarousel" data-bs-slide-to="1"></button>
-                        <button type="button" data-bs-target="#cateringCarousel" data-bs-slide-to="2"></button>
-                        <button type="button" data-bs-target="#cateringCarousel" data-bs-slide-to="3"></button>
-                        <button type="button" data-bs-target="#cateringCarousel" data-bs-slide-to="4"></button>
-                        <button type="button" data-bs-target="#cateringCarousel" data-bs-slide-to="5"></button>
-                        <button type="button" data-bs-target="#cateringCarousel" data-bs-slide-to="6"></button>
-                        <button type="button" data-bs-target="#cateringCarousel" data-bs-slide-to="7"></button>
+            <div class="col-lg-8">
+                <div class="section-header mb-5 text-center">
+                    <h2 class="h3 fw-bold">Be om cateringtilbud</h2>
+                    <p class="text-muted">Fortell oss om arrangementet ditt så kontakter vi deg</p>
+                </div>
+                
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <form id="cateringForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Navn *</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Telefon *</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label">E-post</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="guests" class="form-label">Antall gjester *</label>
+                                    <select class="form-select" id="guests" required>
+                                        <option value="">Velg antall</option>
+                                        <option value="10-20">10-20 personer</option>
+                                        <option value="20-30">20-30 personer</option>
+                                        <option value="30-50">30-50 personer</option>
+                                        <option value="50-100">50-100 personer</option>
+                                        <option value="100+">Over 100 personer</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="eventDate" class="form-label">Ønsket dato</label>
+                                    <input type="date" class="form-control" id="eventDate">
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Beskrivelse av arrangementet</label>
+                                    <textarea class="form-control" id="message" rows="4" placeholder="Fortell oss om arrangementet, ønsker for mat, budsjett, osv."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-warning btn-lg w-100">
+                                        <i class="fas fa-paper-plane me-2"></i>
+                                        Send forespørsel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="carousel-inner rounded shadow-lg position-relative overflow-hidden">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5" id="faq">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-header mb-5 text-center">
+                    <h2 class="h3 fw-bold">Ofte stilte spørsmål</h2>
+                    <p class="text-muted">Svar på de vanligste spørsmålene om vår catering</p>
+                </div>
+                
+                <div class="accordion" id="cateringFAQ">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Hvor lang tid på forhånd må jeg bestille?
+                            </button>
+                        </h3>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#cateringFAQ">
+                            <div class="accordion-body">
+                                Vi anbefaler å bestille minst 3-5 dager på forhånd for mindre arrangementer. For store arrangementer (50+ personer) eller i travle perioder, anbefaler vi 1-2 uker på forhånd.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Leverer dere til hele Gjøvik?
+                            </button>
+                        </h3>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#cateringFAQ">
+                            <div class="accordion-body">
+                                Ja, vi leverer til hele Gjøvik by og nærområder. For leveringer utenfor sentrum kan det tilkomme en liten leveringsavgift.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Kan dere tilpasse maten for allergier?
+                            </button>
+                        </h3>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#cateringFAQ">
+                            <div class="accordion-body">
+                                Absolutt! Vi kan tilpasse maten for de fleste allergier og kostholdsbehov. Gi oss beskjed når du bestiller, så finner vi gode løsninger.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                Inkluderer prisen servering og opprydding?
+                            </button>
+                        </h3>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#cateringFAQ">
+                            <div class="accordion-body">
+                                Prisene inkluderer levering og oppstilling av maten. Servering og opprydding kan tilkjøpes for større arrangementer - kontakt oss for priser.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="py-5 bg-light" id="gallery">
+    <div class="container">
+        <div class="section-header mb-5 text-center">
+            <h2 class="h3 fw-bold">Galleri</h2>
+            <p class="text-muted">Se bilder fra våre catering-arrangementer</p>
+        </div>
+        
+        <!-- Small Carousel -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8">
+                <div id="cateringCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="4000">
+                    <div class="carousel-inner rounded shadow">
                         <div class="carousel-item active">
-                            <img src="{{ url_for('static', filename='images/Catering1.jpg') }}" class="d-block carousel-img" alt="Catering">
+                            <div class="carousel-center">
+                                <img src="{{ url_for('static', filename='images/Catering1.jpg') }}" class="carousel-img img-fluid" alt="Catering" loading="lazy">
+                            </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/Catering2.jpg') }}" class="d-block carousel-img" alt="Catering">
+                            <div class="carousel-center">
+                                <img src="{{ url_for('static', filename='images/Catering2.jpg') }}" class="carousel-img img-fluid" alt="Catering" loading="lazy">
+                            </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/Catering3.jpg') }}" class="d-block carousel-img" alt="Catering">
+                            <div class="carousel-center">
+                                <img src="{{ url_for('static', filename='images/Catering3.jpg') }}" class="carousel-img img-fluid" alt="Catering" loading="lazy">
+                            </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/Catering4.jpg') }}" class="d-block carousel-img" alt="Catering">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/Catering5.jpg') }}" class="d-block carousel-img" alt="Catering">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/Catering6.jpg') }}" class="d-block carousel-img" alt="Catering">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/Catering7.jpg') }}" class="d-block carousel-img" alt="Catering">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ url_for('static', filename='images/Catering8.jpg') }}" class="d-block carousel-img" alt="Catering">
+                            <div class="carousel-center">
+                                <img src="{{ url_for('static', filename='images/Catering4.jpg') }}" class="carousel-img img-fluid" alt="Catering" loading="lazy">
+                            </div>
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#cateringCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Forrige</span>
+                        <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#cateringCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Neste</span>
+                        <span class="visually-hidden">Next</span>
                     </button>
                 </div>
             </div>
+        </div>
+        
+        <!-- Thumbnail Gallery -->
+        <div class="catering-gallery">
+            <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering1.jpg') }}" data-bs-title="Catering Bilde 1">
+                <img src="{{ url_for('static', filename='images/Catering1.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+            </a>
+            <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering2.jpg') }}" data-bs-title="Catering Bilde 2">
+                <img src="{{ url_for('static', filename='images/Catering2.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+            </a>
+            <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering3.jpg') }}" data-bs-title="Catering Bilde 3">
+                <img src="{{ url_for('static', filename='images/Catering3.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+            </a>
+            <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering4.jpg') }}" data-bs-title="Catering Bilde 4">
+                <img src="{{ url_for('static', filename='images/Catering4.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+            </a>
+            <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering5.jpg') }}" data-bs-title="Catering Bilde 5">
+                <img src="{{ url_for('static', filename='images/Catering5.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+            </a>
+            <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering6.jpg') }}" data-bs-title="Catering Bilde 6">
+                <img src="{{ url_for('static', filename='images/Catering6.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+            </a>
+            <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering7.jpg') }}" data-bs-title="Catering Bilde 7">
+                <img src="{{ url_for('static', filename='images/Catering7.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+            </a>
+            <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering8.jpg') }}" data-bs-title="Catering Bilde 8">
+                <img src="{{ url_for('static', filename='images/Catering8.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Catering Content -->
-<section class="py-5">
-    <div class="container">
-        <!-- Catering Packages -->
-        <div class="menu-section mb-5">
-            <div class="row">
-                <div class="col">
-                    <div class="section-header mb-5">
-                        <h2 class="display-6 fw-bold">
-                            <i class="fas fa-concierge-bell text-warning me-3"></i>
-                            Catering-pakker
-                        </h2>
-                        <p class="text-muted">Velg mellom våre 6 forskjellige catering-menyer</p>
-                    </div>
-                </div>
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            
-            <div class="row g-4">
-                {% for package in packages %}
-                <div class="col-lg-4 col-md-6">
-                    <div class="card border-0 bg-secondary h-100 shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-4">
-                                <h5 class="card-title mb-0 text-white fw-bold">{{ package.name }}</h5>
-                                <span class="badge bg-warning text-dark fs-6 px-3 py-2">{{ package.price_per_person }}</span>
-                            </div>
-                            
-                            <div class="text-light">
-                                <ul class="list-unstyled mb-0">
-                                    {% for item in package.items.split('\n')[:5] if item %}
-                                    <li class="mb-2 d-flex align-items-start">
-                                        <i class="fas fa-check text-warning me-2 mt-1 small"></i>
-                                        <span>{{ item }}</span>
-                                    </li>
-                                    {% endfor %}
-                                    {% if package.items.split('\n')|length > 5 %}
-                                    <li class="text-muted small mt-3">
-                                        <i class="fas fa-plus me-1"></i>
-                                        flere retter inkludert
-                                    </li>
-                                    {% endif %}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
+            <div class="modal-body text-center p-0">
+                <img id="modalImage" src="" alt="" class="img-fluid rounded" style="max-height: 80vh;">
             </div>
         </div>
     </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Form handling
+document.getElementById('cateringForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const guests = document.getElementById('guests').value;
+    const eventDate = document.getElementById('eventDate').value;
+    const message = document.getElementById('message').value;
+    
+    const subject = 'Cateringforespørsel fra ' + name;
+    const body = `Hei,
+
+Jeg ønsker å bestille catering:
+
+Navn: ${name}
+Telefon: ${phone}
+E-post: ${email}
+Antall gjester: ${guests}
+Ønsket dato: ${eventDate}
+
+Beskrivelse:
+${message}
+
+Mvh,
+${name}`;
+    
+    const mailtoLink = `mailto:post@nawaratthaimat.no?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+});
+
+// Gallery modal
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    
+    modal.addEventListener('show.bs.modal', function(event) {
+        const trigger = event.relatedTarget;
+        const imageSrc = trigger.getAttribute('data-bs-image');
+        const imageTitle = trigger.getAttribute('data-bs-title');
+        
+        modalImage.src = imageSrc;
+        modalImage.alt = imageTitle;
+    });
+});
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+</script>
+{% endblock %}
 </section>
 
 <!-- Catering Information -->

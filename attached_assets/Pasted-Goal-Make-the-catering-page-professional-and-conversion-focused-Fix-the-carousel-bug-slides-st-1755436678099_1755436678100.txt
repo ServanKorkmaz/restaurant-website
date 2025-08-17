@@ -1,0 +1,165 @@
+Goal: Make the /catering page professional and conversion-focused.
+
+Fix the carousel bug (slides “stick” / previous slide sits on top).
+
+Keep images at their original aspect ratio (no crop, no stretch).
+
+Move media below the package grid as a compact gallery (preferred), or keep a small carousel that actually works.
+
+Keep the site’s current design (colors, fonts, spacing style).
+
+A. Page structure (professional layout)
+
+Reorder sections to:
+
+Hero (short headline + single-line subtext + CTA “Få cateringtilbud” that scrolls to the form)
+
+Packages grid (Menyforslag 1–6 cards) with buttons “Detaljer” / “Få tilbud”
+
+Request form (simple, validated)
+
+FAQ (accordion)
+
+Image gallery (new) – thumbnails that open in a lightbox
+
+If you must keep a carousel, make it a small one just above the gallery, max-height ~45vh.
+
+B. Fix the carousel bug (Bootstrap)
+
+The current CSS likely changed .carousel-item display/position, breaking the slide animation and causing the previous slide to remain on top. Do not set display:flex on .carousel-item. Use a child wrapper for centering.
+
+Do this:
+
+Ensure we load bootstrap.bundle.js (not just bootstrap.js) so swipe/touch events work.
+
+Restore Bootstrap defaults for the core classes; remove custom rules that override them:
+
+/* Restore Bootstrap behavior */
+.carousel,
+.carousel-inner,
+.carousel-item {
+  height: auto;
+  background: transparent;
+}
+
+.carousel-item {              /* IMPORTANT: keep Bootstrap's default display/position */
+  display: none;              /* (Bootstrap will toggle .active to display:block) */
+  position: relative;
+}
+
+/* Center the image with a child wrapper, not on .carousel-item */
+.carousel-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Keep whole image visible, adaptive height, no crop */
+.carousel-img {
+  display: block;
+  max-width: 100%;
+  height: auto;               /* no fixed height = no crop */
+  max-height: 80vh;           /* avoid overly tall on desktop */
+  object-fit: contain;        /* show entire photo */
+  object-position: center center;
+  background: transparent;
+}
+
+@media (max-width: 576px) {
+  .carousel-img { max-height: 70vh; }
+}
+
+
+Template snippet (example):
+
+<div id="cateringCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
+  <div class="carousel-inner">
+    {% for img in carousel_images %}
+      <div class="carousel-item {% if loop.first %}active{% endif %}">
+        <div class="carousel-center">
+          <img src="{{ url_for('static', filename=img.src) }}"
+               class="carousel-img img-fluid"
+               alt="{{ img.alt or 'Catering' }}"
+               loading="lazy">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#cateringCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#cateringCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+Also check:
+
+No custom CSS sets z-index that keeps an old slide above the new one.
+
+No fixed heights on .carousel or .carousel-item.
+
+Include data-bs-touch="true" and bootstrap.bundle.min.js.
+
+C. Replace big slideshow with a bottom gallery + lightbox (recommended)
+
+Implement a simple responsive grid that opens a lightbox (e.g., GLightbox or Bootstrap Modal). Keep thumbnails small and consistent; this avoids layout jumps and makes the page calmer.
+
+CSS:
+
+.catering-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.catering-thumb {
+  width: 100%;
+  aspect-ratio: 4/3;      /* tidy tiles even if images vary */
+  object-fit: cover;      /* crop only thumbnails, not originals */
+  border-radius: .5rem;
+}
+
+
+Template (thumbnails open lightbox/modal):
+
+<section aria-labelledby="galleri-title" class="mt-5">
+  <h2 id="galleri-title" class="h4 mb-3">Galleri</h2>
+  <div class="catering-gallery">
+    {% for img in gallery_images %}
+      <a href="{{ url_for('static', filename=img.src) }}" class="gallery-item" data-glightbox="title: {{ img.alt|e }}">
+        <img src="{{ url_for('static', filename=img.thumb or img.src) }}"
+             alt="{{ img.alt or 'Catering' }}"
+             class="catering-thumb"
+             loading="lazy">
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+
+If you prefer to avoid a third-party lightbox, use a Bootstrap modal that swaps the src of an <img> inside the modal on click.
+
+D. Small polish (keep design)
+
+Add loading="lazy" to non-critical images.
+
+Ensure headings follow H1 → H2 → H3.
+
+Keep current colors/fonts; only adjust spacing a bit for breathing room.
+
+Make the “Få cateringtilbud” CTA prominent and sticky on mobile if desired.
+
+Acceptance criteria
+
+Carousel (if kept) swipes and slides correctly; no previous slide stuck on top; no cropping/stretching; height adapts to each image.
+
+Gallery at the bottom: neat grid of small thumbnails; clicking opens full image in a lightbox/modal.
+
+Page feels calmer: hero → packages → form → FAQ → gallery.
+
+All existing styling stays consistent with the rest of the site.
