@@ -19,4 +19,7 @@ dependencies = [
     "pyjwt>=2.10.1",
     "sendgrid>=6.12.4",
     "sqlalchemy>=2.0.42",
+    "isort>=6.0.1",
+    "autoflake>=2.3.1",
+    "black>=25.9.0",
 ]

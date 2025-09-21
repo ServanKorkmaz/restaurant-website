@@ -1,152 +1,348 @@
-from flask import render_template, request, flash, redirect, url_for
-from app import app, db  
-import logging
-from forms import ContactForm
-from models import MenuItem, RestaurantInfo, CateringPackage
-import logging
+from flask import flash, render_template, request
 
-@app.route('/')
+from app import app
+from models import CateringPackage, MenuItem, RestaurantInfo
+
+
+@app.route("/")
 def index():
     """Homepage with business introduction"""
     # Featured dishes to showcase on homepage
     featured_dishes = [
-        {'name': 'Kylling m/ Cashewnøtter', 'image': 'kylling-cashew.jpg', 'price': '205'},
-        {'name': 'Rød Karri m/ And', 'image': 'rod-karri-and.jpg', 'price': '245'},
-        {'name': 'Pad Krapao', 'image': 'pad-krapao.jpg', 'price': '205'}
+        {
+            "name": "Kylling m/ Cashewnøtter",
+            "image": "kylling-cashew.jpg",
+            "price": "205",
+        },
+        {"name": "Rød Karri m/ And", "image": "rod-karri-and.jpg", "price": "245"},
+        {"name": "Pad Krapao", "image": "pad-krapao.jpg", "price": "205"},
     ]
-    return render_template('index.html', featured_dishes=featured_dishes)
+    return render_template("index.html", featured_dishes=featured_dishes)
 
-@app.route('/meny')
+
+@app.route("/meny")
 def menu():
     """Menu page displaying food and beverage offerings"""
+
     # Helper function to separate allergen info from description
     def clean_description_and_extract_allergens(desc):
         """Separate allergen info from description"""
         if not desc:
-            return '', ''
-        
+            return "", ""
+
         # Look for allergen patterns like "Allergener: 1,2,3"
         import re
-        allergen_match = re.search(r'[.\s]*Allergener?:\s*([0-9,\s]+)', desc, re.IGNORECASE)
+
+        allergen_match = re.search(
+            r"[.\s]*Allergener?:\s*([0-9,\s]+)", desc, re.IGNORECASE
+        )
         if allergen_match:
             allergens = allergen_match.group(1).strip()
             # Remove allergen info from description
-            clean_desc = re.sub(r'[.\s]*Allergener?:\s*[0-9,\s]+', '', desc, flags=re.IGNORECASE).strip().rstrip('.')
+            clean_desc = (
+                re.sub(r"[.\s]*Allergener?:\s*[0-9,\s]+", "", desc, flags=re.IGNORECASE)
+                .strip()
+                .rstrip(".")
+            )
             return clean_desc, allergens
-        return desc, ''
-    
+        return desc, ""
+
     # Get menu items from database, fallback to static data if empty
-    db_items = MenuItem.query.filter_by(is_active=True).filter(MenuItem.category != 'catering').order_by(MenuItem.category, MenuItem.sort_order, MenuItem.name).all()
-    
-    if db_items and len([item for item in db_items if item.category == 'hovedretter']) > 0:
+    db_items = (
+        MenuItem.query.filter_by(is_active=True)
+        .filter(MenuItem.category != "catering")
+        .order_by(MenuItem.category, MenuItem.sort_order, MenuItem.name)
+        .all()
+    )
+
+    if (
+        db_items
+        and len([item for item in db_items if item.category == "hovedretter"]) > 0
+    ):
         # Use database items (exclude catering items)
         menu_data = {
-            'hovedretter': [],
-            'ekstra': [],
-            'dessert': [],
-            'drikker': [],
-            'alkohol': []
+            "hovedretter": [],
+            "ekstra": [],
+            "dessert": [],
+            "drikker": [],
+            "alkohol": [],
         }
-        
+
         for item in db_items:
             if item.category in menu_data:
-                clean_desc, allergens = clean_description_and_extract_allergens(item.description)
-                menu_data[item.category].append({
-                    'name': item.name,
-                    'price': item.price,
-                    'description': clean_desc,
-                    'allergens': allergens or getattr(item, 'allergens', ''),
-                    'image': item.image_filename
-                })
+                clean_desc, allergens = clean_description_and_extract_allergens(
+                    item.description
+                )
+                menu_data[item.category].append(
+                    {
+                        "name": item.name,
+                        "price": item.price,
+                        "description": clean_desc,
+                        "allergens": allergens or getattr(item, "allergens", ""),
+                        "image": item.image_filename,
+                    }
+                )
     else:
         # Fallback to static data - this will be replaced by database items
         menu_data = {
-        'hovedretter': [
-            {'name': '01. Kylling med cashewnøtter og ris', 'price': '195', 'description': 'Paprika, løk og hjemmelaget saus', 'allergens': '1,2,3,4,5,6,8', 'image': '01-kylling-cashew.jpg'},
-            {'name': '02. Rød karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, rød chilipasta og kokosmelk', 'allergens': '7', 'image': '02-rod-karri.jpg'},
-            {'name': '03. Grønn karri med kylling, svin eller biff og ris', 'price': '195', 'description': 'Bambus, paprika, basilikum, grønn chilipasta og kokosmelk', 'allergens': '7', 'image': '03-gronn-karri.jpg'},
-            {'name': '04. Paneng kai med kylling, svin, scampi eller biff og ris', 'price': '195', 'description': 'Paprika, basilikum, sitronblad, rød chilipasta og kokosmelk', 'allergens': '7', 'image': '04-paneng-kai.jpg'},
-            {'name': '05. Sweet chili', 'price': '195', 'description': 'Paprika, løk, gulrot, ananas og hjemmelaget saus', 'allergens': '1,4,5', 'image': '05-sweet-chili.jpg'},
-            {'name': '06. Stekt ris', 'price': '195', 'description': 'Brokkoli, gulrot, løk, egg, østersaus, gulrot og soyasaus', 'allergens': '1,2,4,5,6', 'image': '06-stekt-ris.jpg'},
-            {'name': '07. Rød karri m/ And og Ris', 'price': '205', 'description': 'Ananas, paprika, basilikum, tomat og kokosmelk', 'allergens': '7', 'image': '07-rod-karri-and.jpg'},
-            {'name': '08. Kyllingsuppe m/ Ris', 'price': '195', 'description': 'Champignon, tomat, løk, sitronblad, sitrongress, lime og kokosmelk', 'allergens': '', 'image': '08-kyllingsuppe.jpg'},
-            {'name': '09. Pad Krapao', 'price': '195', 'description': 'Bambus, holy basilikum, chili, hvitløk, østersaus og soyasaus', 'allergens': '1,4,5', 'image': '09-pad-krapao.jpg'},
-            {'name': '10. Biff m/ Østersaus', 'price': '215', 'description': 'Brokkoli, gulrot, løk, hjemmelaget saus', 'allergens': '1,4,5', 'image': '10-biff-ostersaus.jpg'},
-            {'name': '11. Wok', 'price': '195', 'description': 'Paprika, løk, brokkoli, gulrot, hvitløk, soyasaus, østersaus', 'allergens': '1,2,4,5', 'image': '11-wok.jpg'},
-            {'name': '12. Pad Thai', 'price': '195', 'description': 'Risnudler, egg, grønnsaker og hjemmelaget saus', 'allergens': '1,4,5,6', 'image': '12-pad-thai.jpg'},
-            {'name': '13. Stekte Eggnudler m/ Kylling', 'price': '195', 'description': 'Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus', 'allergens': '1,4,5,6', 'image': '13-stekte-eggnudler.jpg'},
-            {'name': '14. Vårruller m/ Salat & Ris', 'price': '195', 'description': 'Glassnudler, kål, gulrot, løk, kyllingkjøttdeig, soyasaus og østersaus', 'allergens': '1,4,5,8', 'image': '14-varruller.jpg'},
-            {'name': '15. Kyllingklubber', 'price': '195', 'description': 'Med hjemmelaget marinade og ris', 'allergens': '1,4,5,6', 'image': '15-kyllingklubber.jpg'},
-            {'name': '16. Innbakt Scampi', 'price': '195', 'description': 'Med salat og ris', 'allergens': '1,2,6', 'image': '16-innbakt-scampi.jpg'},
-            {'name': '17. Mixed Tallerken', 'price': '195', 'description': '2 vårruller, 1 innbakt scampi og 1 innbakt kylling med salat og ris', 'allergens': '1,2,4,5,6,8', 'image': '17-mixed-tallerken.jpg'}
-        ],
-        'ekstra': [
-            {'name': '2 stk Kylling spyd med satay saus', 'price': '60', 'description': '', 'image': None},
-            {'name': '2 stk vårruller med dip', 'price': '60', 'description': '', 'image': None},
-            {'name': '2 stk innbakt scampi', 'price': '60', 'description': '', 'image': None},
-            {'name': '2 stk innbakt kyllingfilet', 'price': '60', 'description': '', 'image': None}
-        ],
-        'dessert': [
-            {'name': 'Fritert is (1 kule)', 'price': '75', 'description': '', 'image': None},
-            {'name': 'Fritert is (2 kuler)', 'price': '135', 'description': '', 'image': None},
-            {'name': 'Mango og sticky rice', 'price': '149', 'description': '', 'image': None},
-            {'name': 'Kule is (1 kule)', 'price': '40', 'description': '', 'image': None},
-            {'name': 'Kule is (2 kuler)', 'price': '80', 'description': '', 'image': None},
-            {'name': 'Boble vaffel', 'price': '129', 'description': '', 'image': None},
-            {'name': 'Bingsu is', 'price': '99', 'description': '', 'image': None}
-        ],
-        'drikker': [
-            {'name': 'Mineralvann', 'price': '40', 'description': '', 'image': None},
-            {'name': 'Alkoholfritt øl', 'price': '69', 'description': '', 'image': None},
-            {'name': 'Kaffe', 'price': '40', 'description': '', 'image': None},
-            {'name': 'Te', 'price': '40', 'description': '', 'image': None},
-            {'name': 'Is kaffe', 'price': '85', 'description': '', 'image': None},
-            {'name': 'Thai te', 'price': '89', 'description': '', 'image': None}
-        ],
-        'alkohol': []  # Now loaded from database,
+            "hovedretter": [
+                {
+                    "name": "01. Kylling med cashewnøtter og ris",
+                    "price": "195",
+                    "description": "Paprika, løk og hjemmelaget saus",
+                    "allergens": "1,2,3,4,5,6,8",
+                    "image": "01-kylling-cashew.jpg",
+                },
+                {
+                    "name": "02. Rød karri med kylling, svin eller biff og ris",
+                    "price": "195",
+                    "description": "Bambus, paprika, basilikum, rød chilipasta og kokosmelk",
+                    "allergens": "7",
+                    "image": "02-rod-karri.jpg",
+                },
+                {
+                    "name": "03. Grønn karri med kylling, svin eller biff og ris",
+                    "price": "195",
+                    "description": "Bambus, paprika, basilikum, grønn chilipasta og kokosmelk",
+                    "allergens": "7",
+                    "image": "03-gronn-karri.jpg",
+                },
+                {
+                    "name": "04. Paneng kai med kylling, svin, scampi eller biff og ris",
+                    "price": "195",
+                    "description": "Paprika, basilikum, sitronblad, rød chilipasta og kokosmelk",
+                    "allergens": "7",
+                    "image": "04-paneng-kai.jpg",
+                },
+                {
+                    "name": "05. Sweet chili",
+                    "price": "195",
+                    "description": "Paprika, løk, gulrot, ananas og hjemmelaget saus",
+                    "allergens": "1,4,5",
+                    "image": "05-sweet-chili.jpg",
+                },
+                {
+                    "name": "06. Stekt ris",
+                    "price": "195",
+                    "description": "Brokkoli, gulrot, løk, egg, østersaus, gulrot og soyasaus",
+                    "allergens": "1,2,4,5,6",
+                    "image": "06-stekt-ris.jpg",
+                },
+                {
+                    "name": "07. Rød karri m/ And og Ris",
+                    "price": "205",
+                    "description": "Ananas, paprika, basilikum, tomat og kokosmelk",
+                    "allergens": "7",
+                    "image": "07-rod-karri-and.jpg",
+                },
+                {
+                    "name": "08. Kyllingsuppe m/ Ris",
+                    "price": "195",
+                    "description": "Champignon, tomat, løk, sitronblad, sitrongress, lime og kokosmelk",
+                    "allergens": "",
+                    "image": "08-kyllingsuppe.jpg",
+                },
+                {
+                    "name": "09. Pad Krapao",
+                    "price": "195",
+                    "description": "Bambus, holy basilikum, chili, hvitløk, østersaus og soyasaus",
+                    "allergens": "1,4,5",
+                    "image": "09-pad-krapao.jpg",
+                },
+                {
+                    "name": "10. Biff m/ Østersaus",
+                    "price": "215",
+                    "description": "Brokkoli, gulrot, løk, hjemmelaget saus",
+                    "allergens": "1,4,5",
+                    "image": "10-biff-ostersaus.jpg",
+                },
+                {
+                    "name": "11. Wok",
+                    "price": "195",
+                    "description": "Paprika, løk, brokkoli, gulrot, hvitløk, soyasaus, østersaus",
+                    "allergens": "1,2,4,5",
+                    "image": "11-wok.jpg",
+                },
+                {
+                    "name": "12. Pad Thai",
+                    "price": "195",
+                    "description": "Risnudler, egg, grønnsaker og hjemmelaget saus",
+                    "allergens": "1,4,5,6",
+                    "image": "12-pad-thai.jpg",
+                },
+                {
+                    "name": "13. Stekte Eggnudler m/ Kylling",
+                    "price": "195",
+                    "description": "Eggnudler, grønnsaker, egg, edikk, soyasaus og østersaus",
+                    "allergens": "1,4,5,6",
+                    "image": "13-stekte-eggnudler.jpg",
+                },
+                {
+                    "name": "14. Vårruller m/ Salat & Ris",
+                    "price": "195",
+                    "description": "Glassnudler, kål, gulrot, løk, kyllingkjøttdeig, soyasaus og østersaus",
+                    "allergens": "1,4,5,8",
+                    "image": "14-varruller.jpg",
+                },
+                {
+                    "name": "15. Kyllingklubber",
+                    "price": "195",
+                    "description": "Med hjemmelaget marinade og ris",
+                    "allergens": "1,4,5,6",
+                    "image": "15-kyllingklubber.jpg",
+                },
+                {
+                    "name": "16. Innbakt Scampi",
+                    "price": "195",
+                    "description": "Med salat og ris",
+                    "allergens": "1,2,6",
+                    "image": "16-innbakt-scampi.jpg",
+                },
+                {
+                    "name": "17. Mixed Tallerken",
+                    "price": "195",
+                    "description": "2 vårruller, 1 innbakt scampi og 1 innbakt kylling med salat og ris",
+                    "allergens": "1,2,4,5,6,8",
+                    "image": "17-mixed-tallerken.jpg",
+                },
+            ],
+            "ekstra": [
+                {
+                    "name": "2 stk Kylling spyd med satay saus",
+                    "price": "60",
+                    "description": "",
+                    "image": None,
+                },
+                {
+                    "name": "2 stk vårruller med dip",
+                    "price": "60",
+                    "description": "",
+                    "image": None,
+                },
+                {
+                    "name": "2 stk innbakt scampi",
+                    "price": "60",
+                    "description": "",
+                    "image": None,
+                },
+                {
+                    "name": "2 stk innbakt kyllingfilet",
+                    "price": "60",
+                    "description": "",
+                    "image": None,
+                },
+            ],
+            "dessert": [
+                {
+                    "name": "Fritert is (1 kule)",
+                    "price": "75",
+                    "description": "",
+                    "image": None,
+                },
+                {
+                    "name": "Fritert is (2 kuler)",
+                    "price": "135",
+                    "description": "",
+                    "image": None,
+                },
+                {
+                    "name": "Mango og sticky rice",
+                    "price": "149",
+                    "description": "",
+                    "image": None,
+                },
+                {
+                    "name": "Kule is (1 kule)",
+                    "price": "40",
+                    "description": "",
+                    "image": None,
+                },
+                {
+                    "name": "Kule is (2 kuler)",
+                    "price": "80",
+                    "description": "",
+                    "image": None,
+                },
+                {
+                    "name": "Boble vaffel",
+                    "price": "129",
+                    "description": "",
+                    "image": None,
+                },
+                {"name": "Bingsu is", "price": "99", "description": "", "image": None},
+            ],
+            "drikker": [
+                {
+                    "name": "Mineralvann",
+                    "price": "40",
+                    "description": "",
+                    "image": None,
+                },
+                {
+                    "name": "Alkoholfritt øl",
+                    "price": "69",
+                    "description": "",
+                    "image": None,
+                },
+                {"name": "Kaffe", "price": "40", "description": "", "image": None},
+                {"name": "Te", "price": "40", "description": "", "image": None},
+                {"name": "Is kaffe", "price": "85", "description": "", "image": None},
+                {"name": "Thai te", "price": "89", "description": "", "image": None},
+            ],
+            "alkohol": [],  # Now loaded from database,
+        }
 
-    }
-    
-    return render_template('menu.html', menu=menu_data)
+    return render_template("menu.html", menu=menu_data)
 
-@app.route('/catering', methods=['GET', 'POST'])
+
+@app.route("/catering", methods=["GET", "POST"])
 def catering():
     """Catering page with detailed catering packages"""
     # Get all active catering packages from database
-    packages = CateringPackage.query.filter_by(is_active=True).order_by(CateringPackage.sort_order).all()
-    
+    packages = (
+        CateringPackage.query.filter_by(is_active=True)
+        .order_by(CateringPackage.sort_order)
+        .all()
+    )
+
     # Get restaurant info for contact details
-    phone = RestaurantInfo.query.filter_by(key='phone').first()
-    email = RestaurantInfo.query.filter_by(key='email').first()
-    
+    phone = RestaurantInfo.query.filter_by(key="phone").first()
+    email = RestaurantInfo.query.filter_by(key="email").first()
+
     contact_info = {
-        'phone': phone.value if phone else '+47 61 17 77 71',
-        'email': email.value if email else 'post@nawaratthaimat.no'
+        "phone": phone.value if phone else "+47 61 17 77 71",
+        "email": email.value if email else "post@nawaratthaimat.no",
     }
-    
+
     # Handle form submission if needed
     form_submitted = False
-    if request.method == 'POST':
+    if request.method == "POST":
         # Basic form handling - you can expand this
-        flash('Takk for din henvendelse! Vi kontakter deg snart.', 'success')
+        flash("Takk for din henvendelse! Vi kontakter deg snart.", "success")
         form_submitted = True
-    
-    return render_template('catering.html', 
-                         packages=packages, 
-                         contact_info=contact_info,
-                         form_submitted=form_submitted)
 
-@app.route('/kontakt')
+    return render_template(
+        "catering.html",
+        packages=packages,
+        contact_info=contact_info,
+        form_submitted=form_submitted,
+    )
+
+
+@app.route("/kontakt")
 def contact():
     """Contact page with business information and mailto links"""
-    return render_template('contact.html')
+    return render_template("contact.html")
+
 
 # Contact form functions removed since we now use mailto links
 
+
 @app.errorhandler(404)
 def not_found_error(error):
-    return render_template('404.html'), 404
+    return render_template("404.html"), 404
+
 
 @app.errorhandler(500)
 def internal_error(error):
-    return render_template('500.html'), 500
+    return render_template("500.html"), 500
