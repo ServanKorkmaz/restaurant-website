@@ -17,7 +17,7 @@ Potetsalat
 Kyllingklubber i hjemmelaget marinade
 Kylling med cashew nøtter
 Vårruller''',
-            'min_persons': 20,
+            'min_persons': 10,
             'allergens': '1,3,5,7,8',
             'best_for': 'Store selskap og bedriftsarrangementer',
             'sort_order': 1
@@ -33,7 +33,7 @@ Hjemmelaget kyllingspyd med satay saus (peanøttsaus)
 Innbakt kyllingfilet
 Hjemmelaget dressing
 Salat''',
-            'min_persons': 15,
+            'min_persons': 10,
             'allergens': '1,2,3,5',
             'best_for': 'Cocktailparty og minglearrangementer',
             'sort_order': 2
@@ -71,7 +71,7 @@ Flatbrød og smør''',
         },
         {
             'name': 'Menyforslag 5 - Thai Mat',
-            'price_per_person': '199 kr/pers',
+            'price_per_person': '249 kr/pers',
             'description': 'Enkel thai-meny for mindre budsjetter',
             'items': '''Vårruller 2 stk pr pers
 Kylling med cashew nøtter
@@ -91,7 +91,7 @@ Rød karri med kylling
 Pad thai
 Kylling med cashew nøtter
 Jasminris''',
-            'min_persons': 20,
+            'min_persons': 10,
             'allergens': '1,2,3,5,8',
             'best_for': 'Bryllup og store feiringer',
             'sort_order': 6
