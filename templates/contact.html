@@ -4,9 +4,12 @@
 
 {% block content %}
 <style>
-/* Jevn bakgrunnsfarge som andre sider */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap');
+
+/* Elegant contact page styling */
 body {
     background: #1a1f2e !important;
+    font-family: 'Inter', sans-serif;
 }
 
 .navbar,
@@ -21,281 +24,479 @@ nav,
     display: none !important;
 }
 
-.bg-dark {
-    background: #1a1f2e !important;
+.contact-container {
+    background: #1a1f2e;
+    min-height: 100vh;
+    color: #e8e3d3;
+    padding-top: 60px;
+}
+
+.contact-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    color: #8a8577;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+
+.contact-main {
+    display: grid;
+    gap: 40px;
+}
+
+.contact-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid rgba(201, 176, 55, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #c9b037, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.contact-card:hover::before {
+    opacity: 1;
+}
+
+.contact-icon {
+    font-size: 48px;
+    color: #c9b037;
+    margin-bottom: 20px;
+}
+
+.contact-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.contact-card p {
+    color: #8a8577;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+
+.contact-btn {
+    background: linear-gradient(135deg, #c9b037, #a08830);
+    color: #1a1f2e;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(201, 176, 55, 0.3);
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: none;
+    width: 100%;
+}
+
+.contact-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201, 176, 55, 0.4);
+    color: #1a1f2e;
+    text-decoration: none;
+}
+
+.contact-info {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(201, 176, 55, 0.1);
+}
+
+.info-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.info-icon {
+    font-size: 20px;
+    color: #c9b037;
+    margin-right: 15px;
+    margin-top: 2px;
+}
+
+.info-content h4 {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.info-content p, .info-content a {
+    color: #8a8577;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.info-content a:hover {
+    color: #c9b037;
+    text-decoration: none;
+}
+
+.hours-grid {
+    display: grid;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+    font-size: 13px;
+}
+
+.social-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(201, 176, 55, 0.2);
+    text-align: center;
+}
+
+.social-title {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    color: #8a8577;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #c9b037;
+    color: #1a1f2e;
+    transform: translateY(-2px);
+}
+
+.location-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.feature-icon {
+    font-size: 36px;
+    color: #c9b037;
+    margin-bottom: 20px;
+}
+
+.feature-title {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.feature-desc {
+    color: #8a8577;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .contact-actions {
+        grid-template-columns: 1fr;
+    }
+    
+    .location-features {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .section-title {
+        font-size: 32px;
+    }
 }
 </style>
 
-<!-- Contact Header -->
-<section class="py-5 bg-dark">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col">
-                <h1 class="display-4 fw-bold mb-3">Kontakt oss</h1>
-                <p class="lead text-muted">
-                    Vi gleder oss til å høre fra deg! Ta kontakt for reservasjoner, catering eller andre henvendelser
-                </p>
-            </div>
+<div class="contact-container">
+    <div class="contact-content">
+        <!-- Header Section -->
+        <div class="section-header">
+            <h1 class="section-title">Kontakt oss</h1>
+            <p class="section-subtitle">
+                Vi gleder oss til å høre fra deg! Ta kontakt for reservasjoner, spørsmål om vår meny, 
+                catering-tjenester eller andre henvendelser. Vi svarer gjerne på alle dine spørsmål.
+            </p>
         </div>
-    </div>
-</section>
 
-<!-- Contact Content -->
-<section class="py-5">
-    <div class="container">
-        <div class="row g-5">
-            <!-- Contact Options -->
-            <div class="col-lg-8">
-                <div class="contact-options">
-                    <h2 class="h3 mb-4">Ta kontakt med oss</h2>
-                    
-                    <div class="row g-4">
-                        <!-- Email Contact -->
-                        <div class="col-md-6">
-                            <div class="contact-card p-4 rounded bg-dark h-100">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
-                                    <h4>Send e-post</h4>
-                                    <p class="text-muted">Åpner ditt e-postprogram</p>
-                                </div>
-                                <a href="mailto:post@nawaratthaimat.no?subject=Henvendelse%20fra%20nettsiden&body=Hei%20Nawarat%20Thai%20Mat%20og%20Catering%2C%0A%0AJeg%20har%20en%20henvendelse%20angående%3A%0A%0A%5BSkriv%20din%20melding%20her%5D%0A%0AMed%20vennlig%20hilsen%2C%0A%5BDitt%20navn%5D" 
-                                   class="btn btn-primary btn-lg w-100">
-                                    <i class="fas fa-paper-plane me-2"></i>
-                                    Åpne e-post
-                                </a>
-                            </div>
+        <!-- Main Contact Grid -->
+        <div class="contact-grid">
+            <!-- Contact Actions -->
+            <div class="contact-main">
+                <div class="contact-actions">
+                    <!-- Email Contact -->
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
                         </div>
-                        
-                        <!-- Phone Contact -->
-                        <div class="col-md-6">
-                            <div class="contact-card p-4 rounded bg-dark h-100">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-phone fa-3x text-primary mb-3"></i>
-                                    <h4>Ring oss</h4>
-                                    <p class="text-muted">Snakk direkte med oss</p>
-                                </div>
-                                <a href="tel:+4761177771" class="btn btn-success btn-lg w-100">
-                                    <i class="fas fa-phone me-2"></i>
-                                    +47 61 17 77 71
-                                </a>
-                            </div>
-                        </div>
+                        <h3>Send e-post</h3>
+                        <p>Åpner ditt e-postprogram med forhåndsutfylt melding</p>
+                        <a href="mailto:post@nawaratthaimat.no?subject=Henvendelse%20fra%20nettsiden&body=Hei%20Nawarat%20Thai%20Mat%20og%20Catering%2C%0A%0AJeg%20har%20en%20henvendelse%20angående%3A%0A%0A%5BSkriv%20din%20melding%20her%5D%0A%0AMed%20vennlig%20hilsen%2C%0A%5BDitt%20navn%5D" 
+                           class="contact-btn">
+                            <i class="fas fa-paper-plane me-2"></i>
+                            Åpne e-post
+                        </a>
                     </div>
                     
-                    <!-- Additional Contact Info -->
-                    <div class="mt-4 p-4 rounded bg-secondary">
-                        <h5 class="mb-3">
-                            <i class="fas fa-info-circle me-2"></i>
-                            Kontaktinformasjon
-                        </h5>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p class="mb-2">
-                                    <i class="fas fa-envelope me-2 text-primary"></i>
-                                    <strong>E-post:</strong> post@nawaratthaimat.no
-                                </p>
-                                <p class="mb-2">
-                                    <i class="fas fa-phone me-2 text-primary"></i>
-                                    <strong>Telefon:</strong> +47 61 17 77 71
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="mb-2">
-                                    <i class="fas fa-map-marker-alt me-2 text-primary"></i>
-                                    <strong>Adresse:</strong> Tordenskjolds gate 1, 2821 Gjøvik
-                                </p>
-                                <p class="mb-0">
-                                    <i class="fas fa-train me-2 text-primary"></i>
-                                    <strong>Avstand:</strong> 1 min gange fra Gjøvik stasjon
-                                </p>
-                            </div>
+                    <!-- Phone Contact -->
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
                         </div>
+                        <h3>Ring oss direkte</h3>
+                        <p>Snakk direkte med oss for rask service og svar</p>
+                        <a href="tel:+4761177771" class="contact-btn">
+                            <i class="fas fa-phone me-2"></i>
+                            +47 61 17 77 71
+                        </a>
                     </div>
                 </div>
             </div>
-            
-            <!-- Contact Information -->
-            <div class="col-lg-4">
-                <div class="contact-info">
-                    <h2 class="h3 mb-4">Kontaktinformasjon</h2>
-                    
-                    <div class="contact-item mb-4 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-start">
-                            <div class="contact-icon me-3">
-                                <i class="fas fa-map-marker-alt fa-lg text-primary"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Adresse</h6>
-                                <p class="text-muted mb-0">
-                                    Tordenskjolds gate 1<br>
-                                    2821 Gjøvik<br>
-                                    <small class="text-muted">1 min gange fra Gjøvik stasjon</small>
-                                </p>
-                            </div>
-                        </div>
+
+            <!-- Contact Information Sidebar -->
+            <div class="contact-info">
+                <h2 class="info-header">Kontaktinformasjon</h2>
+                
+                <!-- Address -->
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    
-                    <div class="contact-item mb-4 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-start">
-                            <div class="contact-icon me-3">
-                                <i class="fas fa-phone fa-lg text-success"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Telefon</h6>
-                                <p class="text-muted mb-0">
-                                    <a href="tel:+4761177771" class="text-decoration-none text-muted">
-                                        +47 61 17 77 71
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item mb-4 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-start">
-                            <div class="contact-icon me-3">
-                                <i class="fas fa-envelope fa-lg text-info"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">E-post</h6>
-                                <p class="text-muted mb-0">
-                                    <a href="mailto:post@nawaratthaimat.no" class="text-decoration-none text-muted">
-                                        post@nawaratthaimat.no
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item mb-4 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-start">
-                            <div class="contact-icon me-3">
-                                <i class="fas fa-clock fa-lg text-warning"></i>
-                            </div>
-                            <div>
-                                <h6 class="mb-1">Åpningstider</h6>
-                                <div class="text-muted small">
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Tirsdag:</span>
-                                        <span>11:00 - 18:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Onsdag:</span>
-                                        <span>11:00 - 18:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Torsdag:</span>
-                                        <span>11:00 - 20:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Fredag:</span>
-                                        <span>11:00 - 20:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Lørdag:</span>
-                                        <span>10:00 - 20:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-1">
-                                        <span>Søndag:</span>
-                                        <span>09:00 - 20:00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <span>Mandag:</span>
-                                        <span>Stengt</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="info-content">
+                        <h4>Adresse</h4>
+                        <p>
+                            Tordenskjolds gate 1<br>
+                            2821 Gjøvik<br>
+                            <small>Kun 1 min gange fra Gjøvik stasjon</small>
+                        </p>
                     </div>
                 </div>
                 
-                <!-- Location Info -->
-                <div class="location-section mt-4">
-                    <h6 class="mb-3">Beliggenhet</h6>
-                    <div class="text-muted small">
-                        <i class="fas fa-map-marker-alt me-2"></i>
-                        Kun 1 minutts gange fra Gjøvik stasjon
+                <!-- Phone -->
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Telefon</h4>
+                        <p>
+                            <a href="tel:+4761177771">+47 61 17 77 71</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Email -->
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>E-post</h4>
+                        <p>
+                            <a href="mailto:post@nawaratthaimat.no">post@nawaratthaimat.no</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Opening Hours -->
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Åpningstider</h4>
+                        <div class="hours-grid">
+                            <div class="hours-row">
+                                <span>Tirsdag:</span>
+                                <span>11:00 - 18:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Onsdag:</span>
+                                <span>11:00 - 18:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Torsdag:</span>
+                                <span>11:00 - 20:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Fredag:</span>
+                                <span>11:00 - 20:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Lørdag:</span>
+                                <span>10:00 - 20:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Søndag:</span>
+                                <span>09:00 - 20:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Mandag:</span>
+                                <span>Stengt</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Social Media -->
-                <div class="social-section mt-4">
-                    <h6 class="mb-3">Følg oss</h6>
-                    <div class="social-links d-flex gap-2">
-                        <a href="https://www.facebook.com/nawarat.thai.mat.og.catering" class="text-muted" target="_blank" title="Følg oss på Facebook">
+                <div class="social-section">
+                    <h4 class="social-title">Følg oss</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/nawarat.thai.mat.og.catering" target="_blank" title="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://www.instagram.com/nawaratthaimat/" class="text-muted" target="_blank" title="Følg oss på Instagram">
+                        <a href="https://www.instagram.com/nawaratthaimat/" target="_blank" title="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="text-muted" title="Se oss på TripAdvisor">
+                        <a href="#" title="TripAdvisor">
                             <i class="fab fa-tripadvisor"></i>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- Location Section -->
-<section class="py-5 bg-dark">
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <h2 class="h3 mb-4">Finn frem til oss</h2>
-                <p class="text-muted mb-4">
-                    Vi ligger sentralt i Gjøvik sentrum, lett tilgjengelig med bil, tog eller til fots
+        <!-- Location Features -->
+        <div class="location-features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-parking"></i>
+                </div>
+                <h4 class="feature-title">Parkering</h4>
+                <p class="feature-desc">
+                    Gratis gateparkering og parkeringshus i nærheten
                 </p>
-                
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="location-feature">
-                            <i class="fas fa-parking fa-2x text-success mb-3"></i>
-                            <h6>Parkering</h6>
-                            <p class="text-muted small">
-                                Gratis gateparkering og parkeringshus i nærheten
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="location-feature">
-                            <i class="fas fa-train fa-2x text-info mb-3"></i>
-                            <h6>Offentlig transport</h6>
-                            <p class="text-muted small">
-                                1 min gange fra Gjøvik stasjon
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="location-feature">
-                            <i class="fas fa-wheelchair fa-2x text-warning mb-3"></i>
-                            <h6>Tilgjengelighet</h6>
-                            <p class="text-muted small">
-                                Handicapvennlig inngang og fasiliteter
-                            </p>
-                        </div>
-                    </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-train"></i>
                 </div>
+                <h4 class="feature-title">Offentlig transport</h4>
+                <p class="feature-desc">
+                    Kun 1 minutts gange fra Gjøvik stasjon
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-wheelchair"></i>
+                </div>
+                <h4 class="feature-title">Tilgjengelighet</h4>
+                <p class="feature-desc">
+                    Tilgjengelig for rullestol og barnevogn
+                </p>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- Emergency Contact -->
-<section class="py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <div class="alert alert-info border-0" role="alert">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <strong>Catering bestillinger:</strong> Vi anbefaler at du kontakter oss minst 48 timer i forveien 
-                    for cateringbestillinger. For akutte bestillinger, ring oss direkte.
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 {% endblock %}
