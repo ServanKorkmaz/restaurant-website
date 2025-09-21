@@ -43,6 +43,7 @@ def menu():
         menu_data = {
             'hovedretter': [],
             'ekstra': [],
+            'dessert': [],
             'drikker': []
         }
         
@@ -83,6 +84,15 @@ def menu():
             {'name': '2 stk vårruller med dip', 'price': '60', 'description': '', 'image': None},
             {'name': '2 stk innbakt scampi', 'price': '60', 'description': '', 'image': None},
             {'name': '2 stk innbakt kyllingfilet', 'price': '60', 'description': '', 'image': None}
+        ],
+        'dessert': [
+            {'name': 'Fritert is (1 kule)', 'price': '75', 'description': '', 'image': None},
+            {'name': 'Fritert is (2 kuler)', 'price': '135', 'description': '', 'image': None},
+            {'name': 'Mango og sticky rice', 'price': '149', 'description': '', 'image': None},
+            {'name': 'Kule is (1 kule)', 'price': '40', 'description': '', 'image': None},
+            {'name': 'Kule is (2 kuler)', 'price': '80', 'description': '', 'image': None},
+            {'name': 'Boble vaffel', 'price': '129', 'description': '', 'image': None},
+            {'name': 'Bingsu is', 'price': '99', 'description': '', 'image': None}
         ],
         'drikker': [
             {'name': 'Vann', 'price': '40', 'description': '', 'image': None},
