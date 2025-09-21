@@ -2,6 +2,7 @@ from flask import flash, render_template, request
 
 from app import app
 from models import CateringPackage, MenuItem, RestaurantInfo
+from utils.text import clean_description_and_extract_allergens
 
 
 @app.route("/")
@@ -23,29 +24,6 @@ def index():
 @app.route("/meny")
 def menu():
     """Menu page displaying food and beverage offerings"""
-
-    # Helper function to separate allergen info from description
-    def clean_description_and_extract_allergens(desc):
-        """Separate allergen info from description"""
-        if not desc:
-            return "", ""
-
-        # Look for allergen patterns like "Allergener: 1,2,3"
-        import re
-
-        allergen_match = re.search(
-            r"[.\s]*Allergener?:\s*([0-9,\s]+)", desc, re.IGNORECASE
-        )
-        if allergen_match:
-            allergens = allergen_match.group(1).strip()
-            # Remove allergen info from description
-            clean_desc = (
-                re.sub(r"[.\s]*Allergener?:\s*[0-9,\s]+", "", desc, flags=re.IGNORECASE)
-                .strip()
-                .rstrip(".")
-            )
-            return clean_desc, allergens
-        return desc, ""
 
     # Get menu items from database, fallback to static data if empty
     db_items = (
