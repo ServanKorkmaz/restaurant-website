@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meny</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&family=Inter:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1f2e;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(201, 176, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(201, 176, 55, 0.02) 0%, transparent 50%);
+            color: #e8e3d3;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Elegant header */
+        .menu-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .menu-header::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c9b037, transparent);
+            margin: 20px auto;
+        }
+
+        h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: #c9b037;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        /* Section styling */
+        .menu-section {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 32px;
+            color: #e8e3d3;
+            margin-bottom: 8px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, #c9b037, transparent 30%);
+            margin-bottom: 25px;
+            opacity: 0.5;
+        }
+
+        .section-subtitle {
+            font-size: 12px;
+            color: #968c6a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        /* Two-column layout for better readability */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px 40px;
+        }
+
+        .menu-grid.three-columns {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Menu items with elegant styling */
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 10px 0;
+            border-bottom: 1px dotted rgba(201, 176, 55, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            padding-left: 10px;
+            border-bottom-color: rgba(201, 176, 55, 0.3);
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 15px;
+            color: #e8e3d3;
+            font-weight: 400;
+        }
+
+        .item-details {
+            font-size: 12px;
+            color: #7a7360;
+            font-style: italic;
+        }
+
+        .price {
+            color: #c9b037;
+            font-weight: 500;
+            font-size: 14px;
+            margin-left: 20px;
+            white-space: nowrap;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Special section for drinks */
+        .drinks-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .drink-category {
+            padding: 20px;
+            background: rgba(201, 176, 55, 0.02);
+            border: 1px solid rgba(201, 176, 55, 0.1);
+            border-radius: 8px;
+        }
+
+        .category-label {
+            font-family: 'Crimson Text', serif;
+            font-size: 20px;
+            color: #c9b037;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        /* Wine note */
+        .wine-note {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 15px;
+            background: rgba(201, 176, 55, 0.03);
+            border-radius: 6px;
+            font-size: 13px;
+            color: #968c6a;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        /* Decorative elements */
+        .ornament {
+            text-align: center;
+            color: #c9b037;
+            font-size: 20px;
+            margin: 40px 0;
+            opacity: 0.3;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .menu-grid,
+            .menu-grid.three-columns,
+            .drinks-wrapper {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            body {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .menu-grid.three-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <div class="menu-header">
+            <h1>MENY</h1>
+        </div>
+
+        <!-- Ekstra Section -->
+        <div class="menu-section">
+            <h2 class="section-title">Ekstra</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Tillegg til hovedrettene</p>
+            
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Kylling spyd med satay saus</span>
+                        <span class="item-details"> · 2 stk</span>
+                    </div>
+                    <span class="price">60 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Vårruller med dip</span>
+                        <span class="item-details"> · 2 stk</span>
+                    </div>
+                    <span class="price">60 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Innbakt scampi</span>
+                        <span class="item-details"> · 2 stk</span>
+                    </div>
+                    <span class="price">60 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Innbakt kyllingfilet</span>
+                        <span class="item-details"> · 2 stk</span>
+                    </div>
+                    <span class="price">60 kr</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ornament">❦</div>
+
+        <!-- Dessert Section -->
+        <div class="menu-section">
+            <h2 class="section-title">Dessert</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Søte avslutninger</p>
+            
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Fritert is</span>
+                        <span class="item-details"> · 1 kule</span>
+                    </div>
+                    <span class="price">75 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Fritert is</span>
+                        <span class="item-details"> · 2 kuler</span>
+                    </div>
+                    <span class="price">135 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Mango og sticky rice</span>
+                    </div>
+                    <span class="price">149 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Kule is</span>
+                        <span class="item-details"> · 1 kule</span>
+                    </div>
+                    <span class="price">40 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Kule is</span>
+                        <span class="item-details"> · 2 kuler</span>
+                    </div>
+                    <span class="price">80 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Boble vaffel</span>
+                    </div>
+                    <span class="price">129 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Bingsu is</span>
+                    </div>
+                    <span class="price">159 kr</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ornament">❦</div>
+
+        <!-- Drikker Section -->
+        <div class="menu-section">
+            <h2 class="section-title">Drikker</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Brus og varme drikker</p>
+            
+            <div class="menu-grid three-columns">
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Mineralvann</span>
+                    </div>
+                    <span class="price">40 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Alkoholfritt øl</span>
+                    </div>
+                    <span class="price">69 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Kaffe</span>
+                    </div>
+                    <span class="price">40 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Te</span>
+                    </div>
+                    <span class="price">40 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Is kaffe</span>
+                    </div>
+                    <span class="price">65 kr</span>
+                </div>
+                <div class="menu-item">
+                    <div class="item-info">
+                        <span class="item-name">Thai te</span>
+                    </div>
+                    <span class="price">89 kr</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="ornament">❦</div>
+
+        <!-- Alkoholholdig drikke Section -->
+        <div class="menu-section">
+            <h2 class="section-title">Alkoholholdig drikke</h2>
+            <div class="section-divider"></div>
+            <p class="section-subtitle">Øl, vin og cocktails</p>
+            
+            <div class="drinks-wrapper">
+                <!-- Øl -->
+                <div class="drink-category">
+                    <h3 class="category-label">Øl</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Singha</span>
+                        <span class="price">135 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Chang</span>
+                        <span class="price">135 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Ringnes tapp</span>
+                        <span class="price">135 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Poretti</span>
+                        <span class="price">135 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Blanc 1664</span>
+                        <span class="price">125 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Corona</span>
+                        <span class="price">125 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Carlsberg</span>
+                        <span class="price">125 kr</span>
+                    </div>
+                </div>
+
+                <!-- Vin & Brennevin -->
+                <div class="drink-category">
+                    <h3 class="category-label">Vin & Brennevin</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Hvitvin</span>
+                        <span class="price">135 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Rødvin</span>
+                        <span class="price">135 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Breezer</span>
+                        <span class="price">110 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Smirnoff Ice</span>
+                        <span class="price">110 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Ringnes</span>
+                        <span class="price">125 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Whisky</span>
+                        <span class="price">109 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Gammel Opland</span>
+                        <span class="price">119 kr</span>
+                    </div>
+                </div>
+
+                <!-- Cocktails & Kaffe -->
+                <div class="drink-category">
+                    <h3 class="category-label">Cocktails & Kaffe</h3>
+                    <div class="menu-item">
+                        <span class="item-name">Gin and tonic</span>
+                        <span class="price">145 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Vodka og battery</span>
+                        <span class="price">145 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Irish coffee</span>
+                        <span class="price">129 kr</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="item-name">Baileys og kaffe</span>
+                        <span class="price">129 kr</span>
+                    </div>
+                </div>
+
+                <div class="wine-note">
+                    Hvitvin & Rødvin også tilgjengelig på flaske · 499 kr
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
