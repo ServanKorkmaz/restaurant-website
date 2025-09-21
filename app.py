@@ -17,7 +17,7 @@ class Base(DeclarativeBase):
 
 # Initialize Flask app
 app = Flask(__name__)
-app.secret_key = os.environ.get("SESSION_SECRET", "dev-secret-key-change-in-production")
+app.secret_key = os.environ.get("SESSION_SECRET")
 app.wsgi_app = ProxyFix(
     app.wsgi_app, x_proto=1, x_host=1
 )  # needed for url_for to generate with https
@@ -50,13 +50,9 @@ with app.app_context():
     db.create_all()
     logging.info("Database tables created")
 
-# Import routes after app creation to avoid circular imports
-try:
-    from admin_routes import admin_bp
+# Import routes to register them
+import routes  # noqa: F401
 
-    app.register_blueprint(admin_bp)
-except ImportError:
-    logging.warning("Admin routes not available")
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+# Import and register admin blueprint
+from admin_routes import admin_bp
+app.register_blueprint(admin_bp)
