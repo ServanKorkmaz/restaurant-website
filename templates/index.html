@@ -4,9 +4,12 @@
 
 {% block content %}
 <style>
-/* Jevn bakgrunnsfarge som meny og catering */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap');
+
+/* Elegant homepage styling */
 body {
     background: #1a1f2e !important;
+    font-family: 'Inter', sans-serif;
 }
 
 .navbar,
@@ -21,271 +24,684 @@ nav,
     display: none !important;
 }
 
-.hero-section {
-    background: #1a1f2e !important;
-    background-image: none !important;
+.home-container {
+    background: #1a1f2e;
+    min-height: 100vh;
+    color: #e8e3d3;
 }
 
-.bg-dark {
+.home-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero-section {
     background: #1a1f2e !important;
+    padding: 80px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.hero-content {
+    padding-right: 20px;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.hero-title .highlight {
+    color: #c9b037;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #8a8577;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.hero-btn {
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero-btn-primary {
+    background: linear-gradient(135deg, #c9b037, #a08830);
+    color: #1a1f2e;
+    box-shadow: 0 4px 15px rgba(201, 176, 55, 0.3);
+}
+
+.hero-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201, 176, 55, 0.4);
+    color: #1a1f2e;
+    text-decoration: none;
+}
+
+.hero-btn-secondary {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #e8e3d3;
+}
+
+.hero-btn-secondary:hover {
+    border-color: #c9b037;
+    color: #c9b037;
+    text-decoration: none;
+}
+
+.hero-image {
+    text-align: center;
+    position: relative;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    max-height: 400px;
+    object-fit: cover;
+}
+
+/* Section Styling */
+.section {
+    margin: 80px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    color: #8a8577;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid rgba(201, 176, 55, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #c9b037, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-icon {
+    font-size: 48px;
+    margin-bottom: 25px;
+}
+
+.feature-icon.green { color: #4ade80; }
+.feature-icon.yellow { color: #c9b037; }
+.feature-icon.blue { color: #60a5fa; }
+
+.feature-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.feature-desc {
+    color: #8a8577;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Featured Dishes */
+.dishes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.dish-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(201, 176, 55, 0.1);
+    transition: all 0.3s ease;
+}
+
+.dish-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.dish-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.dish-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.dish-card:hover .dish-image img {
+    transform: scale(1.05);
+}
+
+.dish-content {
+    padding: 30px;
+    text-align: center;
+}
+
+.dish-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.dish-price {
+    background: linear-gradient(135deg, #c9b037, #a08830);
+    color: #1a1f2e;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.dish-btn {
+    background: transparent;
+    border: 2px solid rgba(201, 176, 55, 0.3);
+    color: #c9b037;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.dish-btn:hover {
+    background: rgba(201, 176, 55, 0.1);
+    border-color: #c9b037;
+    color: #c9b037;
+    text-decoration: none;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 60px;
+    align-items: center;
+}
+
+.services-list {
+    display: grid;
+    gap: 25px;
+}
+
+.service-item {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(201, 176, 55, 0.1);
+    transition: all 0.3s ease;
+}
+
+.service-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(10px);
+}
+
+.service-icon {
+    font-size: 36px;
+    margin-right: 20px;
+    min-width: 60px;
+}
+
+.service-icon.primary { color: #c9b037; }
+.service-icon.green { color: #4ade80; }
+.service-icon.orange { color: #fb923c; }
+
+.service-content h4 {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.service-content p {
+    color: #8a8577;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.services-visual {
+    text-align: center;
+    position: relative;
+}
+
+.services-icon {
+    font-size: 120px;
+    color: rgba(201, 176, 55, 0.2);
+}
+
+/* Location Section */
+.location-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.location-item {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.location-item:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.location-icon {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.location-icon.primary { color: #c9b037; }
+.location-icon.green { color: #4ade80; }
+.location-icon.orange { color: #fb923c; }
+.location-icon.blue { color: #60a5fa; }
+
+.location-title {
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.location-desc {
+    color: #8a8577;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    padding: 60px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    border: 1px solid rgba(201, 176, 55, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #c9b037, transparent);
+}
+
+.cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.cta-desc {
+    color: #8a8577;
+    font-size: 18px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 36px;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .features-grid,
+    .dishes-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .location-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .section-title {
+        font-size: 32px;
+    }
 }
 </style>
 
-<!-- Hero Section -->
-<section class="hero-section position-relative overflow-hidden">
-    <div class="container py-5">
-        <div class="row align-items-center min-vh-75">
-            <div class="col-lg-6">
-                <div class="hero-content">
-                    <h1 class="display-4 fw-bold mb-4 hero-title">
-                        Velkommen til
-                        <span class="text-primary">Nawarat Thai Mat og Catering</span>
-                    </h1>
-                    <p class="lead mb-4 text-muted">
-                        Opplev autentiske retter fra Thailand laget med friske ingredienser og tradisjonelle oppskrifter 
-                        i hjertet av Gjøvik. Vi serverer deilig thai-mat og tilbyr profesjonell 
-                        catering for alle anledninger.
+<div class="home-container">
+    <div class="home-content">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Velkommen til
+                    <span class="highlight">Nawarat Thai Mat og Catering</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Opplev autentiske retter fra Thailand laget med friske ingredienser og tradisjonelle oppskrifter 
+                    i hjertet av Gjøvik. Vi serverer deilig thai-mat og tilbyr profesjonell 
+                    catering for alle anledninger.
+                </p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('menu') }}" class="hero-btn hero-btn-primary">
+                        <i class="fas fa-utensils"></i>
+                        Se vår meny
+                    </a>
+                    <a href="{{ url_for('contact') }}" class="hero-btn hero-btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Kontakt oss
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="{{ url_for('static', filename='images/hero-bg.jpg') }}" 
+                     alt="Autentisk thai-mat - Kylling med Cashewnøtter">
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Hvorfor velge oss?</h2>
+                <p class="section-subtitle">
+                    Vi er stolte av å tilby de beste thai-rettene i Gjøvik med autentiske smaker og profesjonell service
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon green">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="feature-title">Autentiske ingredienser</h3>
+                    <p class="feature-desc">
+                        Vi importerer spesielle ingredienser direkte fra Thailand og kombinerer 
+                        dem med ferske lokale råvarer for autentisk smak.
                     </p>
-                    <div class="d-flex flex-column flex-sm-row gap-3">
-                        <a href="{{ url_for('menu') }}" class="btn btn-primary btn-lg">
-                            <i class="fas fa-utensils me-2"></i>Se vår meny
-                        </a>
-                        <a href="{{ url_for('contact') }}" class="btn btn-outline-secondary btn-lg">
-                            <i class="fas fa-envelope me-2"></i>Kontakt oss
-                        </a>
-                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="hero-image text-center">
-                    <img src="{{ url_for('static', filename='images/hero-bg.jpg') }}" 
-                         alt="Autentisk thai-mat - Kylling med Cashewnøtter" 
-                         class="img-fluid rounded shadow-lg" 
-                         style="max-height: 400px; object-fit: cover;">
+                
+                <div class="feature-card">
+                    <div class="feature-icon yellow">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="feature-title">Tradisjonelle oppskrifter</h3>
+                    <p class="feature-desc">
+                        Fra Rød Karri med kokosmelk til Pad Krapao med holybasilikum - 
+                        våre kokker følger autentiske thailandske oppskrifter.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon blue">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Profesjonell catering</h3>
+                    <p class="feature-desc">
+                        Fra små møter til store arrangementer - vi leverer skreddersydde 
+                        cateringløsninger som gjør ditt arrangement uforglemmelig.
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- Features Section -->
-<section class="py-5 bg-dark">
-    <div class="container">
-        <div class="row text-center mb-5">
-            <div class="col">
-                <h2 class="display-6 fw-bold mb-3">Hvorfor velge oss?</h2>
-                <p class="lead text-muted">Vi er stolte av å tilby de beste thai-rettene i Gjøvik</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="card h-100 border-0 bg-dark">
-                    <div class="card-body text-center p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="fas fa-seedling fa-3x text-success"></i>
-                        </div>
-                        <h5 class="card-title">Autentiske ingredienser</h5>
-                        <p class="card-text text-muted">
-                            Vi importerer spesielle ingredienser direkte fra Thailand og kombinerer 
-                            dem med ferske lokale råvarer for autentisk smak.
-                        </p>
-                    </div>
-                </div>
+        <!-- Featured Dishes -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Populære thailandske retter</h2>
+                <p class="section-subtitle">
+                    Smak våre mest autentiske og populære thailandske spesialiteter, laget med kjærlighet og tradisjon
+                </p>
             </div>
             
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="card h-100 border-0 bg-dark">
-                    <div class="card-body text-center p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="fas fa-award fa-3x text-warning"></i>
-                        </div>
-                        <h5 class="card-title">Tradisjonelle oppskrifter</h5>
-                        <p class="card-text text-muted">
-                            Fra Rød Karri med kokosmelk til Pad Krapao med holybasilikum - 
-                            våre kokker følger autentiske thailandske oppskrifter.
-                        </p>
+            <div class="dishes-grid">
+                {% for dish in featured_dishes %}
+                <div class="dish-card">
+                    <div class="dish-image">
+                        <img src="{{ url_for('static', filename='images/' + dish.image) }}" 
+                             alt="{{ dish.name }}">
                     </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="card h-100 border-0 bg-dark">
-                    <div class="card-body text-center p-4">
-                        <div class="feature-icon mb-3">
-                            <i class="fas fa-users fa-3x text-info"></i>
-                        </div>
-                        <h5 class="card-title">Profesjonell catering</h5>
-                        <p class="card-text text-muted">
-                            Fra små møter til store arrangementer - vi leverer skreddersydde 
-                            cateringløsninger som gjør ditt arrangement uforglemmelig.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Featured Dishes Section -->
-<section class="py-5">
-    <div class="container">
-        <div class="row text-center mb-5">
-            <div class="col">
-                <h2 class="display-6 fw-bold mb-3">Populære thailandske retter</h2>
-                <p class="lead text-muted">Smak våre mest autentiske og populære thailandske spesialiteter</p>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            {% for dish in featured_dishes %}
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="card h-100 border-0 bg-dark shadow">
-                    <img src="{{ url_for('static', filename='images/' + dish.image) }}" 
-                         class="card-img-top img-fluid" 
-                         alt="{{ dish.name }}" 
-                         style="height: 250px; object-fit: cover;">
-                    <div class="card-body text-center p-4">
-                        <h5 class="card-title mb-3">{{ dish.name }}</h5>
-                        <div class="mb-3">
-                            <span class="badge bg-warning text-dark fs-6">{{ dish.price }} NOK</span>
-                        </div>
-                        <a href="{{ url_for('menu') }}" class="btn btn-outline-primary">
-                            <i class="fas fa-eye me-2"></i>Se hele menyen
+                    <div class="dish-content">
+                        <h3 class="dish-name">{{ dish.name }}</h3>
+                        <div class="dish-price">{{ dish.price }} NOK</div>
+                        <a href="{{ url_for('menu') }}" class="dish-btn">
+                            <i class="fas fa-eye me-1"></i>
+                            Se hele menyen
                         </a>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
-</section>
 
-<!-- Services Section -->
-<section class="py-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <h2 class="display-6 fw-bold mb-4">Våre tjenester</h2>
-                <div class="service-list">
-                    <div class="service-item mb-3 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-center">
-                            <div class="service-icon me-3">
-                                <i class="fas fa-pepper-hot fa-2x text-primary"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-1">Autentiske hovedretter</h5>
-                                <p class="text-muted mb-0">Fra Kylling med Cashewnøtter til Paneng Kai - alle retter 205-245 NOK</p>
-                            </div>
+        <!-- Services Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Våre tjenester</h2>
+                <p class="section-subtitle">
+                    Fra autentiske hovedretter til profesjonell catering - vi dekker alle dine behov for thailandsk mat
+                </p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="services-list">
+                    <div class="service-item">
+                        <div class="service-icon primary">
+                            <i class="fas fa-pepper-hot"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4>Autentiske hovedretter</h4>
+                            <p>Fra Kylling med Cashewnøtter til Paneng Kai - alle retter 205-245 NOK</p>
                         </div>
                     </div>
                     
-                    <div class="service-item mb-3 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-center">
-                            <div class="service-icon me-3">
-                                <i class="fas fa-utensils fa-2x text-success"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-1">Friske vårruller og tillegg</h5>
-                                <p class="text-muted mb-0">Vårruller, innbakt scampi og ekstra ris - perfekte tillegg til måltidet</p>
-                            </div>
+                    <div class="service-item">
+                        <div class="service-icon green">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4>Friske vårruller og tillegg</h4>
+                            <p>Vårruller, innbakt scampi og ekstra ris - perfekte tillegg til måltidet</p>
                         </div>
                     </div>
                     
-                    <div class="service-item mb-3 p-3 rounded bg-dark">
-                        <div class="d-flex align-items-center">
-                            <div class="service-icon me-3">
-                                <i class="fas fa-birthday-cake fa-2x text-warning"></i>
-                            </div>
-                            <div>
-                                <h5 class="mb-1">Profesjonell catering</h5>
-                                <p class="text-muted mb-0">Fra 199 - 385kr per person for bedrifter og arrangementer</p>
-                            </div>
+                    <div class="service-item">
+                        <div class="service-icon orange">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <div class="service-content">
+                            <h4>Profesjonell catering</h4>
+                            <p>Fra 199 - 385kr per person for bedrifter og arrangementer</p>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="col-lg-6">
-                <div class="services-visual text-center">
+                
+                <div class="services-visual">
                     <i class="fas fa-concierge-bell services-icon"></i>
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- Location Section -->
-<section class="py-5 bg-dark">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col">
-                <h2 class="display-6 fw-bold mb-4">Besøk oss på Tordenskjolds gate</h2>
-                <p class="lead text-muted mb-4">
-                    Du finner Nawarat Thai Mat og Catering sentralt i Gjøvik sentrum
+        <!-- Location Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Besøk oss på Tordenskjolds gate</h2>
+                <p class="section-subtitle">
+                    Du finner Nawarat Thai Mat og Catering sentralt i Gjøvik sentrum, lett tilgjengelig for alle
                 </p>
+            </div>
+            
+            <div class="location-grid">
+                <div class="location-item">
+                    <div class="location-icon primary">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4 class="location-title">Adresse</h4>
+                    <p class="location-desc">Tordenskjolds gate 1<br>2821 Gjøvik</p>
+                </div>
                 
-                <div class="row g-4">
-                    <div class="col-md-3">
-                        <div class="location-item">
-                            <i class="fas fa-map-marker-alt fa-2x text-primary mb-3"></i>
-                            <h5>Adresse</h5>
-                            <p class="text-muted">Tordenskjolds gate 1<br>2821 Gjøvik</p>
-                        </div>
+                <div class="location-item">
+                    <div class="location-icon green">
+                        <i class="fas fa-phone"></i>
                     </div>
-                    
-                    <div class="col-md-3">
-                        <div class="location-item">
-                            <i class="fas fa-phone fa-2x text-success mb-3"></i>
-                            <h5>Ring oss</h5>
-                            <p class="text-muted">+47 61 17 77 71</p>
-                        </div>
+                    <h4 class="location-title">Ring oss</h4>
+                    <p class="location-desc">+47 61 17 77 71</p>
+                </div>
+                
+                <div class="location-item">
+                    <div class="location-icon orange">
+                        <i class="fas fa-parking"></i>
                     </div>
-                    
-                    <div class="col-md-3">
-                        <div class="location-item">
-                            <i class="fas fa-parking fa-2x text-warning mb-3"></i>
-                            <h5>Parkering</h5>
-                            <p class="text-muted">Gratis parkering<br>i nærheten</p>
-                        </div>
+                    <h4 class="location-title">Parkering</h4>
+                    <p class="location-desc">Gratis parkering<br>i nærheten</p>
+                </div>
+                
+                <div class="location-item">
+                    <div class="location-icon blue">
+                        <i class="fas fa-train"></i>
                     </div>
-                    
-                    <div class="col-md-3">
-                        <div class="location-item">
-                            <i class="fas fa-train fa-2x text-info mb-3"></i>
-                            <h5>Transport</h5>
-                            <p class="text-muted">1 min gange fra<br>Gjøvik stasjon</p>
-                        </div>
-                    </div>
+                    <h4 class="location-title">Transport</h4>
+                    <p class="location-desc">1 min gange fra<br>Gjøvik stasjon</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- Call to Action -->
-<section class="py-5">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col">
-                <div class="cta-content bg-primary rounded p-5">
-                    <h2 class="display-6 fw-bold text-white mb-3">
-                        Klar for autentisk thailandsk mat?
-                    </h2>
-                    <p class="lead text-white mb-4">
-                        Besøk oss på Tordenskjolds gate eller kontakt oss for catering til ditt arrangement
-                    </p>
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a href="{{ url_for('contact') }}" class="btn btn-light btn-lg">
-                            <i class="fas fa-phone me-2"></i>Ring oss nå
-                        </a>
-                        <a href="{{ url_for('menu') }}" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-eye me-2"></i>Se hele menyen
-                        </a>
-                    </div>
+        <!-- Call to Action -->
+        <div class="section">
+            <div class="cta-section">
+                <h2 class="cta-title">Klar for autentisk thailandsk mat?</h2>
+                <p class="cta-desc">
+                    Besøk oss i dag eller kontakt oss for catering til ditt neste arrangement. 
+                    Vi gleder oss til å servere deg den beste thailandske maten i Gjøvik.
+                </p>
+                <div class="cta-buttons">
+                    <a href="{{ url_for('menu') }}" class="hero-btn hero-btn-primary">
+                        <i class="fas fa-utensils"></i>
+                        Se hele menyen
+                    </a>
+                    <a href="{{ url_for('contact') }}" class="hero-btn hero-btn-secondary">
+                        <i class="fas fa-phone"></i>
+                        Ring oss nå
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+
 {% endblock %}
