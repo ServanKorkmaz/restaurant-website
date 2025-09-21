@@ -26,6 +26,7 @@ class MenuItemForm(FlaskForm):
         ('hovedretter', 'Hovedretter'),
         ('ekstra', 'Ekstra'),
         ('drikker', 'Drikker'),
+        ('alkohol', 'Alkoholholdige drikker'),
         ('catering', 'Catering')
     ], validators=[DataRequired()])
     image_filename = StringField('Bildenavn', validators=[Length(max=100)])

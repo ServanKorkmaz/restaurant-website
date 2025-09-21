@@ -103,26 +103,7 @@ def menu():
             {'name': 'Is kaffe', 'price': '85', 'description': '', 'image': None},
             {'name': 'Thai te', 'price': '89', 'description': '', 'image': None}
         ],
-        'alkohol': [
-            {'name': 'Singha', 'price': '135', 'description': '', 'image': None},
-            {'name': 'Chang', 'price': '135', 'description': '', 'image': None},
-            {'name': 'Ringnes tapp', 'price': '135', 'description': '', 'image': None},
-            {'name': 'Poretti', 'price': '135', 'description': '', 'image': None},
-            {'name': 'Blanc 1864', 'price': '125', 'description': '', 'image': None},
-            {'name': 'Corona', 'price': '129', 'description': '', 'image': None},
-            {'name': 'Breezer', 'price': '110', 'description': '', 'image': None},
-            {'name': 'Smirnoff ice', 'price': '110', 'description': '', 'image': None},
-            {'name': 'Carlsberg', 'price': '125', 'description': '', 'image': None},
-            {'name': 'Ringnes', 'price': '125', 'description': '', 'image': None},
-            {'name': 'Irish coffee', 'price': '129', 'description': '', 'image': None},
-            {'name': 'Baileys og kaffe', 'price': '125', 'description': '', 'image': None},
-            {'name': 'Vodka og battery', 'price': '145', 'description': '', 'image': None},
-            {'name': 'Gin and tonic', 'price': '145', 'description': '', 'image': None},
-            {'name': 'Gammel Oppland', 'price': '119', 'description': '', 'image': None},
-            {'name': 'Whisky', 'price': '109', 'description': '', 'image': None},
-            {'name': 'Hvitvin', 'price': '135', 'description': '135,- / 499,- (flaske)', 'image': None},
-            {'name': 'Rødvin', 'price': '135', 'description': '135,- / 499,- (flaske)', 'image': None}
-        ],
+        'alkohol': []  # Now loaded from database,
 
     }
     
