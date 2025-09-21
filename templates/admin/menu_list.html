@@ -18,7 +18,7 @@
 </div>
 
 {% if items %}
-    {% set categories = {'hovedretter': 'Hovedretter', 'ekstra': 'Ekstra', 'drikker': 'Drikker', 'catering': 'Catering'} %}
+    {% set categories = {'hovedretter': 'Hovedretter', 'ekstra': 'Ekstra', 'drikker': 'Drikker', 'alkohol': 'Alkoholholdige drikker', 'catering': 'Catering'} %}
     
     {% for category_key, category_name in categories.items() %}
         {% set category_items = items | selectattr('category', 'equalto', category_key) | list %}
