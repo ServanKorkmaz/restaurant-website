@@ -79,8 +79,10 @@ def menu():
             {'name': '17. Mixed Tallerken', 'price': '195', 'description': '2 vårruller, 1 innbakt scampi og 1 innbakt kylling med salat og ris', 'allergens': '1,2,4,5,6,8', 'image': '17-mixed-tallerken.jpg'}
         ],
         'ekstra': [
-            {'name': 'Vårruller pr stk', 'price': '25', 'description': '', 'image': None},
-            {'name': 'Innbakt scampi pr stk', 'price': '30', 'description': '', 'image': None}
+            {'name': '2 stk Kylling spyd med satay saus', 'price': '60', 'description': '', 'image': None},
+            {'name': '2 stk vårruller med dip', 'price': '60', 'description': '', 'image': None},
+            {'name': '2 stk innbakt scampi', 'price': '60', 'description': '', 'image': None},
+            {'name': '2 stk innbakt kyllingfilet', 'price': '60', 'description': '', 'image': None}
         ],
         'drikker': [
             {'name': 'Vann', 'price': '40', 'description': '', 'image': None},
