@@ -3,126 +3,329 @@
 {% block title %}Catering - Nawarat Thai Mat og Catering{% endblock %}
 
 {% block content %}
-<!-- Hero Section -->
-<section class="py-5 catering-gallery-section">
-    <div class="container">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-8">
-                <h1 class="display-4 fw-bold mb-3 text-light">Profesjonell Thai Catering</h1>
-                <p class="lead text-light opacity-75 mb-4">Autentisk thailandsk mat til alle anledninger</p>
-                <a href="tel:+4761177771" class="btn btn-warning btn-lg px-5 py-3">
-                    <i class="fas fa-phone me-2"></i>
-                    Ring for tilbud
-                </a>
-            </div>
+<!-- Custom styles for catering menu design -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap');
+
+.catering-menu-container {
+    background: linear-gradient(180deg, #2c3444 0%, #1a1f2e 100%);
+    min-height: 100vh;
+    color: #e8e3d3;
+    font-family: 'Inter', sans-serif;
+}
+
+.catering-hero {
+    background: linear-gradient(180deg, #1a1f2e 0%, #242938 100%);
+    padding: 80px 20px 60px;
+    text-align: center;
+    position: relative;
+}
+
+.catering-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(180deg, rgba(26, 31, 46, 0) 0%, rgba(26, 31, 46, 1) 100%);
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #8a8577;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-cta {
+    background: linear-gradient(135deg, #c9b037, #a08830);
+    color: #1a1f2e;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(201, 176, 55, 0.3);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(201, 176, 55, 0.4);
+    color: #1a1f2e;
+    text-decoration: none;
+}
+
+.catering-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.section-subtitle {
+    font-size: 14px;
+    color: #8a8577;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 300;
+}
+
+.catering-packages {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.package-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(201, 176, 55, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.package-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #c9b037, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.package-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.package-card:hover::before {
+    opacity: 1;
+}
+
+.package-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(201, 176, 55, 0.2);
+}
+
+.package-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.package-price {
+    background: linear-gradient(135deg, #c9b037, #a08830);
+    color: #1a1f2e;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(201, 176, 55, 0.2);
+}
+
+.package-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.package-items li {
+    color: #e8e3d3;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.package-items li::before {
+    content: '•';
+    color: #c9b037;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.gallery-section {
+    margin: 80px 0;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.gallery-item {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.gallery-thumb {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.separator-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 176, 55, 0.3), transparent);
+    margin: 60px 0;
+}
+
+@media (max-width: 768px) {
+    .catering-packages {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .hero-title {
+        font-size: 36px;
+    }
+    .section-title {
+        font-size: 32px;
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}
+</style>
+
+<div class="catering-menu-container">
+    <!-- Hero Section -->
+    <div class="catering-hero">
+        <div class="catering-content">
+            <h1 class="hero-title">Profesjonell Thai Catering</h1>
+            <p class="hero-subtitle">Autentisk thailandsk mat til alle anledninger - fra små selskaper til store arrangementer</p>
+            <a href="tel:+4761177771" class="hero-cta">
+                <i class="fas fa-phone me-2"></i>
+                Ring for tilbud
+            </a>
         </div>
     </div>
-</section>
 
-<!-- Catering Packages -->
-<section class="py-5" id="packages">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="section-header mb-5 text-center">
-                    <h2 class="display-6 fw-bold">
-                        <i class="fas fa-concierge-bell text-warning me-3"></i>
-                        Catering-pakker
-                    </h2>
-                    <p class="text-muted">Velg mellom våre 6 forskjellige catering-menyer</p>
-                </div>
-            </div>
+    <div class="catering-content">
+        <!-- Catering Packages -->
+        <div class="section-header">
+            <h2 class="section-title">Catering-pakker</h2>
+            <p class="section-subtitle">Velg mellom våre 6 forskjellige menyer</p>
         </div>
         
-        <div class="row g-4">
+        <div class="catering-packages">
             {% for package in packages %}
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="card catering-card h-100 shadow-sm">
-                    <div class="card-body p-4 d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-start mb-4">
-                            <h5 class="card-title">{{ package.name }}</h5>
-                            <span class="catering-price-badge">{{ package.price_per_person }}</span>
-                        </div>
-                        
-                        <div class="flex-grow-1">
-                            <ul class="catering-dish-list">
-                                {% for item in package.items.split('\n') if item.strip() %}
-                                <li>{{ item.strip() }}</li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
+            <div class="package-card">
+                <div class="package-header">
+                    <h3 class="package-name">{{ package.name }}</h3>
+                    <span class="package-price">{{ package.price_per_person }}</span>
                 </div>
+                
+                <ul class="package-items">
+                    {% for item in package.items.split('\n') if item.strip() %}
+                    <li>{{ item.strip() }}</li>
+                    {% endfor %}
+                </ul>
             </div>
             {% endfor %}
         </div>
-    </div>
-</section>
 
-<!-- Gallery Section -->
-<section class="catering-gallery-section py-5" id="gallery">
-    <div class="container">
-        <div class="section-header mb-5 text-center">
-            <h2 class="h3 fw-bold text-light">Galleri</h2>
-            <p class="text-light opacity-75">Se bilder fra våre catering-arrangementer</p>
-        </div>
-        
-        <!-- Thumbnail Gallery -->
-        <div class="text-center">
-            <div class="catering-gallery">
+        <div class="separator-line"></div>
+
+        <!-- Gallery Section -->
+        <div class="gallery-section">
+            <div class="section-header">
+                <h2 class="section-title">Galleri</h2>
+                <p class="section-subtitle">Se bilder fra våre catering-arrangementer</p>
+            </div>
+            
+            <div class="gallery-grid">
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering1.jpg') }}" data-bs-title="Catering Bilde 1">
-                    <img src="{{ url_for('static', filename='images/Catering1.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/Catering1.jpg') }}" alt="Catering" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering2.jpg') }}" data-bs-title="Catering Bilde 2">
-                    <img src="{{ url_for('static', filename='images/Catering2.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/Catering2.jpg') }}" alt="Catering" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering3.jpg') }}" data-bs-title="Catering Bilde 3">
-                    <img src="{{ url_for('static', filename='images/Catering3.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/Catering3.jpg') }}" alt="Catering" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering4.jpg') }}" data-bs-title="Catering Bilde 4">
-                    <img src="{{ url_for('static', filename='images/Catering4.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/Catering4.jpg') }}" alt="Catering" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering5.jpg') }}" data-bs-title="Catering Bilde 5">
-                    <img src="{{ url_for('static', filename='images/Catering5.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/Catering5.jpg') }}" alt="Catering" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering6.jpg') }}" data-bs-title="Catering Bilde 6">
-                    <img src="{{ url_for('static', filename='images/Catering6.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/Catering6.jpg') }}" alt="Catering" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering7.jpg') }}" data-bs-title="Catering Bilde 7">
-                    <img src="{{ url_for('static', filename='images/Catering7.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/Catering7.jpg') }}" alt="Catering" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/Catering8.jpg') }}" data-bs-title="Catering Bilde 8">
-                    <img src="{{ url_for('static', filename='images/Catering8.jpg') }}" alt="Catering" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/Catering8.jpg') }}" alt="Catering" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/catering-potatoes.jpg') }}" data-bs-title="Stekte poteter">
-                    <img src="{{ url_for('static', filename='images/catering-potatoes.jpg') }}" alt="Stekte poteter" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/catering-potatoes.jpg') }}" alt="Stekte poteter" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/catering-shrimp-salad.jpg') }}" data-bs-title="Rekesalat">
-                    <img src="{{ url_for('static', filename='images/catering-shrimp-salad.jpg') }}" alt="Rekesalat" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/catering-shrimp-salad.jpg') }}" alt="Rekesalat" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/catering-beef-salad.jpg') }}" data-bs-title="Biff salat">
-                    <img src="{{ url_for('static', filename='images/catering-beef-salad.jpg') }}" alt="Biff salat" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/catering-beef-salad.jpg') }}" alt="Biff salat" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/catering-ham-salad.jpg') }}" data-bs-title="Skinke salat">
-                    <img src="{{ url_for('static', filename='images/catering-ham-salad.jpg') }}" alt="Skinke salat" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/catering-ham-salad.jpg') }}" alt="Skinke salat" class="gallery-thumb" loading="lazy">
                 </a>
                 <a href="#" class="gallery-item" data-bs-toggle="modal" data-bs-target="#imageModal" data-bs-image="{{ url_for('static', filename='images/catering-spring-rolls.jpg') }}" data-bs-title="Vårruller">
-                    <img src="{{ url_for('static', filename='images/catering-spring-rolls.jpg') }}" alt="Vårruller" class="catering-thumb" loading="lazy">
+                    <img src="{{ url_for('static', filename='images/catering-spring-rolls.jpg') }}" alt="Vårruller" class="gallery-thumb" loading="lazy">
                 </a>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- FAQ Section -->
-<section class="py-5 catering-gallery-section" id="faq">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="section-header mb-5 text-center">
-                    <h2 class="h3 fw-bold text-light">Ofte stilte spørsmål</h2>
-                    <p class="text-light opacity-75">Svar på de vanligste spørsmålene om vår catering</p>
-                </div>
                 
                 <div class="accordion" id="cateringFAQ">
                     <div class="accordion-item">
