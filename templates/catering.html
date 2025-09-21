@@ -8,7 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap');
 
 .catering-menu-container {
-    background: linear-gradient(180deg, #2c3444 0%, #1a1f2e 100%);
+    background: #1a1f2e !important;
     min-height: 100vh;
     color: #e8e3d3;
     font-family: 'Inter', sans-serif;
@@ -232,6 +232,23 @@
     .gallery-grid {
         grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     }
+}
+
+/* Jevn bakgrunnsfarge som menysiden */
+body {
+    background: #1a1f2e !important;
+}
+
+.navbar,
+nav,
+.navbar-dark {
+    background: #1a1f2e !important;
+    background-image: none !important;
+    background-color: #1a1f2e !important;
+}
+
+.section-header::after {
+    display: none !important;
 }
 </style>
 
