@@ -95,8 +95,12 @@ def menu():
             {'name': 'Bingsu is', 'price': '99', 'description': '', 'image': None}
         ],
         'drikker': [
-            {'name': 'Vann', 'price': '40', 'description': '', 'image': None},
-            {'name': 'Brus', 'price': '40', 'description': '', 'image': None}
+            {'name': 'Mineralvann', 'price': '40', 'description': '', 'image': None},
+            {'name': 'Alkoholfritt øl', 'price': '69', 'description': '', 'image': None},
+            {'name': 'Kaffe', 'price': '40', 'description': '', 'image': None},
+            {'name': 'Te', 'price': '40', 'description': '', 'image': None},
+            {'name': 'Is kaffe', 'price': '85', 'description': '', 'image': None},
+            {'name': 'Thai te', 'price': '89', 'description': '', 'image': None}
         ],
 
     }
